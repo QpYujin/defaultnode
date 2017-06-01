@@ -1,0 +1,12 @@
+header-bar
+div(layout, flex)
+  main-sidebar#main-sidebar(layout="column", ng-class="{closed: $root.sidebarClosed}")
+  div(layout="column", flex)
+    .scrollable(flex, layout="column")
+      breadcrumb(items="breadcrumbs.items")
+      h2.page-title(layout, ng-hide="hideTitle")
+        | {{pageTitle}}
+        span(flex)
+        button.btn.btn-info(ng-if="addOnButton.title", ui-sref="{{addOnButton.url}}") {{addOnButton.title}}
+      div.content-wrapper(ui-view="organization", flex, layout="column", ng-class="{'no-padding': hideTitle}")
+  deploying-app#deploying-app

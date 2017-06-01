@@ -1,0 +1,87 @@
+#page-sidebar.bg-black.font-inverse(flex)
+  .scroll-sidebar
+    ul#sidebar-menu
+      li.header
+        span Features
+      //- li
+      //-   a(ui-sref="user.organization.home", title='Elements')
+      //-     i.glyph-icon.icon-home(title='.icon-home', style='color:DeepSkyBlue;')
+      //-     span Dashboard
+      li
+        a(ui-sref="user.organization.projects", title='Elements')
+          i.glyph-icon.icon-bars(title='.icon-bars', style='color:DeepSkyBlue;')
+          span Projects
+        .sidebar-submenu(ng-show="$root.currentApplicationName")
+          ul
+            li
+              a(ui-sref="user.organization.projects.project.applications") Applications
+              ul(style="padding-left: 40px;")
+                li
+                  span {{$root.currentApplicationName}}
+                  ul
+                    li
+                      a(ui-sref="user.organization.projects.project.applications.application.stage.build.config", ui-sref-active="active") Build
+                    li
+                      a(ui-sref="user.organization.projects.project.applications.application.stage.deploy.images", ui-sref-active="active") Deploy
+                    li
+                      a(ui-sref="user.organization.projects.project.applications.application.stage.test.config", ui-sref-active="active") Test
+      //- li
+      //-   a(ui-sref="user.organization.applications", title='Elements')
+      //-     i.glyph-icon.icon-bars(title='.icon-bars', style='color:DeepSkyBlue;')
+      //-     span Applications
+      //- li
+      //-   a(ui-sref="user.organization.builds", title='Elements')
+      //-     i.glyph-icon.icon-bars(title='.icon-bars', style='color:DeepSkyBlue;')
+      //-     span Builds
+      //- li
+      //-   a(href='#', title='Widgets')
+      //-     i.glyph-icon.icon-paper-plane-o(title='.icon-paper-plane-o', style='color:DarkOrange;')
+      //-     span TestResults
+      //- li
+      //-   a(ui-sref="user.organization.release-comparison", title='Forms UI')
+      //-     i.glyph-icon.icon-line-chart(title='.icon-line-chart', style='color:Aquamarine;')
+      //-     span Release Comparisions
+      //- li
+      //-   a(ui-sref="user.organization.ha-testing", title='Advanced tables')
+      //-     i.glyph-icon.icon-linecons-diamond(style='color:Brown;')
+      //-     span HA Testing
+      //- li
+      //-   a(href='#', title='Charts')
+      //-     i.glyph-icon.icon-align-left(title='.icon-align-left', style='color:red;')
+      //-     span Risk Analysis
+      //- li
+      //-   a(href='#', title='Maps')
+      //-     i.glyph-icon.icon-dollar(title='.icon-dollar', style='color:Green;')
+      //-     span Cost Analysis
+      //- li
+      //-   a(ui-sref="user.organization.usage-model-analysis", title='Pages')
+      //-     i.glyph-icon.icon-bar-chart(title='.icon-bar-chart', style='color:Pink;')
+      //-     span Usage Model Analysis
+      //- li
+      //-   a(href='#', title='Other Pages')
+      //-     i.glyph-icon.icon-calculator(title='.icon-calculator', style='color:BlueViolet;')
+      //-     span Calibration
+      //- li
+      //-   a(href='multiple_users.html', title='Dashboard boxes')
+      //-     i.glyph-icon.icon-user(title='.icon-user', style='color:FloralWhite;')
+      //-     span Users
+      //- li
+      //-   a(href='#', title='Mailbox')
+      //-     i.glyph-icon.icon-cog(title='.icon-cog', style='color:Gold;')
+      //-     span Settings
+      //-   .sidebar-submenu
+      //-     ul
+      //-       li
+      //-         a(href='mailbox-inbox.html', title='Inbox')
+      //-           span Profile
+      //-       li
+      //-         a(href='mailbox-compose.html', title='Compose message')
+      //-           span Account
+      //- li
+      //-   a(ui-sref="user.organization.pattern-calculator", title='Forms UI')
+      //-     i.glyph-icon.icon-calculator(title='.icon-line-chart', style='color:Aquamarine;')
+      //-     span Pattern Calculator
+        // .sidebar-submenu
+    // #sidebar-menu
+
+ 

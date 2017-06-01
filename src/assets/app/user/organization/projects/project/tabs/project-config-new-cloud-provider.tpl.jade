@@ -1,0 +1,20 @@
+form.new-repo-box(layout="column", name="cloudForm")
+  label(layout="row", layout-align="start center")
+    span Name
+    input.form-control(ng-model="cloudProvider.name", required)
+  label(layout="row", layout-align="start center")
+    span Provider
+    md-input-containter
+      md-select(ng-model="cloudProvider.provider")
+        md-option(ng-repeat="item in providers", ng-value="item.value") {{item.name}}
+  label(layout="row", layout-align="start center")
+    span Public Key
+    input.form-control(ng-model="cloudProvider.publicKey", required)
+  label(layout="row", layout-align="start center")
+    span Private Key
+    input.form-control(ng-model="cloudProvider.privateKey", required)
+
+  .text-center
+    button.btn.btn-secondary(ui-sref="^") Cancel
+    &nbsp;&nbsp;&nbsp;
+    button.btn.btn-success(ng-disabled="cloudForm.$invalid", ng-click="addNewCloudProvider()") {{cloudProvider.uuid ? 'Update' : 'Add'}}

@@ -1,0 +1,13 @@
+label(layout="row").form-group
+  span Release Date
+  input.form-control(ng-model="release.name")
+label(layout="row").form-group
+  span Release Date
+  textarea.form-control(ng-model="release.description")
+label(layout="row").form-group
+  span Release Date
+  md-datepicker(ng-model="release.releaseDate" md-placeholder="Enter date",  md-open-on-focus)
+.text-center
+  button.btn.btn-secondary(ui-sref="^") Cancel
+  &nbsp;&nbsp;&nbsp;
+  button.btn.btn-success(ng-disabled="!release.name", ng-click="updateRelease()") {{release.uuid ? 'Update' : 'Add'}}

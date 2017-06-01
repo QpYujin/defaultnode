@@ -1,0 +1,39 @@
+md-table-container.scrollable.grids-table.build-image-table(layout, flex, ng-show="images.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column, style="width: 40px") &nbsp;
+        th(md-column) Image
+        th(md-column) Version
+        th(md-column) Tag
+        th(md-column) Stage
+        th(md-column) Release
+    tbody(md-body)
+      tr(md-row, ng-repeat="image in images | orderBy: query.order")
+        td(md-cell, style="width: 40px")
+          md-radio-group(ng-model="deployGlobal.selectedImage")
+            md-radio-button(ng-value="image")
+        td(md-cell)
+          span() {{image.buildImageId}}
+        td(md-cell) {{image.build.version}}
+        td(md-cell) {{image.tag}}
+        td(md-cell) {{image.stage}}
+        td(md-cell) {{image.build.release.name}}
+
+h3(ng-hide="images.length") There is no image
+
+label(layout="row", layout-align="start center")
+  span Server Type
+  md-select(ng-model="service", placeholder="Select")
+    md-option(value="internal") Internal
+    md-option(value="external") External
+
+label(layout="row", ng-show="service == 'external'")
+  span Port
+  input.form-control(ng-model="port")
+
+
+
+
+.button-group
+  button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="deployImage()") Deploy

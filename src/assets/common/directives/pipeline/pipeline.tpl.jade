@@ -1,0 +1,19 @@
+#pipeline(layout="row")
+  div.single-box(ng-repeat="item in data.stages", layout="column", layout-align="start center")
+    .circle-icon(layout, layout-align="center center")
+      i.fa.fa-wifi
+    i.fa.fa-caret-up
+    .pipeline-box.panel()
+      .panel-header(layout, layout-align="center center")
+        .label(ng-class="'label-'+item.class", ui-sref="user.organization.projects.project.applications.application.stage.build.config({stage: item.name})") {{item.name}}
+        span(flex)
+        a(ng-show="item.status=='failed'")
+          i.fa.fa-refresh
+          span &nbsp;Re-Build
+      .content Lorem Ipsum is simply dummy text of the printing and typesetting industry
+      div.time
+        i
+          i.fa.fa-clock-o
+          span &nbsp;{{item.createdAt}}
+          span(ng-show="item.status != 'pending'") &nbsp;{{item.status}}
+      //- div {{item.value}}

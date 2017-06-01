@@ -1,0 +1,47 @@
+div(layout="column", flex).scrollable
+  div(flex)
+    //- div(ng-repeat-start="field in fields")
+    //-   label.form-group(layout="row")
+    //-     span {{field.name}}
+    //-     input.form-control(ng-model="application[field.field]", ng-if="!field.type", ng-disabled="application.isBuild")
+    //-     textarea.form-control(ng-model="application[field.field]", ng-if="field.type=='textarea'", ng-disabled="application.isBuild")
+
+    //-     md-input-container(ng-if="field.type=='select'")
+    //-       md-select(ng-model="application[field.field]", ng-disabled="application.isBuild")
+    //-         md-option(ng-repeat="item in field.items", ng-value="item.id") {{item.name}} 
+
+    label(layout="row")
+      span Name
+      input.form-control(ng-model="application.name")
+    label(layout="row")
+      span Description
+      textarea.form-control(ng-model="application.description")
+    hr
+    label(layout="row", layout-align="start center")
+      span Source Control
+      md-input-container(flex)
+        md-select(placeholder="Select" ng-model="application.sourceManagementId")
+          md-option(ng-repeat="item in global.repos", ng-value="item.uuid") {{item.name}}
+
+    label(layout="row", layout-align="start center")
+      span Cloud Provider
+      md-input-container(flex)
+        md-select(placeholder="Select" ng-model="application.cloudProviderId")
+          md-option(ng-repeat="item in global.clouds", ng-value="item.uuid") {{item.name}}
+
+    label(layout="row", layout-align="start center")
+      span Image Repository
+      md-input-container(flex)
+        md-select(placeholder="Select" ng-model="application.imageRepositoryId")
+          md-option(ng-repeat="item in global.images", ng-value="item.uuid") {{item.name}}
+    .form-group(ng-repeat-end)
+      hr(ng-if="field.separator == 'line'")
+    div(layout="row", layout-align="start center")
+      button.btn.btn-default(ui-sref="user.organization.projects.project.applications.application.dashboard") Back
+      span &nbsp;&nbsp;
+      button.btn.btn-success(ng-click="updateApplication()") {{application.uuid ? 'Update' : 'Create'}}
+
+style.
+  #steps-buttons {
+    display: none;
+  }

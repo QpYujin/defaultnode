@@ -1,0 +1,70 @@
+doctype html
+html(lang='en')
+  head
+    base(href='/')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    title Tarabalam
+    // Bootstrap
+    link(href='vendor/css/bootstrap.min.css', rel='stylesheet')
+    link(href='vendor/fonts/font-awesome/css/font-awesome.css', rel='stylesheet')
+    link(href='vendor/css/fullcalendar.min.css', rel='stylesheet')
+    link(href='vendor/css/ng-table.min.css', rel='stylesheet')
+    link(href='vendor/css/sweetalert.css', rel='stylesheet')
+    // Custom style
+    link(href='vendor/css/style.css', rel='stylesheet')
+    link(href='vendor/css/admin.css', rel='stylesheet')
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+    script(src='https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit', async='', defer='')
+  body
+
+    script.
+        var currentUser;
+    if user
+        script.
+            if ('#{user.id}') {
+                currentUser = {
+                    id: '#{user.id}',
+                    firstName: '#{user.firstName}',
+                    lastName: '#{user.lastName}',
+                    email: '#{user.email}',
+                    dateOfBirth: '#{user.dateOfBirth}',
+                    placeOfBirth: '#{user.placeOfBirth}',
+                    timeOfBirth: '#{user.timeOfBirth}',
+                    star: '#{user.star}',
+                    role: '#{user.role}'
+                }
+            }
+    #controller(ng-app='app')
+      div(ui-view='navbar')
+      #main-content.container
+        div(ui-view='main')
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    // Include all compiled plugins (below), or include individual files as needed
+    script(src='vendor/js/bootstrap.min.js')
+    script(src='vendor/js/angular.js')
+    script(src='vendor/js/lodash.js')
+    script(src='vendor/js/moment.min.js')
+    script(src='vendor/js/fullcalendar.min.js')
+    script(src='vendor/js/gcal.min.js')
+    script(src='vendor/js/scriptnak.js')
+    script(src='vendor/js/sweetalert.min.js')
+    script(src='vendor/js/restangular.min.js')
+    script(src='vendor/js/angular-ui-router.js')
+    script(src='vendor/js/angular-ui-bootstrap.min.js')
+    script(src='vendor/js/angular-ui-calendar.js')
+    script(src='vendor/js/ng-table.min.js')
+    script(src='vendor/js/angular-recaptcha.min.js')
+    script(src='vendor/js/angular-assets/app.js')
+    script(src='vendor/js/angular-assets/controller.js')
+    script(src='vendor/js/angular-assets/service.js')
+    script(src='vendor/js/angular-assets/directive.js')
+    // <script src="http://52.52.180.209/auth/assets/js/keycloak.js"></script>
+    // <script type="text/javascript" src="http://ec2-52-201-241-226.compute-1.amazonaws.com:8080/auth/assets/js/keycloak.js"></script>

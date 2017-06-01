@@ -1,0 +1,28 @@
+//- #steps-buttons.clearfix(layout)
+  button.btn.btn-success(ng-hide="global.application.isBuild", ng-click="global.deployApp()", ng-disabled="deploymentStatus") Deploy App
+  span(flex)
+  button.btn.btn-primary(ng-show="global.application.isBuild", ng-click="global.runTest()", ng-disabled="deploymentStatus || global.ranTest") Run Test
+  #deployment-status(ng-show="deploymentStatus")
+    .progressbar
+      .progressbar-value.bg-primary(style='width: 100%')
+        .progress-overlay(style='width: 100%')
+        .progress-label
+          h3.ng-binding {{deploymentStatus}}
+
+#steps-header.navigation
+  div(layout="row")
+    div.step(flex, 
+      ng-repeat="step in appGlobal.steps",
+      ui-sref="{{appGlobal.rootStateUrl + '.' + step.url}}",
+      ui-sref-active="active") {{step.title}}
+#steps.scrollable(flex, layout="column")
+  div(ui-view="stepContent", flex, layout="column")
+
+style.
+  #steps-buttons button {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .content-wrapper {
+    margin-top: 0;
+  }

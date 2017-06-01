@@ -1,0 +1,24 @@
+div(layout="column", flex).scrollable
+  h3(ng-show="!projects.length") There is no project
+  md-table-container.scrollable.grids-table(layout, flex, ng-show="projects.length")
+    table(md-table, flex)
+      thead(md-head, md-order="query.order")
+        tr(md-row)
+          th(md-column)
+          th(md-column) Project Name
+          th(md-column) Stack
+          th(md-column) Environment
+          th(md-column) No of Apps
+          th(md-column) Create At
+          th(md-column)
+      tbody(md-body)
+        tr(md-row, ng-repeat="project in projects | orderBy: query.order")
+          td(md-cell)
+          td(md-cell)
+            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.name}}
+          td(md-cell) {{project.stack}}
+          td(md-cell) {{project.environmentDisplay}}
+          td(md-cell) {{project.zone}}
+          td(md-cell, style="white-space: nowrap") {{project.createdAt | date:'dd-M-yyyy'}}
+          td(md-cell)
+  md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")

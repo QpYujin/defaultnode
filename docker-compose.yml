@@ -1,0 +1,94 @@
+version: "2"
+services:
+  web:
+    extends:
+      file: common.yml
+      service: app
+    restart: always
+    depends_on:
+      - redis
+    command: ["-wait", "tcp://redis:6379", "-timeout", "30s", "npm", "start" ]
+    environment:
+      - SERVICE_NAME=web
+
+  # cron:
+  #   extends:
+  #     file: common.yml
+  #     service: app
+  #   restart: always
+  #   depends_on:
+  #     - redis
+  #   command: ["-wait", "tcp://redis:6379", "-timeout", "30s", "node", "cron.js"]
+  #   environment:
+  #     - SERVICE_IGNORE=true
+
+  redis:
+    image: redis
+    restart: always
+    environment:
+      - SERVICE_IGNORE=true
+
+  influxdb:
+    image: influxdb
+    restart: always
+    ports:
+      - "8086:8086"
+      - "8083:8083"
+    volumes:
+      - "$HOME/data/influxdb:/var/lib/influxdb"
+    environment:
+      - SERVICE_NAME=influxdb
+      - INFLUXDB_ADMIN_ENABLED=true
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - "$HOME/data/grafana:/var/lib/grafana"
+    environment:
+      - GF_SERVER_ROOT_URL=/grafana
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_SECURITY_ADMIN_PASSWORD=adm@s3cr3t
+      - GF_DASHBOARDS_JSON_ENABLED=true
+      - SERVICE_NAME=grafana
+    links:
+      - influxdb
+
+  nginx:
+    build: ./nginx
+    image: autodeploy/nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - web
+      - grafana
+      - consul
+      - registrator
+    environment:
+      - SERVICE_IGNORE=true
+
+  # Consul and registrator container
+  consul:
+    image: gliderlabs/consul-server
+    restart: always
+    command: "-server -bootstrap"
+    environment:
+      - SERVICE_8300_IGNORE=true
+      - SERVICE_8301_IGNORE=true
+      - SERVICE_8302_IGNORE=true
+      - SERVICE_8400_IGNORE=true
+      - SERVICE_8600_IGNORE=true
+      - SERVICE_8500_NAME=consului
+
+  registrator:
+    image: gliderlabs/registrator
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+    links:
+      - consul
+    command: ["-internal", "consul://consul:8500"]

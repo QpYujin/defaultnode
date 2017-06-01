@@ -1,0 +1,17 @@
+.cloud-watch.row(layout='row' layout-wrap flex style="overflow-y: auto;width: 100%; margin-top: 10px", grid="global.selectedGrid")
+  div.col-sm-6(layout="column", ng-repeat="metric in metrics", ng-if="metric.show")
+    div(flex) {{metric.name}}
+    div.panel( layout="column")
+      div.header.panel-heading(layout="row" layout-align="start center")
+        div(uib-dropdown ng-repeat="type in types")
+          button.btn(uib-dropdown-toggle) {{metric[type.name].text}}
+          ul.dropdown-menu-right(uib-dropdown-menu role="menu")
+            li(role="menuitem" ng-repeat="opt in type.arr")
+              a.btn(layout="row" layout-align="start center"
+                href="javascript:void(null)" ng-click="selectMetric(metric, type, opt)") 
+                | {{opt.text}}
+        span(flex)
+        button.btn.close-btn.fa.fa-close(ng-click="metric.show=false")
+      div.graph(ng-attr-id="{{metric.name}}")
+        //- canvas(id="line" class="chart chart-line" chart-data="data[metric.name]" chart-labels="labels[metric.name]" chart-series="instanceIds" chart-options="options" chart-dataset-override="datasetOverride" chart-click="onClick")
+        canvas.chart.chart-line(chart-data="metric.data" chart-labels="lineLabels" chart-series="lineSeries" chart-options="lineOptions" chart-dataset-override="datasetOverride" chart-click="onClick")

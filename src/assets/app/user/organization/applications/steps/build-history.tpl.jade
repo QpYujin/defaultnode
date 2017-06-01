@@ -1,0 +1,22 @@
+md-table-container.scrollable.grids-table(layout, flex, ng-show="images.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column) Image Version
+        th(md-column) Source Management Url
+        th(md-column) Repository
+        th(md-column) Branch
+        th(md-column) Status
+        th(md-column) Created At
+    tbody(md-body)
+      tr(md-row, ng-repeat="image in images | orderBy: query.order")
+        td(md-cell)
+          span() {{image.version}}
+        td(md-cell) {{image.sourceManagementUrl}}
+        td(md-cell) {{image.sourceManagementRepo}}
+        td(md-cell) {{image.sourceManagementBranch}}
+        td(md-cell) {{image.status}}
+        td(md-cell, style="white-space: nowrap") {{image.createdAt | date:'dd-M-yyyy'}}
+        td(md-cell)
+          button.btn.btn-success(ng-disabled="image.blocked", ng-click="deploy(image)") Deploy
+h3(ng-hide="images.length") There is no image
