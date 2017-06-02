@@ -5,7 +5,7 @@
     i.fa.fa-caret-up
     .pipeline-box.panel()
       .panel-header(layout, layout-align="center center")
-        .label(ng-class="'label-'+item.class", ui-sref="user.organization.projects.project.applications.application.stage.build.config({stage: item.name})") {{item.name}}
+        .label(ng-class="'label-'+item.class", ui-sref="{{item.url}}") {{item.name}}
         span(flex)
         a(ng-show="item.status=='failed'")
           i.fa.fa-refresh

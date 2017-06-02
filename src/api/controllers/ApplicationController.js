@@ -73,7 +73,6 @@ ApplicationController.newdeployApi = (req, res) => {
     if (err) return console.log(err);
   });
   res.end('ending server response');
-
 };
 
 
@@ -87,19 +86,15 @@ ApplicationController.newservice = (req, res) => {
   console.log("At the server side function");
   console.log('Creating file from editor');
   var writeStream = fs.createWriteStream("/usr/src/app/api/controllers/service.yaml");
-
   console.log('Writing to file from editor');
+
   fs.writeFile("/usr/src/app/api/controllers/service.yaml", params.serviceyaml, 'utf8', function (err) {
     if (err) return console.log(err);
   });
 
-
- var decservice = params.servicename;
-
   console.log('At application controller server side');
   console.log("You can put code here to run cubectl");
-  console.log('Service name -',decservice);
- 
+
   var slack = new Slack();
   slack.setWebhook(webhookUri);
   slack.webhook({
@@ -110,7 +105,7 @@ ApplicationController.newservice = (req, res) => {
     console.log(response);
   });
 
-  
+  /*
   console.log('Before kubctl function');
   var kubectl= K8s.kubectl ({
     //endpoint: 'https://34.225.125.175',
@@ -125,70 +120,35 @@ ApplicationController.newservice = (req, res) => {
      //clientCert: fs.readFileSync('ca.crt').toString(),
      //caCert: fs.readFileSync('server.crt').toString()
      }*/
-  })
+  /*})
 
 
   console.log('before deployment.yml file');
   kubectl.deployment.create(('/usr/src/app/api/controllers/deployment.yaml'), function(err, data){
     console.log(err)
     console.log(data)
- 
-    slack.webhook({
-    channel: "#opsbot",
-    username: "Deploybyte", //neha main user
-    text: err
-        }, function(err, response) {
-              console.log(response);
-  });
-
-
-
- })
+  })
 
   console.log('before service.yml file');
-  
   kubectl.service.create(('/usr/src/app/api/controllers/service.yaml'), function(err, data){
          console.log(err)
-         console.log(data)
-         var delayMillis = 1000;
+          console.log(data)
 
-         setTimeout(function() {
-        //code to be executed after 1 second
-
-
-         //kubectl.command('describe services my-app', function(err, data){
-         kubectl.command('describe services '+decservice, function(err, data){
-
-                 console.log(data)
-                 console.log(err)
-         
-                 slack.webhook({
-                 channel: "#opsbot",
-                 username: "Deploybyte", //neha main user
-                 text: data
-                 }, function(err, response) {
-                       console.log(response);
-                 });//slackwebhook
-
-
-                slack.webhook({
-                 channel: "#opsbot",
-                 username: "Deploybyte", //neha main user
-                 text: 'Please wait for a while to see your application... Keep refreshing above link to see your app in browser!'
-                 }, function(err, response) {
-                       console.log(response);
-                 });//slackwebhook
-
-
-         })//kubectl command
-         
-        },delayMillis);//settimeout function
-
-
-
-
-
- })//kubectl service
+    kubectl.command('describe services my-app', function(err, data){
+          console.log(data)
+          console.log(err)
+      //sending messages on slack
+      slack.setWebhook(webhookUri);
+      slack.webhook({
+        channel: "#api-creator",
+        username: "securitybot", //neha main user
+        text: err
+      }, function(err, response) {
+        console.log(response);
+      });
+    })//kubectl command
+   })//kubectl service
+*/
   res.end('ending server response');
 };
 

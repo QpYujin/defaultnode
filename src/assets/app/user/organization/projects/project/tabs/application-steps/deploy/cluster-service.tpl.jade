@@ -1,36 +1,21 @@
 label(layout="row")
-  span Name of application
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
-
-label(layout="row")
-  span Namespace
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
-
-label(layout="row")
-  span Domain Name
-  input.form-control(ng-model="", flex="30")
-  span .deploybytes.com
-  i.fa.fa-info-circle
-
-label(layout="row")
-  span Port
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
-
-
-
-
-label(layout="row")
   span Service name
   input.form-control(ng-model="cluster.servicename", flex="50")
-  i.fa.fa-info-circle
+  p.tooltip1
+     i.fa.fa-info-circle
+     span.tooltiptext1 Tooltip text
 
-label(layout="row")
-  span Service.yaml
-  textarea(rows=20).form-control(ng-model="cluster.serviceyaml",flex="50")
-  i.fa.fa-info-circle
+  p.tooltip1
+      i.fa.fa-info-circle(style='font-size:24px;color:#282828')
+      span.tooltiptext1 some text here ?dfghgjhfgjfghjghkghkgkhk
+
+
+label(layout='row')
+        span Deployment.yaml
+        input.form-control
+        i.fa.fa-info-circle
+
+
 
 hr
 button.btn.btn-success(ng-click="newservice()") Deploy to Cluster
@@ -40,3 +25,7 @@ hr
 .content-box(ng-show="showLogs")
   h3 Logs
   .content {{logs}}
+
+p.tooltip1
+      | Hover here
+      span.tooltiptext1 some text here ?

@@ -1,13 +1,13 @@
 label(layout="row")
   span Namespace
   input.form-control(ng-model="cluster.namespace",flex="50")
-  i.fa.fa-info-circle
+  p.tooltip1
+  i.fa.fa-info-circle(style='font-size:24px;color:#282828')
+  span.tooltiptext1 some text here ?dfghgjhfgjfghjghkghkgkhk
 
-label(layout="row")
-  span Service name
-  input.form-control(ng-model="cluster.servicename", flex="50")
-  i.fa.fa-info-circle
-
+a.popover-button-header.tooltip-button(href='#', data-toggle='dropdown', data-placement='bottom', title='', data-original-title='Dashboard Quick Menu')
+      i.glyph-icon.icon-linecons-cog
+      
 label(layout="row")
   span Deployment.yaml
   textarea(rows=20).form-control(ng-model="cluster.deploymentyaml",flex="50")
