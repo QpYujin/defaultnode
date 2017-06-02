@@ -1,36 +1,26 @@
 label(layout="row")
   span Name of application
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
+  input.form-control(ng-model="service.appname", flex="50")
+  &nbsp
+  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
 
 label(layout="row")
   span Namespace
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
+  input.form-control(ng-model="service.namespace", flex="50")
+  &nbsp
+  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
 
 label(layout="row")
   span Domain Name
-  input.form-control(ng-model="", flex="30")
-  span .deploybytes.com
-  i.fa.fa-info-circle
-
+  input.form-control(ng-model="service.domain", flex="30")
+  &nbsp
+  span . deploybytes.com
+  
 label(layout="row")
   span Port
-  input.form-control(ng-model="", flex="50")
-  i.fa.fa-info-circle
-
-
-
-
-label(layout="row")
-  span Service name
-  input.form-control(ng-model="cluster.servicename", flex="50")
-  i.fa.fa-info-circle
-
-label(layout="row")
-  span Service.yaml
-  textarea(rows=20).form-control(ng-model="cluster.serviceyaml",flex="50")
-  i.fa.fa-info-circle
+  input.form-control(ng-model="service.port", flex="50")
+  &nbsp
+  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
 
 hr
 button.btn.btn-success(ng-click="newservice()") Deploy to Cluster

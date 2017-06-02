@@ -116,13 +116,13 @@ ApplicationController.newservice = (req, res) => {
 			"ports": [
 				{
 					"name": "web",
-					"port": 80,
+					"port": params.port,
 					"targetPort": "web",
 					"protocol": "TCP"
 				},
 				{
 				"name": "web-ssl",
-				"port": 443,
+				"port": "443",
 				"protocol": "TCP",
 				"targetPort": "web-ssl"
 				}
@@ -187,27 +187,28 @@ ApplicationController.newservice = (req, res) => {
   kubectl.deployment.create(('/usr/src/app/api/controllers/deployment.yaml'), function(err, data){
     console.log(err)
     console.log(data)
- /*
+ 
     slack.webhook({
     channel: "#opsbot",
     username: "Deploybyte", //neha main user
     text: err
         }, function(err, response) {
               console.log(response);
-  });*/
+  });
+
 
 
  })
 
   console.log('before service.yml file');
   
-  kubectl.service.create(('/usr/src/app/api/controllers/service.json'), function(err, data){
+  kubectl.service.create(('/usr/src/app/api/controllers/service.yaml'), function(err, data){
          console.log(err)
          console.log(data)
-         var delayMillis = 4000;
+         var delayMillis = 1000;
 
          setTimeout(function() {
-        //code to be executed after 4 second
+        //code to be executed after 1 second
 
 
          //kubectl.command('describe services my-app', function(err, data){
@@ -228,7 +229,7 @@ ApplicationController.newservice = (req, res) => {
                 slack.webhook({
                  channel: "#opsbot",
                  username: "Deploybyte", //neha main user
-                 text: 'Please wait for a while to see your application... Keep refreshing domain link to see your app in browser!'
+                 text: 'Please wait for a while to see your application... Keep refreshing above link to see your app in browser!'
                  }, function(err, response) {
                        console.log(response);
                  });//slackwebhook
