@@ -63,18 +63,18 @@ angular.module('app.user.organization.applications')
   }
 
   $scope.newservice = function () {
-    console.log("This is from the client side function for new service",$scope.cluster.serviceyaml);
-    console.log("This is from the client side function for new service",$scope.cluster.servicename);
-    //shell.exec('/home/ubuntu/build_script/deploy.sh');
+    console.log("This is from the client side function for new service",$scope.service.appname);
+    console.log("This is from the client side function for new service",$scope.service.namespace);
+    console.log("Port : ",$scope.service.port)
     Restangular
       .one('organizations', String($stateParams.organizationId))
       .one('projects', $stateParams.projectId)
       .one('applications', $scope.application.uuid)
       .one('13')
-      .post('', $scope.cluster)
+      .post('', $scope.service)
       .then(function () {
         swal('DONE', 'Service.yaml created', 'success');
-        $state.go('^', {}, {reload: true});
+        //$state.go('^', {}, {reload: true});
       })
   }
 
