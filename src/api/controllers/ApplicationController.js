@@ -3,6 +3,7 @@
  */
 var shell = require('shelljs');
 var K8s = require('k8s');
+var yaml = require('write-yaml');
 const http = require('http');
 const fs = require('fs');
 var Slack = require('slack-node');
@@ -85,68 +86,132 @@ ApplicationController.newservice = (req, res) => {
   let params = req.body;
   var file = 'service.json'
   var dummyjson = require('dummy-json');
-  var value1= params.port;
-  var value2= params.domain;
+  var port= params.port;
+  var domain= params.domain;
+  var appname=params.appname;
+  var namespace=params.namespace;
+  var dockerimage=params.dockerimage;
   var decservice = params.appname;
+  var fulldomain=domain +'.test.deploybytes.com';
 
   console.log('Parameters :',params);
   console.log('Appname :',params.appname);
+  console.log('Port',params.port);
   console.log("At the server side service function");
-  console.log('Creating file from editor');
-
-  var obj = {
-	       "apiVersion":"v1",
-           "kind":"Service",
+  
+var data = {
+		apiVersion: 'v1',
+		kind:"List",
+		items:
+		[
+	    	{apiVersion: "v1",
+			 kind: 'Namespace',
+			 metadata:
+			 {name: namespace},
+			},
+			
+		    {
+			  apiVersion: 'v1',
+			   kind: 'Service',
+			   metadata:
+			   {name: appname,
+				namespace: namespace,
+				labels:
+				{ app: appname,
+				 role: "web",
+				  dns: "route53"},
+				annotations:
+				{domainName:fulldomain}          		   
+			   },
+			   spec:
+			   {
+				type: 'LoadBalancer',
+				ports:
+				[ 
+				 {name: 'web',
+				  port: parseInt(port),
+				  targetPort: 'web',
+				  protocol: 'TCP'},
 		  
-   		   "metadata": {
-               "name": params.appname,
-               "namespace": params.namespace,
-                  "labels": {
-                           "app": params.appname,
-                          "role": "web",
-                           "dns": "route53"
-                            },
-		          "annotations": {
-                    "domainName": params.domain +".deploybytes.com"
-                    }
-				 },
-		    
-			"spec": {
-			"type": "LoadBalancer",
-			"ports": [
-				{
-					"name": "web",
-					"port": 80,
-					"targetPort": "web",
-					"protocol": "TCP"
+				  {name: 'web-ssl',
+				  port: 443,
+				  protocol: 'TCP',
+				  targetPort: 'web-ssl'} 
+				],
+				selector:
+				{app: appname,
+				role: "web"} 			 
+			   }
+			   },
+			   
+			   {
+			apiVersion: 'extensions/v1beta1',
+			kind: 'Deployment',
+			metadata:
+			   {name: appname,
+			   namespace: namespace},
+			spec:
+			   {replicas: 3,
+			strategy: 
+			   {type: "RollingUpdate"},
+			revisionHistoryLimit: 10,
+			selector:
+			   {   matchLabels:
+			   {app: appname,
+				role: "web"}
 				},
-				{
-				"name": "web-ssl",
-				"port": 443,
-				"protocol": "TCP",
-				"targetPort": "web-ssl"
+			template:
+			{
+			 metadata:{
+			 labels:{
+			  app: appname,
+			  role: "web"
+			  }
+			},
+			 spec:
+			 {
+			 containers:
+			 [
+			{name: appname,
+			 image: dockerimage,
+			 resources:
+			{  limits:{
+			 cpu: "100m",
+			  memory: "250Mi"
+				},
+			 requests:{
+			  cpu: "10m",
+			  memory: "125Mi"
+				 }
+			 },
+			 ports:[
+				{name: "web",
+				containerPort: 5000}
+				   ], 
+								
+				livenessProbe:{
+						 httpGet:{
+		   			        path: "/",
+					  port: 5000
+						 },
+						 initialDelaySeconds: 15,
+						 timeoutSeconds: 1
+						}
+					}],
+					 }
+					}
 				}
-					],
-					
-			"selector": {
-				"app": params.appname,
-				"role": "web"
-				}
-			}
-  } 
- 
-  console.log(obj);  
-  jsonfile.writeFile('/usr/src/app/api/controllers/service.json', obj, {spaces: 2}, function(err) {
-           console.error(err)
-   })
+			   }	
+			]
+			};
+
+		
+yaml('/usr/src/app/api/controllers/deployment.yaml',data, function(err) {
+  // do stuff with err
+});
 
 
 
-  var writeStream = fs.createWriteStream("/usr/src/app/api/controllers/service.yaml");
-  console.log('Writing to file from editor');
-  fs.writeFile("/usr/src/app/api/controllers/service.yaml", params.serviceyaml, 'utf8', function (err) {
-    if (err) return console.log(err);
-  });
 
  console.log('Service name -',decservice);
  
@@ -182,35 +247,21 @@ ApplicationController.newservice = (req, res) => {
      }*/
   })
 
+ 
 
-  console.log('before deployment.yml file');
-  kubectl.deployment.create(('/usr/src/app/api/controllers/deployment.yaml'), function(err, data){
-    console.log(err)
-    console.log(data)
- /*
-    slack.webhook({
-    channel: "#opsbot",
-    username: "Deploybyte", //neha main user
-    text: err
-        }, function(err, response) {
-              console.log(response);
-  });*/
-
-
- })
 
   console.log('before service.yml file');
-  
-  kubectl.service.create(('/usr/src/app/api/controllers/service.json'), function(err, data){
-         console.log(err)
+       var delayMillis = 4000;
+ 
+       kubectl.command('create -f /usr/src/app/api/controllers/deployment.yaml', function(err, data){
          console.log(data)
-         var delayMillis = 4000;
+         console.log(err)
+        })
 
          setTimeout(function() {
         //code to be executed after 4 second
 
-
-         //kubectl.command('describe services my-app', function(err, data){
+         //kubectl.command('describe services'+decservice, function(err, data){
          kubectl.command('describe services '+decservice, function(err, data){
 
                  console.log(data)
@@ -238,19 +289,10 @@ ApplicationController.newservice = (req, res) => {
          
         },delayMillis);//settimeout function
 
-
- })//kubectl service
-
-
-
 //------------------------------------------------------------------------------------------------------------------------------
-
-
 
   res.end('ending server response');
 };
-
-
 
 
 ApplicationController.findAll = (req, res) => {

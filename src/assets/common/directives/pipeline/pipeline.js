@@ -14,12 +14,14 @@ angular.module('app.directives')
             name: 'build',
             status: 'failed',
             class: 'danger',
+          //  url :'user.organization.projects.project.applications.application.stage.build.config'
             createdAt: moment().fromNow(),
           },
           {
             name: 'deploy',
             status: 'success',
             createdAt: moment().fromNow(),
+            //url :'user.organization.projects.project.applications.application.stage.deploy.images',
             class: 'success',
           },
           {

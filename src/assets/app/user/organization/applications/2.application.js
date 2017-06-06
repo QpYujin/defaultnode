@@ -65,7 +65,9 @@ angular.module('app.user.organization.applications')
   $scope.newservice = function () {
     console.log("This is from the client side function for new service",$scope.service.appname);
     console.log("This is from the client side function for new service",$scope.service.namespace);
-    //shell.exec('/home/ubuntu/build_script/deploy.sh');
+     console.log("This is from the client side function for new service",$scope.service.port);
+ 
+   //shell.exec('/home/ubuntu/build_script/deploy.sh');
     Restangular
       .one('organizations', String($stateParams.organizationId))
       .one('projects', $stateParams.projectId)

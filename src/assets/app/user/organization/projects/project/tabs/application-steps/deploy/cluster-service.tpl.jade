@@ -1,14 +1,17 @@
 label(layout="row")
   span Name of application
   input.form-control(ng-model="service.appname", flex="50")
-  &nbsp
-  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+  //i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+  p.tooltip1
+      i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+      span.tooltiptext1  It can be any name for application ex.HelloWorld, myapp etc
 
 label(layout="row")
   span Namespace
   input.form-control(ng-model="service.namespace", flex="50")
-  &nbsp
-  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+  p.tooltip1
+      i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+      span.tooltiptext1  Create namespace for you web application. Use any name or add 'default'
 
 label(layout="row")
   span Domain Name
@@ -18,9 +21,17 @@ label(layout="row")
   
 label(layout="row")
   span Port
-  input.form-control(ng-model="service.port", flex="50")
-  &nbsp
-  i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+  input.form-control(ng-model="service.port", flex="50")   
+  p.tooltip1
+      i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+      span.tooltiptext1  Add port number on which your web app will run ex.80,8080,3000 etc
+
+label(layout="row")
+  span Docker-image
+  input.form-control(ng-model="service.dockerimage", flex="50")
+  p.tooltip1
+      i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+      span.tooltiptext1  Add docker hub image link ex.Username/repository
 
 hr
 button.btn.btn-success(ng-click="newservice()") Deploy to Cluster

@@ -54,7 +54,8 @@
     "angular-tooltips":"1.2.1",
     "slack-node":"0.1.8",
     "dummy-json":"2.0.0",
-    "jsonfile":"3.0.0"
+    "jsonfile":"3.0.0",
+    "write-yaml":"1.0.0"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.0",

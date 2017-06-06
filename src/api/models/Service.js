@@ -21,7 +21,13 @@ module.exports = (function(sequelize) {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+  
+      dockerimage: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
 
+      
       servicename: {
         type: Sequelize.STRING,
         allowNull: false,
