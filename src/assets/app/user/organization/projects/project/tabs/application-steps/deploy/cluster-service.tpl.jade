@@ -1,3 +1,7 @@
+.alert.alert-success(ng-if='successMessage')
+  | {{successMessage}}
+  .cssload-loader
+
 label(layout="row")
   span Name of application
   input.form-control(ng-model="service.appname", flex="50")

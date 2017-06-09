@@ -152,11 +152,11 @@ angular.module('app.user.organization.projects.project.applications', [])
                 title: 'Cloud Metric',
                 url: 'cloud-metric'
               },
-              {
+             /* {
                 //newly added cluster deployment section
                 title: 'Cluster Deployment',
                 url: 'cluster-deploy'
-              },
+              },*/
               {
                 //newly added cluster deployment section
                 title: 'Cluster Service',

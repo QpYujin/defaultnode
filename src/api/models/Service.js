@@ -2,6 +2,29 @@ const Sequelize = require('sequelize');
 
 module.exports = (function(sequelize) {
   let Service = sequelize.define('service', {
+    
+   /*
+    uuid: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV1,
+      primaryKey: true
+    },
+
+    organizationId: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+
+    projectId: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    
+    applicationId: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },*/
+
       appname: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -23,17 +46,6 @@ module.exports = (function(sequelize) {
       },
   
       dockerimage: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      
-      servicename: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      serviceyaml:{
         type: Sequelize.STRING,
         allowNull: false,
       }

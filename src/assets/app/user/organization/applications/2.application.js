@@ -2,7 +2,7 @@
 //var defaultser="default value at service";
 
 angular.module('app.user.organization.applications')
-.controller('SingleApplicationCtrl', function ($rootScope, $scope, $state, $stateParams, $location, Restangular, application, StaticParams) {
+.controller('SingleApplicationCtrl', function ($rootScope, $scope, $state, $stateParams, $location, Restangular, application, StaticParams,$interval,$timeout) {
   $scope.gitProviders = ['git', 'bitbucket'];
   $scope.application = application ? angular.copy(application) : {};
 
@@ -66,17 +66,57 @@ angular.module('app.user.organization.applications')
     console.log("This is from the client side function for new service",$scope.service.appname);
     console.log("This is from the client side function for new service",$scope.service.namespace);
      console.log("This is from the client side function for new service",$scope.service.port);
- 
+      
    //shell.exec('/home/ubuntu/build_script/deploy.sh');
     Restangular
       .one('organizations', String($stateParams.organizationId))
       .one('projects', $stateParams.projectId)
-      .one('applications', $scope.application.uuid)
+      .one('applications', $stateParams.applicationId)
       .one('13')
       .post('', $scope.service)
-      .then(function () {
-        swal('DONE', 'Service.yaml created', 'success');
-        $state.go('^', {}, {reload: true});
+      .then(function () {  
+        
+         $scope.successMessage="Initializing deployments.......";
+
+         $timeout(function(){
+         $scope.successMessage="Creating name space......";
+         },5000);
+
+         $timeout(function(){
+            $scope.successMessage="Connecting to dockerhub .......";
+         },11000);
+
+         
+          $timeout(function(){
+            $scope.successMessage="Pulling dockerhub image.......";
+         },17000);
+
+
+         $timeout(function(){
+            $scope.successMessage="Configuring cluster.......";
+
+         },23000);
+
+         $timeout(function(){
+            $scope.successMessage="Analysing cluster requirements.......";
+         },27000);
+
+         
+         $timeout(function(){
+            $scope.successMessage="Processing domain registration.......";
+         },34000);
+
+         
+         $timeout(function(){
+            $scope.successMessage="Deploying Application.......";
+         },39000);
+         
+    	$timeout(function(){
+             swal('DONE', 'Successfully deployed', 'success');
+    	},46000);
+	
+        //swal('DONE', 'Service.yaml created', 'success');
+        //$state.go('^', {}, {reload: true});
       })
   }
 

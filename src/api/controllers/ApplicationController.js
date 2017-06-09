@@ -92,12 +92,22 @@ ApplicationController.newservice = (req, res) => {
   var namespace=params.namespace;
   var dockerimage=params.dockerimage;
   var decservice = params.appname;
-  var fulldomain=domain +'.test.deploybytes.com';
+  var fulldomain=domain +'.deploybytes.com';
 
   console.log('Parameters :',params);
   console.log('Appname :',params.appname);
   console.log('Port',params.port);
   console.log("At the server side service function");
+
+/*  UtilService.wrapCb(Service.create(params), (err, application) => {
+    if (err) {
+      server.log.error('Error create service', err);
+      res.status(500).json(err);
+    }
+    res.send(service);
+  });*/
+
+
   
 var data = {
 		apiVersion: 'v1',
@@ -131,13 +141,8 @@ var data = {
 				 {name: 'web',
 				  port: parseInt(port),
 				  targetPort: 'web',
-				  protocol: 'TCP'},
-		  
-				  {name: 'web-ssl',
-				  port: 443,
-				  protocol: 'TCP',
-				  targetPort: 'web-ssl'} 
-				],
+				  protocol: 'TCP'}
+				 ],
 				selector:
 				{app: appname,
 				role: "web"} 			 
@@ -187,17 +192,9 @@ var data = {
 			 ports:[
 				{name: "web",
 				containerPort: 5000}
-				   ], 
-								
-				livenessProbe:{
-						 httpGet:{
-		   			        path: "/",
-					  port: 5000
-						 },
-						 initialDelaySeconds: 15,
-						 timeoutSeconds: 1
-						}
-					}],
+				   ]
+				
+				}]
 					 }
 					}
 				}
@@ -262,7 +259,7 @@ yaml('/usr/src/app/api/controllers/deployment.yaml',data, function(err) {
         //code to be executed after 4 second
 
          //kubectl.command('describe services'+decservice, function(err, data){
-         kubectl.command('describe services '+decservice, function(err, data){
+         kubectl.command('--namespace='+namespace+' describe services '+appname, function(err, data){
 
                  console.log(data)
                  console.log(err)
@@ -291,7 +288,7 @@ yaml('/usr/src/app/api/controllers/deployment.yaml',data, function(err) {
 
 //------------------------------------------------------------------------------------------------------------------------------
 
-  res.end('ending server response');
+res.end('ending server response');
 };
 
 
