@@ -144,24 +144,34 @@ angular.module('app.user.organization.projects.project.applications', [])
                 title: 'Deploy',
                 url: 'images'
               },
+
+              {
+                //newly added cluster deployment section
+                title: 'Deploy',
+                url: 'cluster-service'
+              },
+               
               {
                 title: 'Logs',
                 url: 'logs'
               },
+
+              {
+               title: 'Analytics',
+                url: 'analytics'
+
+              },
+
               {
                 title: 'Cloud Metric',
                 url: 'cloud-metric'
               },
-             /* {
-                //newly added cluster deployment section
-                title: 'Cluster Deployment',
-                url: 'cluster-deploy'
-              },*/
+            
               {
-                //newly added cluster deployment section
-                title: 'Cluster Service',
-                url: 'cluster-service'
-              },
+                title: 'History',
+                url: 'deployment-history'
+              }
+             
 
             ];
 
@@ -184,7 +194,7 @@ angular.module('app.user.organization.projects.project.applications', [])
           return Restangular.one('organizations', $stateParams.organizationId)
             .one('projects', $stateParams.projectId)
             .one('applications', $stateParams.applicationId)
-            .one($stateParams.stage)
+            //.one($stateParams.stage)
             .one('images')
             .get()
         }
@@ -215,6 +225,23 @@ angular.module('app.user.organization.projects.project.applications', [])
       },
     });
 
+    $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.analytics', {
+      url: '/analytics',
+      title: 'Analytics',
+      hideTitle: true,
+      views: {
+        'subStepContent': {
+          templateUrl: 'app/user/organization/projects/project/tabs/application-steps/deploy/analytics.tpl.jade',
+          controller: 'OrganizationProjectApplicationDeployAnalyticsCtrl'
+        }
+      },
+    });    
+
+
+
+
+
+
     $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.cloud-metric', {
       url: '/cloud-metric',
       title: 'Cloud Metric',
@@ -226,6 +253,33 @@ angular.module('app.user.organization.projects.project.applications', [])
         }
       },
     });
+
+    $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.deployment-history', {
+      url: '/deployment-history',
+      title: 'History',
+      hideTitle: true,
+      views: {
+        'subStepContent': {
+          templateUrl: 'app/user/organization/projects/project/tabs/application-steps/deploy/deployment-history.tpl.jade',
+          controller: 'OrganizationProjectApplicationDeployDeploymentHistoryCtrl'
+        }
+      },
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //newly added cluster deployment
     $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.cluster-deploy', {

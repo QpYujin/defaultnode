@@ -1,0 +1,20 @@
+md-table-container.scrollable.grids-table.service-table(layout, flex, ng-show="services.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column) Application Name
+        th(md-column) Domain Name
+        th(md-column) Docker Image
+        th(md-column) Port
+        th(md-column) Created At 
+    tbody(md-body)
+      tr.tHi(md-row, ng-repeat-start="service in services | orderBy: query.order")
+          //td(md-cell, style="width: 40px")
+          //  md-radio-group(ng-model="deployGlobal.selectedImage")
+          //    md-radio-button(ng-value="cluster")
+          td(md-cell) {{service.appname}}
+          td(md-cell) {{service.domain}}
+          td(md-cell) {{service.dockerimage}}
+          td(md-cell) {{service.port}}
+          td(md-cell, style="white-space: nowrap") {{service.createdAt | date:'dd-M-yyyy'}}
+       tr(ng-repeat-end)

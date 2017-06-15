@@ -7,13 +7,19 @@ angular.module('app.user.organization.projects.project.applications')
       swal('ERROR', 'You have to select an image first', 'error');
       return;
     }
-    if (!$scope.service) {
+
+    /*if (!$scope.service) {
       swal('ERROR', 'Please select server type', 'error');
-    }
-    if ($scope.service == 'external' && !$scope.port) {
-      swal('ERROR', 'Please enter the port', 'error');
       return;
     }
+
+    if ($scope.service == 'external' && !$scope.service.domain) {
+      swal('ERROR', 'Please enter the port', 'error');
+      return;
+    }*/
+
+     
+    else{
     $scope.deployGlobal.deployed = true;
 
     $scope.global.deploymentStatus = 'Deploying';
@@ -39,6 +45,7 @@ angular.module('app.user.organization.projects.project.applications')
     $timeout(function () {
       $scope.global.deploymentStatus = '';
     }, 10000);
+    }
 
   }
 })

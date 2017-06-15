@@ -72,51 +72,89 @@ angular.module('app.user.organization.applications')
       .one('organizations', String($stateParams.organizationId))
       .one('projects', $stateParams.projectId)
       .one('applications', $stateParams.applicationId)
-      .one('13')
+      .one('deployments')
       .post('', $scope.service)
       .then(function () {  
         
-         $scope.successMessage="Initializing deployments.......";
+        // $scope.successMessage="Initializing deployments.......";
 
-         $timeout(function(){
-         $scope.successMessage="Creating name space......";
-         },5000);
+        // $timeout(function(){
+        // $scope.successMessage="Creating name space......";
+        // },5000);
 
-         $timeout(function(){
-            $scope.successMessage="Connecting to dockerhub .......";
-         },11000);
-
-         
-          $timeout(function(){
-            $scope.successMessage="Pulling dockerhub image.......";
-         },17000);
-
-
-         $timeout(function(){
-            $scope.successMessage="Configuring cluster.......";
-
-         },23000);
-
-         $timeout(function(){
-            $scope.successMessage="Analysing cluster requirements.......";
-         },27000);
+        // $timeout(function(){
+        //    $scope.successMessage="Connecting to dockerhub .......";
+        // },11000);
 
          
-         $timeout(function(){
-            $scope.successMessage="Processing domain registration.......";
-         },34000);
+        //  $timeout(function(){
+        //    $scope.successMessage="Pulling dockerhub image.......";
+        // },17000);
+
+
+        // $timeout(function(){
+         //   $scope.successMessage="Configuring cluster.......";
+
+        // },23000);
+
+        // $timeout(function(){
+        //    $scope.successMessage="Analysing cluster requirements.......";
+        // },27000);
 
          
-         $timeout(function(){
-            $scope.successMessage="Deploying Application.......";
-         },39000);
+        // $timeout(function(){
+        //    $scope.successMessage="Processing domain registration.......";
+        // },34000);
          
-    	$timeout(function(){
-             swal('DONE', 'Successfully deployed', 'success');
-    	},46000);
+        // $timeout(function(){
+        //    $scope.successMessage="Deploying Application.......";
+        // },39000);
+         
+    	//$timeout(function(){
+        //     swal('DONE', 'Successfully deployed', 'success');
+        //	},46000);
+       
 	
         //swal('DONE', 'Service.yaml created', 'success');
         //$state.go('^', {}, {reload: true});
+
+
+        $scope.deployGlobal.deployed = true;
+
+        $scope.global.deploymentStatus = 'Deploying';
+        $state.go('^.logs');
+
+        $timeout(function () {
+          $scope.deployGlobal.logs += 'Succssfully configured deploybytes with your docker hub repository....\n';
+        }, 2000);
+        $timeout(function () {
+          $scope.deployGlobal.logs += 'Initializing Dockerhub repository.....,\n';
+        }, 3000);
+
+        $timeout(function () {
+          $scope.deployGlobal.logs += 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged\n';
+        },3500);
+
+        $timeout(function () {
+          $scope.deployGlobal.logs += 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged\n';
+        }, 5000);
+        $timeout(function () {
+          $scope.deployGlobal.logs += ' It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages\n';
+        }, 7000);
+
+        $timeout(function () {
+          $scope.global.deploymentStatus = '';
+        }, 10000);
+
+
+
+
+
+
+
+
+
+
       })
   }
 

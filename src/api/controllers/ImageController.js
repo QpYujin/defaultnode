@@ -55,8 +55,9 @@ ImageController.findAll = (req, res) => {
   UtilService.wrapCb(Image.findAndCountAll({
     where: {
       organizationId: req.params.organizationId,
+      projectId:req.params.projectId,
       applicationId: req.params.applicationId,
-      stage: req.params.stage
+      //stage: req.params.stage
     },
     limit: 5,
     offset: 0,

@@ -9,31 +9,84 @@ md-table-container.scrollable.grids-table.build-image-table(layout, flex, ng-sho
         th(md-column) Stage
         th(md-column) Release
     tbody(md-body)
-      tr(md-row, ng-repeat="image in images | orderBy: query.order")
+      tr.tHi(md-row, ng-repeat="image in images | orderBy: query.order")
         td(md-cell, style="width: 40px")
           md-radio-group(ng-model="deployGlobal.selectedImage")
             md-radio-button(ng-value="image")
         td(md-cell)
           span() {{image.buildImageId}}
-        td(md-cell) {{image.build.version}}
+        //td(md-cell) {{image.build.version}}
+        td(md-cell) {{image.version}}
         td(md-cell) {{image.tag}}
         td(md-cell) {{image.stage}}
-        td(md-cell) {{image.build.release.name}}
+        //td(md-cell) {{image.build.release.name}}
+        td(md-cell) {{image.createdAt}}
+
 
 h3(ng-hide="images.length") There is no image
 
-label(layout="row", layout-align="start center")
-  span Server Type
-  md-select(ng-model="service", placeholder="Select")
-    md-option(value="internal") Internal
-    md-option(value="external") External
+//label(layout="row", layout-align="start center")
+//  span Server Type
+//  md-select(ng-model="service", placeholder="Select")
+//    md-option(value="internal") Internal
+//    md-option(value="external") External
 
-label(layout="row", ng-show="service == 'external'")
-  span Port
-  input.form-control(ng-model="port")
+//label(layout="row", ng-show="service == 'external'")
+//  span Port
+//  input.form-control(ng-model="port")
 
+//label(layout="row", layout-align="start center")
+//  span Server Type
+//  md-select(ng-model="server", placeholder="Select")
+//    md-option(value="internal") New
+//    md-option(value="external") Kubernetes
 
+//label(layout="row", ng-show="server == 'external'")
+//  span Domain name
+//  input.form-control(ng-model="service.domain")
+//  span  .deploybytes.com
 
+br
 
 .button-group
-  button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="deployImage()") Deploy
+    button.btn.btn-success(ng-disabled="global.deploymentStatus",ng-click="deployImage()") Deploy
+
+.content-box(layout="column" ng-show="server == 'internal'")
+     .content(layout="column" ng-show="server == 'internal'")
+        label(layout="row")
+          span Name of application
+          input.form-control(ng-model="service.appname")
+        
+        br
+
+        //label(layout="row")
+        //  span namespace
+        //  input.form-control(ng-model="service.namespace")
+        
+        //br 
+
+        label(layout="row")
+          span Domain Name
+          input.form-control(ng-model="service.domain",flex="50")
+          &nbsp
+          span . deploybytes.com
+        
+        br
+
+        label(layout="row")
+          span Port
+          input.form-control(ng-model="service.port",flex="50")
+          p.tooltip1
+            i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+            span.tooltiptext1  Add port number on which your web app will run ex.80,8080,3000 etc      
+        
+        br
+        label(layout="row")
+          span Docker-image
+          input.form-control(ng-model="service.dockerimage",flex="50")
+          p.tooltip1
+            i.fa.fa-exclamation-circle.fa-2x(style="font-size:20px")
+            span.tooltiptext1  Add docker hub image link ex.Username/repository
+
+          button.btn.btn-success(ng-click="newservice()") Deploy
+

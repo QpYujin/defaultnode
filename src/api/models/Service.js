@@ -2,8 +2,6 @@ const Sequelize = require('sequelize');
 
 module.exports = (function(sequelize) {
   let Service = sequelize.define('service', {
-    
-   /*
     uuid: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV1,
@@ -23,7 +21,7 @@ module.exports = (function(sequelize) {
     applicationId: {
       type: Sequelize.STRING,
       allowNull: false,
-    },*/
+    },
 
       appname: {
         type: Sequelize.STRING,

@@ -62,9 +62,14 @@ module.exports = function(app) {
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications', ApplicationController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId', ApplicationController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId', ApplicationController.update);
-  //new route added for new deployapi function
+  
+  //new route added for get and post all deployments for service model
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/12', ApplicationController.newdeployApi);
-  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/13', ApplicationController.newservice);
+
+  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/deployments', DeployController.create);
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/deployments', DeployController.findAll);
+
+
 
    // Application Releases
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/releases', ReleaseController.findAll);
@@ -80,7 +85,8 @@ module.exports = function(app) {
 
 
   // Images Releases
-  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.findAll);
+  //apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.findAll);
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/images', ImageController.findAll);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images/:imageId', ImageController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images/:imageId', ImageController.update);
