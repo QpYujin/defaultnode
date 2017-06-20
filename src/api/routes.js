@@ -65,7 +65,6 @@ module.exports = function(app) {
   
   //new route added for get and post all deployments for service model
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/12', ApplicationController.newdeployApi);
-
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/deployments', DeployController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/deployments', DeployController.findAll);
 
@@ -77,17 +76,21 @@ module.exports = function(app) {
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/releases/:releaseId', ReleaseController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/releases/:releaseId', ReleaseController.update);
 
-   // Build Images Releases
-  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.findAll);
-  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.create);
+   // Build Images
+  //newly added without stage
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.findAll);
+  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.create);
+  //apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.findAll);
+  //apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images/:buildImageId', BuildImageController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images/:bunpm startildImageId', BuildImageController.update);
 
 
-  // Images Releases
+  // Images Releases newly added without stage
   //apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.findAll);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/images', ImageController.findAll);
-  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.create);
+  apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/images', ImageController.create);
+  //apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images', ImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images/:imageId', ImageController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/images/:imageId', ImageController.update);
 

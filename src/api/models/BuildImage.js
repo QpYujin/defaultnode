@@ -15,11 +15,18 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING,
       allowNull: false,
     },
+
+    projectId: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },  
+
     version: {
       type: Sequelize.STRING(64),
       allowNull: true,
       unique: true
     },
+     
     applicationId: {
       type: Sequelize.STRING(64),
       allowNull: false
@@ -32,7 +39,7 @@ module.exports = (function(sequelize) {
     },
     releaseId: {
       type: Sequelize.STRING(64),
-      allowNull: false
+      allowNull: true
     },
     sourceControlId: {
       type: Sequelize.STRING(64),
@@ -40,7 +47,7 @@ module.exports = (function(sequelize) {
     },
     repoName: {
       type: Sequelize.STRING(64),
-      allowNull: false
+      allowNull: true
     },
     branchName: {
       type: Sequelize.STRING(64),

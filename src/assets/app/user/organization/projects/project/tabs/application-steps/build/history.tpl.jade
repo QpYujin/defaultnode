@@ -12,7 +12,7 @@ md-table-container.scrollable.grids-table.build-image-table(layout, flex, ng-sho
       tr(md-row, ng-repeat-start="image in buildImages | orderBy: query.order")
         td(md-cell)
           span() {{image.version}}
-        td(md-cell) {{image.repo.provider}}
+        td(md-cell) {{image.repo.url}}
         td(md-cell) {{image.repoName}}
         td(md-cell) {{image.branchName}}
         td(md-cell, style="white-space: nowrap") {{image.createdAt | date:'dd-M-yyyy'}}

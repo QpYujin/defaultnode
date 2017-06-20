@@ -1,5 +1,5 @@
 FROM nginx
-MAINTAINER Trinh Phuoc Thai <tphuocthai@gmail.com>
+MAINTAINER Neha Khairnar <neha@qpair.io>
 
 ENV CONSUL_HOST consul:8500
 ENV CONSUL_TPL_VERSION 0.18.0

@@ -105,7 +105,7 @@ angular.module('app.user.organization.projects.project.applications')
       return Restangular.one('organizations', $stateParams.organizationId)
         .one('projects', $stateParams.projectId)
         .one('applications', $stateParams.applicationId)
-        .one($stateParams.stage)
+        //.one($stateParams.stage)
         .one('build-images')
         .post('', $scope.build)
         .then(function (newBuild) {
@@ -153,20 +153,22 @@ angular.module('app.user.organization.projects.project.applications')
 
 
   var doPushImage = function (buildId) {
-    return Restangular.one('organizations', $stateParams.organizationId)
+    return Restangular
+        .one('organizations', $stateParams.organizationId)
         .one('projects', $stateParams.projectId)
         .one('applications', $stateParams.applicationId)
-        .one($stateParams.stage)
+        //.one($stateParams.stage)
         .one('images')
         .post('', {
           buildImageId: buildId,
           status: 'pending',
-          tag: '',
+          tag: 'latest',
         }).then(function () {
           swal('DONE', '', 'success');
           $scope.global.deploymentStatus = '';
         })
   }
+
   $scope.pushImage = function () {
     if ($scope.build.uuid) {
       doPushImage($scope.build.uuid);

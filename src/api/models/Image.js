@@ -37,7 +37,7 @@ module.exports = (function(sequelize) {
     },
     stage: {
       type: Sequelize.STRING(128),
-      allowNull: false
+      allowNull: true
     },
   
   }, {
