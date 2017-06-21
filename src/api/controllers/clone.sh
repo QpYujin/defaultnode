@@ -11,7 +11,9 @@ git clone $1
 if [ $? -eq 0 ]; then
         echo "Successfully cloned"
         cd $2
-        sudo docker-compose build
+        #docker-machine create default
+        #docker-machine start default
+        docker-compose build
         if [ $? -eq 0 ]; then
             echo "Image successfully build"
         else

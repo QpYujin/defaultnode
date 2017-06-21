@@ -67,19 +67,24 @@ ImageController.findAll = (req, res) => {
       server.log.error('Error getting image', err);
       res.status(500).json(err);
     }
-    Promise.all(_.map(images.rows, (image) => {
+
+    /*Promise.all(_.map(images.rows, (image) => {
       return function() {
-        var img = image.toJSON();
+        //var img = image.toJSON();
         return new Promise((resolve, reject) => {
-          BuildImageService.getOne(img.buildImageId, (err, build) => {
+          BuildImageService.getOne(image.buildImageId, (err, build) => {
             img.build = build;
             resolve();
           })
         })
-      }();
-    })).then(() => {
+      }();*/
+
+   // })).then(() => {
       res.send(images);
-    })
+   // })
+
+
+
   })
 }
 
