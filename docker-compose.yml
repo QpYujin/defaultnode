@@ -7,7 +7,7 @@ services:
     restart: always
     depends_on:
       - redis
-    command: ["-wait", "tcp://redis:6379", "-timeout", "30s", "npm", "start" ]
+    #command: ["-timeout", "30s", "npm", "start" ]
     environment:
       - SERVICE_NAME=web
 

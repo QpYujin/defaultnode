@@ -15,6 +15,11 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    projectId: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    
     version: {
       type: Sequelize.STRING(64),
       allowNull: true,
