@@ -52,9 +52,9 @@ RUN grunt build
 
 EXPOSE 3000
 
-#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJSFQD22NWHRPZLJQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 default
+#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJ6UFRM6TZMY2BDXQ --amazonec2-instance-type t2.micro --amazonec2-secret-key RVQrufEMSWIjKgduoblv38PnO79eSv0rR/gL5TK --amazonec2-region us-east-1 default
 #RUN docker-machine start default
-#RUN eval $(docker-machine env default)
+#RUN eval $(docker-machine env default --shell bash)
 
 RUN sudo mv /usr/src/app/.kube $HOME
 RUN chmod +x /usr/src/app/kubectl
