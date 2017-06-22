@@ -162,7 +162,7 @@ angular.module('app.user.organization.projects.project.applications')
         .post('', {
           buildImageId: buildId,
           status: 'pending',
-          tag: 'latest',
+          //tag: 'latest',
         }).then(function () {
           swal('DONE', '', 'success');
           $scope.global.deploymentStatus = '';

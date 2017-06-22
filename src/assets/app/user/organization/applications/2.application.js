@@ -63,11 +63,13 @@ angular.module('app.user.organization.applications')
   }
 
   $scope.newservice = function () {
-    console.log("This is from the client side function for new service",$scope.service.appname);
-    console.log("This is from the client side function for new service",$scope.service.namespace);
-     console.log("This is from the client side function for new service",$scope.service.port);
-      
-   //shell.exec('/home/ubuntu/build_script/deploy.sh');
+    console.log('This is select Image ID',$scope.deployGlobal.selectedImage.build.uuid)
+    console.log('This is reponame',$scope.deployGlobal.selectedImage.build.repoName);
+    var link= 'kokyj93/'+$scope.deployGlobal.selectedImage.build.repoName;
+    console.log('This is complete link',link);
+    console.log('This is application name',$scope.global.application.name);
+    //console.log("This is from the client side function for new service")
+
     Restangular
       .one('organizations', String($stateParams.organizationId))
       .one('projects', $stateParams.projectId)
@@ -85,39 +87,6 @@ angular.module('app.user.organization.applications')
         // $timeout(function(){
         //    $scope.successMessage="Connecting to dockerhub .......";
         // },11000);
-
-         
-        //  $timeout(function(){
-        //    $scope.successMessage="Pulling dockerhub image.......";
-        // },17000);
-
-
-        // $timeout(function(){
-         //   $scope.successMessage="Configuring cluster.......";
-
-        // },23000);
-
-        // $timeout(function(){
-        //    $scope.successMessage="Analysing cluster requirements.......";
-        // },27000);
-
-         
-        // $timeout(function(){
-        //    $scope.successMessage="Processing domain registration.......";
-        // },34000);
-         
-        // $timeout(function(){
-        //    $scope.successMessage="Deploying Application.......";
-        // },39000);
-         
-    	//$timeout(function(){
-        //     swal('DONE', 'Successfully deployed', 'success');
-        //	},46000);
-       
-	
-        //swal('DONE', 'Service.yaml created', 'success');
-        //$state.go('^', {}, {reload: true});
-
 
         $scope.deployGlobal.deployed = true;
 
@@ -145,15 +114,6 @@ angular.module('app.user.organization.applications')
         $timeout(function () {
           $scope.global.deploymentStatus = '';
         }, 10000);
-
-
-
-
-
-
-
-
-
 
       })
   }

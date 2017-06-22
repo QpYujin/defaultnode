@@ -37,6 +37,12 @@ module.exports = (function(sequelize) {
     stage: {
       type: Sequelize.STRING(64)
     },
+
+    tag: {
+      type: Sequelize.STRING(64),
+      allowNull: false
+    },
+
     releaseId: {
       type: Sequelize.STRING(64),
       allowNull: true

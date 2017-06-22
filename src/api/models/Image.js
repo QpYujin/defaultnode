@@ -18,12 +18,12 @@ module.exports = (function(sequelize) {
     projectId: {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    
-    version: {
+    },   
+    /*version: {
       type: Sequelize.STRING(64),
       allowNull: true,
-    },
+    },*/
+
     applicationId: {
       type: Sequelize.STRING(64),
       allowNull: false
@@ -36,14 +36,11 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING(128),
       allowNull: false
     },
-    tag: {
-      type: Sequelize.STRING(128),
-      allowNull: false
-    },
-    stage: {
+
+    /*stage: {
       type: Sequelize.STRING(128),
       allowNull: true
-    },
+    },*/
   
   }, {
     classMethods: {

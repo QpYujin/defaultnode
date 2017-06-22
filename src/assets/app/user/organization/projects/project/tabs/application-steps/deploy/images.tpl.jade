@@ -15,10 +15,10 @@ md-table-container.scrollable.grids-table.build-image-table(layout, flex, ng-sho
             md-radio-button(ng-value="image")
         td(md-cell)
           span() {{image.buildImageId}}
-        //td(md-cell) {{image.build.version}}
-        td(md-cell) {{image.version}}
+        td(md-cell) {{image.build.version}}
+        //td(md-cell) {{image.version}}
         td(md-cell) {{image.tag}}
-        td(md-cell) {{image.stage}}
+        td(md-cell) {{image.build.stage}}
         //td(md-cell) {{image.build.release.name}}
         td(md-cell) {{image.createdAt}}
 

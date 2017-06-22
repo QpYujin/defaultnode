@@ -10,6 +10,12 @@
     label(layout="row")
       span Image ID
       p {{deployGlobal.selectedImage.uuid}}
+    label(layout="row")
+      span Repository name
+      p {{deployGlobal.selectedImage.build.repoName}}
+    label(layout="row")
+      span Image tag
+      p {{deployGlobal.selectedImage.build.tag}}
 .content-box
   h3 Logs
   .content(layout="column") 

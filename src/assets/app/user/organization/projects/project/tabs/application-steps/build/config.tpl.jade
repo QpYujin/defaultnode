@@ -19,6 +19,10 @@ div(layout="column", flex).scrollable
       span Select Branch
       md-select(ng-disabled="!editing", ng-model="build.branchName")
         md-option(ng-repeat="branch in branches", ng-value="branch.name") {{branch.name}}
+    label(layout="row")
+      span Image name
+      input.form-control(ng-disabled="!editing", ng-model="build.tag", flex="50")
+
     hr
     div(layout="row", layout-align="start center", ng-hide="editing")
       button.btn.btn-primary(ng-disabled="global.deploymentStatus", ng-click="updateImage()") Git Clone
