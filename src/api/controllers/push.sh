@@ -1,9 +1,11 @@
 # Pushing to dockerhub need some planning
 
 # First set up connection to a docker hub (NOTE: Currently just to docker hub, eventually branching out to other registry)
-docker login --password $1 --username $2 --email $3
 
-docker tag $1
+eval $(docker-machine env default --shell bash)
+docker login --password Alpharius93 --username kokyj93 --email yujin@qpair.io
+
+docker tag $1 kokyj93/$2
 docker push kokyj93/$2
 if [ $? -eq 0 ]; then
         echo "Successfully pushed image"

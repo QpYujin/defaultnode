@@ -36,7 +36,7 @@ angular.module('app.user.organization.projects.project.applications')
       	{
        		appname: $scope.global.application.name,
        		namespace:$scope.global.application.name,
-       		port:90,
+       		port:5000,
        		domain:$scope.global.application.name,
        		dockerimage:link,
       	}

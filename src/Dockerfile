@@ -52,9 +52,9 @@ RUN grunt build
 
 EXPOSE 3000
 
-#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJ6UFRM6TZMY2BDXQ --amazonec2-instance-type t2.micro --amazonec2-secret-key RVQrufEMSWIjKgduoblv38PnO79eSv0rR/gL5TK --amazonec2-region us-east-1 default
+RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAIY6Y6BNS64IPDHSQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 default
 #RUN docker-machine start default
-#RUN eval $(docker-machine env default --shell bash)
+RUN eval $(docker-machine env default --shell bash)
 
 RUN sudo mv /usr/src/app/.kube $HOME
 RUN chmod +x /usr/src/app/kubectl
@@ -62,6 +62,8 @@ RUN sudo mv /usr/src/app/kubectl /usr/local/bin/
 RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh
+RUN chmod +x /usr/src/app/api/controllers/push.sh
+
 
 #ENTRYPOINT ["dockerize"]
 

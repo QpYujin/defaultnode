@@ -32,14 +32,14 @@ let params = req.body;
     	console.log('Service appname',service.appname);
 	console.log('Service domain',service.domain);
  	console.log('Service port',service.port);
- 	console.log('Service namespace',service.namespace);
- 	console.log('Service dockerimage',service.dockerimage);
+ 	console.log('Service namespace',service.namespace.toLowerCase());
+ 	console.log('Service dockerimage',service.dockerimage.toLowerCase());
 
         var port= service.port;
-	var domain= service.domain;
-  	var appname= service.appname;
-  	var namespace= service.namespace;
-  	var dockerimage= service.dockerimage;
+	var domain= service.domain.toLowerCase();
+  	var appname= service.appname.toLowerCase();
+  	var namespace= service.namespace.toLowerCase();
+  	var dockerimage= service.dockerimage.toLowerCase();
   	var fulldomain=domain +'.deploybytes.com';
 
          var data = {
@@ -47,13 +47,13 @@ let params = req.body;
                  kind:"List",
                  items:
                  [
-                 {apiVersion: "v1",
+                	 {apiVersion: "v1",
                           kind: 'Namespace',
                           metadata:
                           {name: namespace},
                          },
 
-                     {
+                    	 {	
                            apiVersion: 'v1',
                             kind: 'Service',
                             metadata:
@@ -77,59 +77,63 @@ let params = req.body;
                                    protocol: 'TCP'}
                                   ],
                                  selector:
-                                 {app: appname,
-                                 role: "web"}
+                                 {	app: appname,
+                                 	role: "web"}
                             }
                             },
 
                             {
-                         apiVersion: 'extensions/v1beta1',
-                         kind: 'Deployment',
-                         metadata:
-                            {name: appname,
-                            namespace: namespace},
-                         spec:
-                            {replicas: 3,
-                         strategy:
-                            {type: "RollingUpdate"},
-                         revisionHistoryLimit: 10,
-                         selector:
-                            {   matchLabels:
-                            {app: appname,
-                                 role: "web"}
-                                 },
-                         template:
-                         {
-                          metadata:{
-                          labels:{
-                           app: appname,
-                            role: "web"
-                          }
-                        },
-                         spec:
-                         {
-                         containers:
-                         [
-                        {name: appname,
-                         image: dockerimage,
-                         resources:
-                        {  limits:{
-                         cpu: "100m",
-                          memory: "250Mi"
-                                },
-                         requests:{
-                          cpu: "10m",
-                          memory: "125Mi"
-                                 }
-                         },
-                         ports:[
-                                {name: "web",
-                                containerPort: parseInt(port)}
-                               ]
+                         	apiVersion: 'extensions/v1beta1',
+                         	kind: 'Deployment',
+                         	metadata:
+                            	{     name: appname,
+                            	      namespace: namespace},
+                         	spec:
+                            	{  replicas: 3,
+                         	   strategy:
+                                       {type: "RollingUpdate"},
+                                        revisionHistoryLimit: 10,
+                                   selector:
+                                    {   matchLabels:
+                                            {app: appname,
+                                             role: "web"}
+                                    },
+                         	   template:
+                         	  {
+                          		metadata:{
+                          			labels:{
+                          				 app: appname,
+                            				 role: "web"
+                         				 },
+                                                 annotations:{
+                                                          "consul.register/enabled": "true"
+                                                         }
+                       				 },
+                                                
+                         		spec:
+                         		{
+                         		containers:
+                         		[
+                        			{name: appname,
+                         			image: dockerimage,
+                         			resources:
+                       				 {  limits:{
+                         				cpu: "100m",
+                          				memory: "250Mi"
+                              				  },
+                         			    requests:{
+                          				cpu: "10m",
+                          				memory: "125Mi"
+                                			 }
+                        			 },
+                    			     ports:[
+                               			 {name: "web",
+                                		containerPort: parseInt(port)}
+                              			 ]
 
-                                }]
+                               		 }]
                                          }
-                                        }
+                                   }
                                 }
                            }
                         ]

@@ -18,82 +18,10 @@ ImageController.findOne = (req, res) => {
         image.build = build;
       }
       res.send(image);
-      //code for pushing to docker hub image
-           shell.exec('/usr/src/app/api/controllers/push.sh',
-           function (error, stdout, stderr) {
-           console.log('This is inside push shell script function');
-               if (error !== null) {
-               console.log('Success!');
-               }
-           });
-     //   });//end of source management
-
-
     }
   });
 
 };
-
-/*
-
-ImageController.create = (req, res) => {
-  let params = req.body;
-  params.organizationId = req.params.organizationId;
-  params.projectId = req.params.projectId;
-  params.applicationId = req.params.applicationId;
-  params.stage = req.params.stage;
-  UtilService.wrapCb(Image.create(params), (err, image) => {
-    if (err) {
-      server.log.error('Error create image', err);
-      res.status(500).json(err);
-    }
-    res.send(image);
-
-    //code for push.sh shell script
-    var getrepolink = function () {
-      var img = image.toJSON();
-      return BuildImage.findById(image.buildImageId).then((build)=>{
-        img.build=build;//.toJSON();
-        console.log('Image is building for repo: ',build.repoName);
-        console.log('Image tage name',build.tag);
-        var dockertab=build.repoName+'_'+build.tag;
-        console.log('Complete dockerhub',dockertab);
-
-          shell.exec('/usr/src/app/api/controllers/push.sh'+' '+dockertab+' '+build.repoName+' ',
-            function (error, stdout, stderr) {
-              console.log('This is inside shell script function');
-              if (error !== null) {
-                console.log('Success!!');
-              }
-            });
-
-        //code for getting link JOIN source management table
-        return SourceManagement.findById(build.sourceControlId).then((repo)=>{
-        img.repo=repo.toJSON();
-        console.log('This is at pushing docker hub github  link: ',repo.url);
-      });//end of source management
-
-    });
-
-  }();//end of get repo
-
-  });
-};
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -112,8 +40,52 @@ ImageController.create = (req, res) => {
       res.status(500).json(err);
     }
     res.send(image);
+  
+  var getrepolink = function () {
+      var img = image.toJSON();
+      return BuildImage.findById(image.buildImageId).then((build)=>{
+        img.build=build;//.toJSON();
+        console.log('Image is building for repo: ',build.repoName);
+        console.log('Image tage name',build.tag);
+        var dockertab=build.repoName.toLowerCase()+'_'+build.tag;
+        console.log('Complete dockerhub tab',dockertab);
+
+          shell.exec('/usr/src/app/api/controllers/push.sh'+' '+dockertab+' '+build.repoName.toLowerCase()+' ',
+            function (error, stdout, stderr) {
+              console.log('This is inside ---push--- shell script function');
+              if (error !== null) {
+                console.log('Success for running shell script!!');
+              }
+            });
+
+        //code for getting link JOIN source management table
+        return SourceManagement.findById(build.sourceControlId).then((repo)=>{
+        img.repo=repo.toJSON();
+        console.log('This is github  link: ',repo.url);
+      });//end of source management
+
+    });
+
+  }();//end of get repo
+
+
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ImageController.update = (req, res) => {
   let params = req.body;
