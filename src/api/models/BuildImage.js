@@ -43,6 +43,11 @@ module.exports = (function(sequelize) {
       allowNull: false
     },
 
+    port: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+
     releaseId: {
       type: Sequelize.STRING(64),
       allowNull: true

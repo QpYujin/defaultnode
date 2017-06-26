@@ -47,6 +47,7 @@ ImageController.create = (req, res) => {
         img.build=build;//.toJSON();
         console.log('Image is building for repo: ',build.repoName);
         console.log('Image tage name',build.tag);
+        console.log('Image PORT',build.port);
         var dockertab=build.repoName.toLowerCase()+'_'+build.tag;
         console.log('Complete dockerhub tab',dockertab);
 
@@ -54,7 +55,7 @@ ImageController.create = (req, res) => {
             function (error, stdout, stderr) {
               console.log('This is inside ---push--- shell script function');
               if (error !== null) {
-                console.log('Success for running shell script!!');
+                console.log('Success for running push shell script!!');
               }
             });
 

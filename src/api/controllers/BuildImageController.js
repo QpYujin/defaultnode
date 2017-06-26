@@ -62,6 +62,8 @@ BuildImageController.create = (req, res) => {
       console.log('This is build image object--------------------------------');
       console.log('This is repository name',params.repoName);
       console.log('this is from branch',params.branchName);
+      console.log('This is port',params.port);      
+
       var gitlink=repo.url+'/'+params.repoName+'.git';
       console.log('complete link ',gitlink);
 

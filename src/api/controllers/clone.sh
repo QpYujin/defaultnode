@@ -17,6 +17,8 @@ if [ $? -eq 0 ]; then
         docker-compose build
         if [ $? -eq 0 ]; then
             echo "Image successfully build"
+            cd ..
+            rm -rf $2 
         else
             echo "Image build failed"
 		    fi

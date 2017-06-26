@@ -26,6 +26,7 @@ angular.module('app.user.organization.projects.project.applications')
     var link= 'kokyj93/'+$scope.deployGlobal.selectedImage.build.repoName;
     console.log('This is complete link',link);
     console.log('This is application name',$scope.global.application.name)
+    console.log('This is application port',$scope.deployGlobal.selectedImage.build.port)
 
     Restangular
       .one('organizations', String($stateParams.organizationId))
@@ -36,7 +37,7 @@ angular.module('app.user.organization.projects.project.applications')
       	{
        		appname: $scope.global.application.name,
        		namespace:$scope.global.application.name,
-       		port:5000,
+       		port:$scope.deployGlobal.selectedImage.build.port,
        		domain:$scope.global.application.name,
        		dockerimage:link,
       	}
