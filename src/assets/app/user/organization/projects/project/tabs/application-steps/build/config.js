@@ -133,7 +133,7 @@ angular.module('app.user.organization.projects.project.applications')
           $scope.global.deploymentStatus = 'Cloning code';
           $timeout(function () {
             $scope.global.deploymentStatus = '';
-            swal('DONE', '', 'success');
+            swal('DONE','This is message', 'success');
             
             $scope.showLogs = false;
             return newBuild;
@@ -146,7 +146,8 @@ angular.module('app.user.organization.projects.project.applications')
             swal('ERROR', 'Please fill required fields', 'error');
           }
           $scope.global.deploymentStatus = '';
-          return result;
+        
+	  return result;
         })
     }
   }

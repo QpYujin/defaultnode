@@ -75,6 +75,22 @@ BuildImageController.create = (req, res) => {
                console.log(' success ! ');
                }
            });
+
+	   var delayMillis = 6000; //1 second
+            console.log('Success for running shell script!!');
+            console.log('inside image update function');
+            setTimeout(function () {
+              if (shell.echo == 'Image successfully build') {
+                buildImage.setDataValue('status', 'Success BUILD');
+                return buildImage.save();
+              }
+              else {
+                buildImage.setDataValue('status', 'Failed to Build');
+                return buildImage.save();
+              }
+            }, delayMillis);
+
+
         });//end of source management
 
     }();//end of get repo
