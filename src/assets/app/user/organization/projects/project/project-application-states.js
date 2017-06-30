@@ -145,16 +145,23 @@ angular.module('app.user.organization.projects.project.applications', [])
                 url: 'images'
               },
 
-              {
+             /* {
                 //newly added cluster deployment section
                 title: 'Deploy',
                 url: 'cluster-service'
-              },
+              },*/
                
+	
               {
                 title: 'Logs',
                 url: 'logs'
               },
+
+	      {
+                title: 'Status',
+                url: 'status'
+              },
+
 
               {
                title: 'Analytics',
@@ -224,6 +231,22 @@ angular.module('app.user.organization.projects.project.applications', [])
         }
       },
     });
+
+   $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.status', {
+      url: '/status',
+      title: 'Status',
+      hideTitle: true,
+      views: {
+        'subStepContent': {
+          templateUrl: 'app/user/organization/projects/project/tabs/application-steps/deploy/status.tpl.jade',
+          controller: 'OrganizationProjectApplicationDeployStatusCtrl'
+        }
+      },
+    });
+
+
+
+
 
     $stateProvider.state('user.organization.projects.project.applications.application.stage.deploy.analytics', {
       url: '/analytics',

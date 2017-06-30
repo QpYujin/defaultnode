@@ -15,15 +15,16 @@ if [ $? -eq 0 ]; then
         #docker-machine start default
         eval $(docker-machine env default --shell bash)
         docker-compose build
+        
         if [ $? -eq 0 ]; then
-            echo "Image successfully build"
-            cd ..
-            rm -rf $2 
+           echo "Image successfully build">clonelog.txt
+           cd ..
+           rm -rf $2 
         else
-            echo "Image build failed"
-		    fi
+            echo "Image build failed">clonelog.txt
+	fi
 else
-        echo "Fail to clone repository"
+        echo "Fail to clone repository">clonelog.txt
         exit 1
 fi
 

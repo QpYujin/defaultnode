@@ -133,11 +133,13 @@ angular.module('app.user.organization.projects.project.applications')
           $scope.global.deploymentStatus = 'Cloning code';
           $timeout(function () {
             $scope.global.deploymentStatus = '';
-            swal('DONE','This is message', 'success');
+            //swal('DONE','This is message', 'success');
             
+	    doGetImage(newBuild.uuid);
+
             $scope.showLogs = false;
             return newBuild;
-          }, 10000)
+          }, 20000)
         }, function (result) {
           if (result.data.fields && result.data.fields.version) {
             swal('ERROR', 'Version is existed, please choose another one.', 'error');
@@ -153,6 +155,11 @@ angular.module('app.user.organization.projects.project.applications')
   }
 
 
+
+
+
+
+//code for push image to docker hub
   var doPushImage = function (buildId) {
     return Restangular
         .one('organizations', $stateParams.organizationId)
@@ -184,6 +191,61 @@ angular.module('app.user.organization.projects.project.applications')
       
     }
   }
+
+
+//code for get image status
+var doGetImage=function (buildId) {
+    return Restangular.one('organizations', $stateParams.organizationId)
+      .one('projects', $stateParams.projectId)
+      .one('applications', $stateParams.applicationId)
+      //     .one($stateParams.stage)
+      .one('build-images')
+      .one(buildId)
+      .get()
+      .then(function (image) {
+
+      //  $scope.global.deploymentStatus = '';
+        $scope.buildimage=image;
+
+        console.log('this is after get call for status',$scope.buildimage);
+        console.log($scope.buildimage.status);
+
+        if($scope.buildimage.status.toString()=="Failed to clonned"){
+          console.log('this is unsuccessful clonned message')
+          swal('Error', $scope.buildimage.status, 'error');
+        }
+
+        if ($scope.buildimage.status =="Failed to Build"){
+         console.log('This is Error');
+          swal('Error', $scope.buildimage.status +' Try again!','error');
+        }
+
+
+        if ($scope.buildimage.status =="Successfully Build"){
+         console.log('This is Error');
+          swal('Done', $scope.buildimage.status +' Image is ready to deploy!','success');
+        }
+
+      })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   $scope.deploy = function (image) {
     $scope.global.deploymentStatus = 'Deploying';
