@@ -9,7 +9,7 @@ app.directive('iframeDirective', ['$sce', function($sce) {
     template: '<iframe scrolling="no" src="{{ mysite1 }}" frameborder="0" allowfullscreen></iframe>',
     link: function(scope) {
       scope.trustedUrl = $sce.trustAsResourceUrl("//www.youtube.com/embed/dQw4w9WgXcQ");
-      scope.mysite1=$sce.trustAsResourceUrl("https://api.deploybytes.com/api/v1/proxy/namespaces/kube-system/services/kibana-logging/goto/23fc6962e9821c6a43bd3779c9ce3028")
+      scope.mysite1=$sce.trustAsResourceUrl("http://a5ab07a0361b011e78a2a0e3a81493ac-1745348620.us-east-1.elb.amazonaws.com:5601/goto/64967e6889bfc2603ece9683e9663316");
       scope.mysite=$sce.trustAsResourceUrl("https://api.deploybytes.com?embed=true&username=admin&password=EwyYppd81PjH7iYgGM8nNi8gHGkGh4jT/api/v1/proxy/namespaces/kube-system/services/kibana-logging/goto/9efb4a8216d5d26005312f0dd66457a9")}
 
 

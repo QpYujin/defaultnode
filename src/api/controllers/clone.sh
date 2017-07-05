@@ -9,7 +9,7 @@ echo $1
 git clone $1
 #If cloning is successful, ccd into folder and build image
 if [ $? -eq 0 ]; then
-        echo "Successfully cloned"
+        echo "Successfully cloned">/usr/src/app/api/controllers/clonelog.txt
         cd $2
         #docker-machine create default
         #docker-machine start default
@@ -17,14 +17,14 @@ if [ $? -eq 0 ]; then
         docker-compose build
         
         if [ $? -eq 0 ]; then
-           echo "Image successfully build">clonelog.txt
+           echo "Image successfully build">/usr/src/app/api/controllers/clonelog.txt
            cd ..
            rm -rf $2 
         else
-            echo "Image build failed">clonelog.txt
+            echo "Image build failed">/usr/src/app/api/controllers/clonelog.txt
 	fi
 else
-        echo "Fail to clone repository">clonelog.txt
+        echo "Fail to clone repository">usr/src/app/api/controllers/clonelog.txt
         exit 1
 fi
 

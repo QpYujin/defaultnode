@@ -80,6 +80,10 @@ module.exports = function(app) {
   //newly added without stage
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.findAll);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.create);
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images/:buildImageId', BuildImageController.findOne);
+
+
+
   //apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.findAll);
   //apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images/:buildImageId', BuildImageController.findOne);

@@ -97,54 +97,45 @@ BuildImageController.create = (req, res) => {
 
 		//code for getting logs from shell
                sleep.sleep(15);
-		fs.readFile('/usr/src/app/clonelog.txt', 'utf8', function (err,data) {
+		fs.readFile('/usr/src/app/api/controllers/clonelog.txt', 'utf8', function (err,data) {
 			if (err) {
 				return console.log(err);
 			}
 			
 			console.log(data);
 			logger.emit('read', {message: 'Successfully reading clone logs'});
-			if(data.indexOf('Successfully cloned') >= 0){
-			   	
-				
-			//	console.log('This is status:',data.toString());
-			//	buildImage.setDataValue('status', 'Success fully cloned');
-                	//	return buildImage.save();				 
-			
-				
-
-				//read file for build-----------------------------------
-				fs.readFile('/usr/src/app/clonelog.txt', 'utf8', function (err,data) {
-				if (err) {
-					return console.log(err);
-				}
-			
-				console.log(data);
-				 logger.emit('read', {message: 'Successfully reading clone logs'});
-
-				if(data.indexOf('Image successfully build') >= 0){
-			   	console.log('This is status:',data.toString());
-				 buildImage.setDataValue('status', 'Successfully Build');
-                                 logger.emit('status', {message: 'Successfully Build'});
-				 return buildImage.save();
-
-			 	 }
-			  	else{console.log('This is build status :failed');
-				buildImage.setDataValue('status', 'Failed to Build');
-				 logger.emit('status', {message: 'Failed to Build'});
-                                 return buildImage.save();
-				 }
-
-				});
-
+	
+			if(data.indexOf('Successfully cloned') >= 0){			
+				console.log('This is status after clonning:',data.toString());
+	                        buildImage.setDataValue('status', 'Success fully cloned');
+                		return buildImage.save();				 
 
 			 }//end of clonned if
+
+			else if(data.indexOf('Image successfully build') >= 0){
+                                        console.log('This is status:',data.toString());
+                                        buildImage.setDataValue('status', 'Successfully Build');
+                                        logger.emit('status', {message: 'Successfully Build'});
+                                        return buildImage.save();
+
+                                         }
+
+
+
+			else if(data.indexOf('Image build failed') >= 0)
+				{	console.log('This is build status :failed');
+                                        buildImage.setDataValue('status', 'Failed to Build');
+                                        logger.emit('status', {message: 'Failed to Build'});
+                                        return buildImage.save();
+                                         }
+
+
+
 			  else{
 				 console.log('failed');
-				buildImage.setDataValue('status', 'Failed to clonned');
+				 buildImage.setDataValue('status', 'Failed to clonned');
 				 logger.emit('status', {message: 'Failed to clonned'});
                 		return buildImage.save();
-		
 			  }
 		
           	 });
