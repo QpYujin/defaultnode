@@ -1,0 +1,17 @@
+md-table-container.scrollable.grids-table.cluster-table(layout, flex, ng-show="clusters.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column) Cluster
+        th(md-column) Cluster service
+    tbody(md-body)
+      tr.tHi(md-row, ng-repeat-start="cluster in clusters | orderBy: query.order")
+          //td(md-cell, style="width: 40px")
+          //  md-radio-group(ng-model="deployGlobal.selectedImage")
+          //    md-radio-button(ng-value="cluster")
+          td(md-cell) {{cluster.servicename}}
+          td(md-cell) {{cluster.serviceyaml}}
+          td(md-cell, style="white-space: nowrap") {{cluster.createdAt | date:'dd-M-yyyy'}}
+       tr(ng-repeat-end)
+.button-group
+  button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="deployservice()") Deploy

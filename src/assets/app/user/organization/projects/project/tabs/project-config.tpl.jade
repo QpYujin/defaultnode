@@ -1,0 +1,107 @@
+collapse-box(title="Source code Management", buttons="managementButtons")
+  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.repos.length")
+    table(md-table, flex)
+      thead(md-head, md-order="query.order")
+        tr(md-row)
+          th(md-column) 
+            strong Name
+          th(md-column) 
+            strong Provider
+          th(md-column) 
+            strong Url
+          th(md-column) 
+            strong Type
+          th(md-column)
+      tbody(md-body)
+        tr(md-row, ng-repeat="repo in global.repos")
+          td(md-cell) {{repo.name}}
+          td(md-cell) {{repo.provider}}
+          td(md-cell) {{repo.url}}
+          td(md-cell) {{repo.type}}
+          td(md-cell)
+            md-button.md-icon-button(ui-sref=".repo({repoId: repo.uuid})")
+              i.fa.fa-cog
+            md-button.md-icon-button
+              i.fa.fa-remove
+  h3(ng-show="!global.repos.length") There is no repository
+br
+br
+collapse-box(title="Cloud Provider", buttons="cloudProviderButtons")
+  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.clouds.length")
+    table(md-table, flex)
+      thead(md-head, md-order="query.order")
+        tr(md-row)
+          th(md-column) 
+            strong Name
+          th(md-column) 
+            strong Provider
+          th(md-column)
+      tbody(md-body)
+        tr(md-row, ng-repeat="cloud in global.clouds")
+          td(md-cell) {{cloud.name}}
+          td(md-cell) {{cloud.provider}}
+          td(md-cell)
+            md-button.md-icon-button(ui-sref=".cloud({cloudId: cloud.uuid})")
+              i.fa.fa-cog
+            md-button.md-icon-button
+              i.fa.fa-remove
+  h3(ng-show="!global.clouds.length") There is no cloud provider
+br
+br
+collapse-box(title="Image Repository", buttons="imageButtons")
+  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.images.length")
+    table(md-table, flex)
+      thead(md-head, md-order="query.order")
+        tr(md-row)
+          th(md-column) 
+            strong Name
+          th(md-column) 
+            strong Provider
+          th(md-column) 
+            strong Url
+          th(md-column) 
+            strong Type
+          th(md-column)
+      tbody(md-body)
+        tr(md-row, ng-repeat="image in global.images")
+          td(md-cell) {{image.name}}
+          td(md-cell) {{image.provider}}
+          td(md-cell) {{image.url}}
+          td(md-cell) {{image.type}}
+          td(md-cell)
+            md-button.md-icon-button(ui-sref=".image({imageId: image.uuid})")
+              i.fa.fa-cog
+            md-button.md-icon-button
+              i.fa.fa-remove
+  h3(ng-show="!global.images.length") There is no image repository
+br
+br
+collapse-box(title="Edit project params")
+  div(layout="column", style="padding: 15px;")
+
+    label.form-group(layout="row", layout-align="start center")
+      span Select Stack
+      md-input-container
+        md-select(ng-model="global.project.stack", ng-change="updateProject()")
+          md-option(ng-repeat="item in stacks", ng-value="item.value") {{item.name}}
+    label.form-group(layout="row", layout-align="start start")
+      span Select Environment
+      div(layout, layout-wrap, flex)
+        md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+      //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
+        md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
+    label(layout="row", layout-align="start start")
+      span Select DB Stack
+      div(layout, layout-wrap, flex)
+        md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+      //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
+        md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+br
+br
+.text-left
+  button.btn.btn-default(ui-sref="user.organization.projects.project.applications") Back
+
+style.
+  #steps-buttons {
+    display: none;
+  }

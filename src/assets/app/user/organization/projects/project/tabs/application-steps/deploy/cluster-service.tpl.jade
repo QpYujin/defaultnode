@@ -1,0 +1,18 @@
+label(layout="row")
+  span Service name
+  input.form-control(ng-model="global.application.name", flex="50")
+  &nbsp
+  i.fa.fa-exclamation-circle.fa-2x(style="font-size:26px")
+
+label(layout="row")
+  span Service.yaml
+  textarea(rows=20).form-control(ng-model="global.application.name",flex="50")
+  i.fa.fa-exclamation-circle.fa-2x
+
+hr
+button.btn.btn-success(ng-click="newservice()") Deploy to Cluster
+
+hr
+.content-box(ng-show="showLogs")
+  h3 Logs
+  .content {{logs}}

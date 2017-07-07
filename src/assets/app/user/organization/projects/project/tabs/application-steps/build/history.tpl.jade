@@ -1,0 +1,32 @@
+md-table-container.scrollable.grids-table.build-image-table(layout, flex, ng-show="buildImages.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column) Image Version
+        th(md-column) Source Management
+        th(md-column) Repository
+        th(md-column) Branch
+        th(md-column) Status
+        th(md-column) Created At
+        th(md-column)
+        th(md-column) &nbsp;
+    tbody(md-body)
+      tr(md-row, ng-repeat-start="image in buildImages | orderBy: query.order")
+        td(md-cell)
+          span() {{image.version}}
+        td(md-cell) {{image.repo.url}}
+        td(md-cell) {{image.repoName}}
+        td(md-cell) {{image.branchName}}
+        td(md-cell) {{image.status}}
+        td(md-cell, style="white-space: nowrap") {{image.createdAt | date:'dd-M-yyyy'}}
+        td(md-cell)
+          a(ng-click="image.showLogs = !image.showLogs") {{image.showLogs ? 'Hide Logs' : 'Show Logs'}}
+      tr(ng-repeat-end, ng-show="image.showLogs")
+        td.logs(colspan="6")
+          pre -Cloning code from github.js
+            br
+            | -Finished cloning
+            br
+            | -Pushing image
+
+h3(ng-hide="buildImages.length") There is no image

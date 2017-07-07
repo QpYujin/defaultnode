@@ -1,0 +1,6 @@
+div(ng-repeat="item in apps")
+  .progressbar
+    .progressbar-value.bg-primary(style='width: 100%')
+      .progress-overlay(style='width: 100%')
+      .progress-label
+        h3.ng-binding {{item.name}}

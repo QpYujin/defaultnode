@@ -1,0 +1,23 @@
+div.widget-container(masonry, options="$root.masonryOptions", ng-show="global.applications.length")
+  .item.widget(masonry-tile, ng-repeat="application in global.applications track by $index", style="width: calc(33.33% - 10px);")
+    div.application
+      .widget-header.bg-primary(layout, layout-align="start center")
+        h4 
+          strong(ui-sref="user.organization.projects.project.applications.application.dashboard({applicationId: application.uuid})") {{application.name}}
+      .widget-body
+        div.app-description {{application.description || 'application Description'}}
+        div.app-details(layout="column")
+          label
+            span.label-title Created at:
+            span {{application.createdAt | date:'dd-M-yyyy'}}
+          label
+            span.label-title Region:
+            span {{application.region}}
+          label
+            span.label-title Zone:
+            span {{application.zone}}
+      .widget-footer(layout)
+        .button-group(layout, flex)
+          button.btn.btn-success(flex, ui-sref="user.organization.projects.project.applications.application.build.config({applicationId: application.uuid})") Build
+          button.btn.btn-info(flex, ui-sref="user.organization.projects.project.applications.application.deploy.config({applicationId: application.uuid})") Deploy
+h3(ng-hide="global.applications.length") There is no application

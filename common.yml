@@ -1,0 +1,7 @@
+version: "2"
+services:
+  app:
+    build: ./src
+    image: autodeploy/app
+    environment:
+      - CONFIG_SCHEME=deploy

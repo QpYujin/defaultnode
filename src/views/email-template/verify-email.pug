@@ -1,0 +1,12 @@
+extends template.pug
+block content
+  div Hi #{user.firstName}
+  div(style="margin-bottom: 15px;") Please confirm your email #{user.email} by clicking on this button
+  div(style="margin-bottom: 15px;")
+    a(href=`${baseUrl}/confirm/${token.token}` style="display: inline-block; padding: 10px 25px; font-size: 18px; color: #ffffff; background-color: #3ba054; border-radius: 4px; text-decoration: none;") Confirm your email
+  div(style="margin-bottom: 20px;") By clicking this link, you agree to the Terms of Service and Privacy Policy.
+  div(style="font-size:12px; line-height: 22px;")
+    div(style="font-size: 12px;") If clicking on the link does not work, just copy and paste the following address into your browser:
+    div 
+      a(href="`${baseUrl}/confirm/${token.token}`" target="_blank") #{baseUrl}/confirm/#{token.token}
+    div If you are still having problems, simply forward this email to admin@tarabalam.com.

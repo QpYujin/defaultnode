@@ -1,0 +1,28 @@
+header-bar
+div(layout, flex)
+  main-sidebar#main-sidebar(layout="column", ng-class="{closed: $root.sidebarClosed}")
+  div(layout="column", flex)
+    .scrollable(flex, layout="column")
+      breadcrumb(items="breadcrumbs.items")
+      h2.page-title(layout, ng-hide="hideTitle")
+        | {{pageTitle}}
+        span(flex)
+        button.btn.btn-info(ng-if="addOnButton.title", ui-sref="{{addOnButton.url}}") {{addOnButton.title}}
+      div.content-wrapper(ui-view="organization", flex, layout="column", ng-class="{'no-padding': hideTitle}")
+        //h1 Welcome to Deploybytes!
+        div.bt(ng-init="myVar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLuCfTIpDaXqrU5UKGICsq55vJKxssUFmHRCC4HnqoICrhWNgP'")
+          img(ng-src='{{myVar}}')
+          h1.contentm Hello There !
+          .content
+            | &nbsp &nbsp
+            | Welcome to Deploybytes!  &nbsp  &nbsp
+            .content__container
+              p.content__container__text
+              ul.content__container__list
+                li.content__container__list__item Build !
+                li.content__container__list__item Deploy !
+                li.content__container__list__item Test !
+                li.content__container__list__item  & you are done!
+            input.form-control(ng-model="", flex="150")
+
+  deploying-app#deploying-app

@@ -1,0 +1,73 @@
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Auto deployment
+    link(href='vendor/bootstrap-css-only/bootstrap.css', rel='stylesheet')
+    link(href='vendor/font-awesome/css/font-awesome.css', rel='stylesheet')
+    link(href='vendor/sweetalert/sweetalert.css', rel='stylesheet')
+    link(href='styles/login.css', rel='stylesheet')
+    link(href='vendor/css/admin.css', rel='stylesheet')
+    script(src='https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit', async='', defer='')
+  body
+    #controller(ng-app='app', ng-controller="RegisterFormCtrl")
+      #login-page
+        .overlay
+        #login-form
+          h2.text-center Register
+          br
+          form(name='registerForm', ng-submit="register()")
+            .input-group.form-group
+              span.input-group-addon First name
+              input#email.form-control(name='firstName', type='text', ng-model="user.firstName", required)
+            .input-group.form-group
+              span.input-group-addon Last name
+              input.form-control(name='lastName', type='text', ng-model="user.lastName", required)
+            .input-group.form-group
+              span.input-group-addon Email
+              input.form-control(name='email', type='email', ng-model="user.email", required)
+            .input-group.form-group
+              span.input-group-addon Password
+              input.form-control(name='password', type='password', ng-model="user.password", required)
+            .input-group.form-group
+              span.input-group-addon Confirm password
+              input.form-control(name='repassword', type='password', ng-model="user.repassword", required)
+            .row
+              .col-md-6
+                button.btn.btn-lg.btn-success.btn-block(type='submit', ng-disabled="registerForm.$invalid") Register
+              .col-md-6
+                a.btn.btn-lg.btn-info.btn-block(href="/login", target="_self") Login
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='vendor/sweetalert/sweetalert.min.js')
+    script(src='vendor/angular/angular.js')
+
+    script.
+      angular.module('app', [])
+        .controller('RegisterFormCtrl', function ($scope, $http) {
+          $scope.register = function () {
+            if ($scope.user.password.length < 8) {
+              swal('ERROR', 'Password must be at least 8 characters.', 'error');
+              return;
+            }
+            if ($scope.user.password != $scope.user.repassword) {
+              swal('ERROR', 'Password and password confirm not match.', 'error');
+              return;
+            }
+            $http.post('/api/register', $scope.user).then(function (data) {
+              console.log(data);
+            })
+
+
+            //-   Restangular.one('register').post('', $scope.user)
+            //-     .then(function() {
+            //-       swal('DONE', 'Please check email and confirm your registration', 'success');
+            //-       // $scope.user = {};
+            //-       // $scope.tob = {};
+            //-     }, function() {
+            //-       swal('ERROR', 'Email is invalid, please try again', 'error');
+            //-     });
+            //- }
+          }
+        });

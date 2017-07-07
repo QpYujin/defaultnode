@@ -1,0 +1,39 @@
+div.scrollable(layout="column")
+  //- div(layout="column", flex).scrollable
+  //-   h3(ng-show="!builds.length") There is no build
+  //-   md-table-container.scrollable.grids-table(layout, flex, ng-show="builds.length")
+  //-     table(md-table, flex)
+  //-       thead(md-head, md-order="query.order")
+  //-         tr(md-row)
+  //-           th(md-column) Build Name
+  //-           th(md-column) Instance Name
+  //-           th(md-column) Region
+  //-           th(md-column) Zone
+  //-           th(md-column) Create At
+  //-           th(md-column) Status
+  //-       tbody(md-body)
+  //-         tr(md-row, ng-repeat="build in builds | orderBy: query.order")
+  //-           td(md-cell)
+  //-             span(ui-sref="user.organization.builds.build.config({buildId: build.uuid})") {{build.name}}
+  //-           td(md-cell) {{build.instanceName}}
+  //-           td(md-cell) {{build.region}}
+  //-           td(md-cell) {{build.zone}}
+  //-           td(md-cell, style="white-space: nowrap") {{build.createdAt | date:'dd-M-yyyy'}}
+  //-           td(md-cell) {{build.status}}
+  //-   md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")
+
+  div.widget-container(masonry, options="$root.masonryOptions")
+    .item.widget(masonry-tile, ng-repeat="build in builds track by $index", style="width: calc(33.33% - 10px);")
+      div.build
+        .widget-header.bg-primary(layout, layout-align="start center")
+          h4 
+            strong(ui-sref="user.organization.builds.build.config({buildId: build.uuid})") {{build.name}}
+        .widget-body
+          div.app-description {{build.description || 'build Description'}}
+          div.app-details(layout="column")
+            label
+              span.label-title Created at:
+              span {{build.createdAt | date:'dd-M-yyyy'}}
+            label
+              span.label-title Status:
+              span {{build.status}}

@@ -1,0 +1,45 @@
+#page-header.bg-gradient-1
+  #mobile-navigation
+    button#nav-toggle.collapsed(data-toggle='collapse', data-target='#page-sidebar')
+      span
+    a.logo-content-small(href='index.html', title='MonarchUI')
+  #header-logo.logo-bg.text-center(style="padding-top: 0;")
+    i.fa.fa-caret-down(ng-class="{active: $root.sidebarClosed}" ng-click="$root.sidebarClosed = !$root.sidebarClosed")
+    h1(ui-sref="user.organization.home") QPAIR
+  #header-nav-left.pull-right
+    .user-account-btn.dropdown
+      a.user-profile.clearfix(href='#', title='My Account', data-toggle='dropdown')
+        //- img(width='28', src='../../assets/image-resources/gravatar.jpg', alt='Profile image')
+        i.fa.fa-user.avt-icon
+        span {{$root.profile.firstName + ' ' + $root.profile.lastName}}
+        i.glyph-icon.icon-angle-down
+      .dropdown-menu.float-left
+        .box-sm
+          .login-box.clearfix
+            //- .user-img
+            //-   a.change-img(href='#', title='') Change photo
+            //-   img(src='../../assets/image-resources/gravatar.jpg', alt='')
+            .user-info
+              span
+                | {{$root.profile.firstName + ' ' + $root.profile.lastName}}
+                //- i UX/UI developer
+              a(href='#', title='Edit profile') Edit profile
+              a(href='#', title='View notifications') View notifications
+          .divider
+          //- ul.reset-ul.mrg5B
+            li
+              a(href='#')
+                i.glyph-icon.float-right.icon-caret-right
+                |                     View login page example
+            li
+              a(href='#')
+                i.glyph-icon.float-right.icon-caret-right
+                |                     View lockscreen example
+            li
+              a(href='#')
+                i.glyph-icon.float-right.icon-caret-right
+                |                     View account details
+          .pad5A.button-pane.button-pane-alt.text-center
+            a.btn.display-block.font-normal.btn-danger(href='/logout', target="_self")
+              i.glyph-icon.icon-power-off
+              |                   Logout

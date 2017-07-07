@@ -1,0 +1,26 @@
+form(layout="column")
+  label(layout="row")
+    span Name
+    input.form-control(ng-model="project.name", required)
+  label(layout="row")
+    span Description
+    textarea.form-control(ng-model="project.description")
+  //- hr
+  //- label(layout="row")
+  //-   span Stack
+  //-   md-input-container
+  //-     md-select(ng-model="project.stack")
+  //-       md-option(ng-repeat="item in projectStaticParams.stack", ng-value="item.value") {{item.name}}
+  //- label(layout="row")
+  //-   span Environment
+  //-   md-input-container
+  //-     md-select(ng-model="project.environment")
+  //-       md-option(ng-repeat="item in projectStaticParams.environment", ng-value="item.value") {{item.name}}
+  //- label(layout="row")
+  //-   span Database Stack
+  //-   md-input-container
+  //-     md-select(ng-model="project.dbStack")
+  //-       md-option(ng-repeat="item in projectStaticParams.dbStack", ng-value="item.value") {{item.name}}
+  br
+  div.text-right
+    button.btn.btn-success(ng-disabled="!project.name", ng-click="addNewProject()") Add new Project

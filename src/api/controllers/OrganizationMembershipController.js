@@ -1,0 +1,30 @@
+/**
+ * Create OrganizationMembershipController
+ */
+
+let OrganizationMembershipController = module.exports = {};
+
+// Route: get /organization-memberships/:id
+OrganizationMembershipController.findOne = (req, res) => {
+
+  UtilService.wrapCb(OrganizationMembership.findById(req.params.id), (err, membership) => {
+    if (err) {
+      server.log.error('Error getting membership', err);
+      res.status(500).json(err);
+    }
+
+    res.send(membership);
+  });
+};
+
+// Route: post /organization-memberships
+OrganizationMembershipController.create = (req, res) => {
+  UtilService.wrapCb(OrganizationMembership.create(req.body), (err, membership) => {
+    if (err) {
+      server.log.error('Error create membership', err);
+      res.status(500).json(err);
+    }
+
+    res.send(membership);
+  });
+};

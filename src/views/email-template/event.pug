@@ -1,0 +1,12 @@
+extends template.pug
+block content
+  div Hi #{user.firstName}
+  div(style="margin-bottom: 15px;") #{messageBody}
+
+  if (event.imageUrl)
+    div(style="margin-bottom: 15px;")
+      a(href=event.imageUrl) #[img(src=event.imageUrl)]
+
+  if (event.videoUrl)
+    div(style="margin-bottom: 15px;")
+      a(href=event.videoUrl) Click here to view video

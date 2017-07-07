@@ -1,0 +1,9 @@
+.title.bg-primary(ng-click="opened=!opened", layout, layout-align="start center")
+  span {{title}}
+  span(flex)
+  .button-group(ng-show="buttons.length")
+    a(ng-repeat="btn in buttons", ng-click="btnClicked(btn); $event.stopPropagation()") {{btn.title}}
+  button.btn.toggle-btn(ng-class="{active: opened}")
+    i.fa(ng-class="{'fa-minus': opened, 'fa-plus': !opened}")
+.content(style="display: none;")
+  ng-transclude

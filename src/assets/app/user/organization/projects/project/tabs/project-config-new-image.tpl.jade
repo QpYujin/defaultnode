@@ -1,0 +1,22 @@
+.new-repo-box(layout="column")
+  label(layout="row", layout-align="start center")
+    span Name
+    input.form-control(ng-model="image.name")
+  label(layout="row", layout-align="start center")
+    span Provider
+    md-input-containter
+      md-select(ng-model="image.provider")
+        md-option(ng-repeat="item in providers", ng-value="item.value") {{item.name}}
+  label(layout="row", layout-align="start center")
+    span Url
+    input.form-control(ng-model="image.url")
+  label(layout="row", layout-align="start center")
+    span Type
+    md-input-containter
+      md-select(ng-model="image.type")
+        md-option(value="public") Public
+        md-option(value="private") Private
+  .text-center
+    button.btn.btn-secondary(ui-sref="^") Cancel
+    &nbsp;&nbsp;&nbsp;
+    button.btn.btn-success(ng-disabled="!image.name || !image.url", ng-click="addNewImage()") {{image.uuid ? 'Update' : 'Add'}}

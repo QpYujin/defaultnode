@@ -1,0 +1,27 @@
+label(layout="row")
+  span Version
+  input.form-control(ng-model="build.version", flex="50")
+label(layout="row", layout-align="start center")
+  span Release
+  md-select(ng-model="build.releaseId", placeholder="Select Release")
+    md-option(ng-repeat="release in releases", ng-value="release.uuid") {{release.name}}
+  a(ui-sref="^.releases") Manage Releases
+label(layout="row")
+  span Source Management
+  input.form-control(ng-model="currentSourceManagement.url", disabled, flex="50")
+label(layout="row", layout-align="start center")
+  span Select Repo
+  md-select(ng-model="build.sourceManagementRepo", ng-change="changeRepo()")
+    md-option(ng-repeat="repo in repos", ng-value="repo.name") {{repo.name}}
+label(layout="row",  layout-align="start center")
+  span Select Branch
+  md-select(ng-model="build.sourceManagementBranch")
+    md-option(ng-repeat="branch in branches", ng-value="branch.name") {{branch.name}}
+.text-center
+  button.btn.btn-success(ng-disabled="!build.version || !build.releaseId || !build.sourceManagementRepo || !build.sourceManagementBranch", ng-click="updateImage()") Add new Image
+
+hr
+
+.content-box(ng-show="showLogs")
+  h3 Logs
+  .content {{logs}}

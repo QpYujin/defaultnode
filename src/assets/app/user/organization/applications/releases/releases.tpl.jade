@@ -1,0 +1,23 @@
+h2(layout, layout-align="start center")
+  span(flex) Releases&nbsp;&nbsp;
+  button.btn.btn-success(ui-sref="user.organization.projects.project.applications.application.releases.new-release") Add Release
+br
+br
+md-table-container.scrollable.grids-table(layout, flex, ng-show="releases.length")
+  table(md-table, flex)
+    thead(md-head, md-order="query.order")
+      tr(md-row)
+        th(md-column) Release
+        th(md-column) Release Description
+        th(md-column) Release Name
+        th(md-column)
+    tbody(md-body)
+      tr(md-row, ng-repeat="release in releases | orderBy: query.order")
+        td(md-cell)
+          span(ui-sref="user.organization.projects.project.applications.application.releases.release({releaseId: release.uuid})") {{release.name}}
+        td(md-cell) {{release.description}}
+        td(md-cell, style="white-space: nowrap") {{release.releaseDate | date:'dd-M-yyyy'}}
+        td(md-cell)
+          a(ng-click="removeRelease(release)")
+            i.fa.fa-remove
+h3(ng-hide="releases.length") There is no release

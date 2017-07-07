@@ -1,0 +1,20 @@
+div(layout="column")
+  label(layout="row")
+    span JMX File
+    input.form-control#jmx-file(type="file", ng-model="jmxFile")
+  hr
+  div(layout="row")
+    div(flex="50")
+      label(layout="row", layout-align="start center", ng-repeat="param in appGlobal.testParameters")
+        div(flex)
+          input.form-control(ng-model="param.name", placeholder="Param name")
+        div(style="width: 25px")
+        div(flex)
+          input.form-control(ng-model="param.value", placeholder="Param value")
+        b &nbsp;&nbsp;&nbsp;
+        i.fa.fa-close(ng-click="removeParam(param)")
+  .text-left
+    button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="addNewParam()") Add New Param
+  hr
+  .text-center
+    button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="updateConfig()") Save

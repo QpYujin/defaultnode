@@ -1,0 +1,4 @@
+#breadcrumbs(layout)
+  div.item(ng-repeat="item in items track by $index")
+    span(ng-if="item.url", ui-sref="{{item.url}}") {{item.title}}
+    span(ng-if="!item.url") {{item.title}}

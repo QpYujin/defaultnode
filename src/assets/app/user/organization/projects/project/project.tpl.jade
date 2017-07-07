@@ -1,0 +1,11 @@
+#steps-buttons(layout)
+  button.btn.btn-primary(ui-sref="user.organization.projects.project.applications.new-application", ui-sref-active="hidden") Add new Application
+  span(flex)
+  #deployment-status(ng-show="global.deploymentStatus")
+    .progressbar
+      .progressbar-value.bg-primary(style='width: 100%')
+        .progress-overlay(style='width: 100%')
+        .progress-label
+          h3.ng-binding {{global.deploymentStatus}}
+  button.btn.btn-info(ui-sref="user.organization.projects.project.config", ui-sref-active="hidden") Config
+ui-view.scrollable.flex(name="project-content", layout="column", style="padding: 15px;")

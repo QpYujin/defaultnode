@@ -1,0 +1,40 @@
+#steps-header {
+  .step {
+    opacity: 0.7;
+    text-align: center;
+    line-height: 34px;
+    background: #1283a9;
+    color: #fff;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+#steps-buttons {
+  position: relative;
+  background: #eee;
+  padding-bottom: 10px;
+  #deployment-status {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 400px;
+    & * {
+      width: 400px;
+      height: 34px;
+    }
+    h3 {
+      line-height: 34px;
+    }
+  }
+}
+
+#steps {
+  padding: 30px;
+
+  .server-logs {
+    white-space: pre-wrap;
+  }
+}

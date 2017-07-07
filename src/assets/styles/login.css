@@ -1,0 +1,42 @@
+/*------- LOGIN ----------*/
+#login-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  // background: rgba(0,0,0,0.5);
+  background: #ccc;
+}
+#login-form {
+  max-width: 500px;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #fff;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}
+#login-form h2 {
+  margin-top: 0;
+}
+#login-form .btn-social {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.register-form .input-group-addon {
+  min-width: 120px;
+  text-align: center;
+}
+/*-------------------------*/
+#controller {
+  min-height: 100vh;
+  background: #eee;
+  padding-bottom: 40px;
+}

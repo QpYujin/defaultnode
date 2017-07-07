@@ -1,0 +1,23 @@
+label(layout="row")
+  span Namespace
+  input.form-control(ng-model="cluster.namespace",flex="50")
+  i.fa.fa-info-circle
+
+label(layout="row")
+  span Deployment.yaml
+  textarea(rows=20).form-control(ng-model="cluster.deploymentyaml",flex="50")
+  i.fa.fa-info-circle
+hr
+
+label(layout="row")
+  span Docker Image
+  input.form-control(ng-model="cluster.dockerimage", flex="50")
+
+hr
+button.btn.btn-success(ng-click="newdeployApi()") Create Deployment
+button.btn.btn-success(ng-click="") Next
+
+hr
+.content-box(ng-show="showLogs")
+  h3 Logs
+  .content {{logs}}
