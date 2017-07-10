@@ -14,11 +14,11 @@ module.exports = (function(sequelize) {
     },
     email: {
       type: Sequelize.STRING,
-      unique: true,
-      allowNull: false,
-      validate: {
+      //unique: true,
+      allowNull: true,
+      /*validate: {
         isEmail: true
-      }
+      }*/
     },
     role: {
       type: Sequelize.ENUM,

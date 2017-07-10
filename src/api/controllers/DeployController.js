@@ -116,6 +116,7 @@ let params = req.body;
                          		[
                         			{name: appname,
                          			image: dockerimage,
+                                                imagePullPolicy: "Always",
                          			resources:
                        				 {  limits:{
                          				cpu: "100m",

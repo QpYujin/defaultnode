@@ -65,7 +65,7 @@ AuthController.provider = function(req, res, next) {
 /**
  * Callback
  * route: /auth/:provider/callback
- */
+ 
 AuthController.callback = function(req, res, next) {
 
   let loginSuccess = function(err) {
@@ -108,6 +108,72 @@ AuthController.callback = function(req, res, next) {
     failureFlash: true
   })(req, res, loginSuccess);
 };
+
+*/
+
+
+/**
+ * Newly added Callback
+ * route: /auth/:provider/callback
+ */
+AuthController.callback = function(req, res, next) {
+
+  console.log('this is after callback');
+
+
+  let loginSuccess = function(err) {
+    console.log('this is in login success function');
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect('/user/'+req.user.id+'/'+'organizations/'+'cc7604f0-2aa0-11e7-b06f-d7863b545409');
+
+    // if (_(req.user).pick(['placeOfBirth', 'dateOfBirth', 'timeOfBirth']).pickBy().isEmpty()) {
+    //   server.log.warn('User profile has not completed yet, redirecting to user profile');
+    //   return res.redirect('/profile');
+    // }
+
+    // If we have previously stored a returnTo, use that,
+    // otherwise, use the default.
+    // if (req.session && req.session.returnTo) {
+    //   let url = req.session.returnTo;
+    //   delete req.session.returnTo;
+    //   server.log.verbose('Redirecting to', url);
+    //   if (url !== '/') {
+    //     return res.redirect(url);
+    //   }
+    // }
+
+    /*
+    MembershipService.getUserOrgs(req.user, (err, orgs) => {
+      if (err) {
+        console.log(err);
+        res.redirect('/login');
+        return;
+      }
+      console.log(orgs);
+      console.log('this is orgnisation',orgs)
+      if (orgs.length)
+      {
+        console.log('this is org length function')
+        res.redirect('/user/'+req.user.id+'/'+'organizations/'+orgs[0]);
+
+      }
+    });*/
+  };
+
+  passport.authenticate(req.params.provider || 'local', {
+    failureRedirect: '/login',
+    failureFlash: true
+  })(req, res, loginSuccess);
+
+
+};
+
+
+
+
 
 /**
  * JWT login using username and password

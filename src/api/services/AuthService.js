@@ -51,6 +51,76 @@ AuthService.registerUser = function(params) {
 
 };
 
+
+
+
+AuthService.socialOauth = (type, provider, token, profile) => {
+  console.log('Providers in auth service social uth',provider);
+  console.log('Providers in auth service social profile',profile);
+
+  // Require either type is oauth or oauth2
+  if (type !== 'oauth' && type !== 'oauth2') {
+    throw {status: 400, message: 'Invalid type'};
+  }
+  // Create the user OAuth profile
+    let email = profile.login;
+   console.log('this is email',profile.profileUrl);
+   console.log('This is profile name',profile.username);
+
+
+  return Credential.findOne({where: {type: type, provider: provider, identifier: profile.id}}).then(credential => {
+    if (credential) {
+      server.log.debug('Found credential', profile.id, 'from', provider, 'returning user');
+      return credential.getUser();
+    }
+
+
+    // Create user with incomplete information
+    return User.findOrCreate({
+      where: { email:profile.profileUrl },
+      defaults: {
+        firstName: profile.username,
+        lastName: profile.username,
+        emailVerified: true
+      }
+    }).spread((user, created) => {
+      // Got user
+      server.log.info('User is created:', created, email);
+
+      return user.createCredential({
+        type: type,
+        provider: provider,
+        identifier: profile.id,
+        token: token,
+        json: profile
+      }).then(() => {
+        return user;
+      });
+    });
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* privious code for authentications 
+
 AuthService.socialOauth = (type, provider, token, profile) => {
   // Require either type is oauth or oauth2
   if (type !== 'oauth' && type !== 'oauth2') {
@@ -89,3 +159,6 @@ AuthService.socialOauth = (type, provider, token, profile) => {
     });
   });
 };
+
+
+*/

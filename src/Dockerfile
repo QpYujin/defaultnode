@@ -52,7 +52,7 @@ RUN grunt build
 
 EXPOSE 3000
 
-RUN docker-machine create --driver amazonec2 --amazonec2-access-key  AKIAJRFKC5CXIUSJC6DQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
+RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJY7LRXFEYHRVU4BA --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
 

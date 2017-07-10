@@ -20,11 +20,11 @@ html
             a(href="/register") Sign up
           br
           .row
-            .col-md-6
+            //.col-md-6
               a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/facebook') Facebook
-            //.col-md-4
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/twitter') Twitter
-            .col-md-6
+            .col-md-12
+              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') Github
+            //.col-md-6
               a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/google') Google+
           form(name='loginForm', method='post', action='/auth/local')
             - if (errors.length)

@@ -46,10 +46,15 @@ ImageController.create = (req, res) => {
       return BuildImage.findById(image.buildImageId).then((build)=>{
         img.build=build;//.toJSON();
         console.log('Image is building for repo: ',build.repoName);
-        console.log('Image tage name',build.tag);
+        console.log('Image tag name',build.tag);
         console.log('Image PORT',build.port);
-        var dockertab=build.repoName.toLowerCase()+'_'+build.tag;
-        console.log('Complete dockerhub tab',dockertab);
+
+	var str = build.repoName;
+        var cleanstr=str.replace(/[^a-zA-Z ]/g,"");
+	console.log(cleanstr);
+	var dockertab=cleanstr.toLowerCase()+'_'+build.tag;
+
+        console.log('Complete dockerhub tag',dockertab);
 
           shell.exec('/usr/src/app/api/controllers/push.sh'+' '+dockertab+' '+build.repoName.toLowerCase()+' ',
             function (error, stdout, stderr) {

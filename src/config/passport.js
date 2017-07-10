@@ -41,5 +41,16 @@ module.exports = {
       callbackURL: nconf.get('baseUrl') + '/auth/facebook/callback',
       profileFields: ['id', 'email', 'gender', 'about', 'cover', 'name']
     })
+  },
+
+  github:{
+    name: 'Github',
+    protocol: 'oauth2',
+    strategy : require('passport-github').Strategy,
+    scope: ['profile', 'email'],
+    options: _.defaults(nconf.get('github'), {
+      callbackURL: nconf.get('baseUrl') + '/auth/github/callback'
+    })
   }
+
 };
