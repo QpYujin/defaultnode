@@ -8,6 +8,7 @@ module.exports = (function(sequelize) {
   let OrganizationMembership = sequelize.define('organizationmembership', {
     userId: {
       type: Sequelize.INTEGER
+
     },
     organizationId: {
       type: Sequelize.STRING

@@ -51,6 +51,7 @@ AuthService.registerUser = function(params) {
   });
 };
 
+
 AuthService.socialOauth = (type, provider, token, profile) => {
 
   console.log('Providers in auth service social uth',provider);
@@ -82,6 +83,7 @@ AuthService.socialOauth = (type, provider, token, profile) => {
         emailVerified: true
       }
     }).spread((user, created) => {
+
       // Got user
       server.log.info('User is created:', created, email);
 
@@ -95,6 +97,15 @@ AuthService.socialOauth = (type, provider, token, profile) => {
         return user;
       });
     });
+
+
+
+
+
+
+
+
+
   });
 };
 

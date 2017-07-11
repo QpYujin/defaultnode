@@ -28,3 +28,16 @@ OrganizationMembershipController.create = (req, res) => {
     res.send(membership);
   });
 };
+
+OrganizationMembershipController.findAll = (req, res) => {
+  UtilService.wrapCb(OrganizationMembership.findAndCountAll({where: {
+    //userId:req.params.userId,
+    userId: req.params.userId,
+  }}), (err, membership) => {
+    if (err) {
+      server.log.error('Error getting project', err);
+      res.status(500).json(err);
+    }
+    res.send(membership);
+})
+}

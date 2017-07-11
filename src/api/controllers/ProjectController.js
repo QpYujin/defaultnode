@@ -18,6 +18,7 @@ ProjectController.findOne = (req, res) => {
 // Route: post /organizations
 ProjectController.create = (req, res) => {
   let params = req.body;
+  params.userId=req.params.userId;
   params.organizationId = req.params.organizationId;
   UtilService.wrapCb(Project.create(params), (err, project) => {
     if (err) {
@@ -47,6 +48,7 @@ ProjectController.update = (req, res) => {
 
 ProjectController.findAll = (req, res) => {
   UtilService.wrapCb(Project.findAndCountAll({where: {
+      //userId:req.params.userId,
       organizationId: req.params.organizationId,
     }}), (err, projects) => {
     if (err) {

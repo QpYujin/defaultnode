@@ -18,7 +18,9 @@ angular.module('app.user.organization.projects', [
     },
     resolve: {
       projects: function (Restangular, $stateParams) {
-        return Restangular.one('organizations', $stateParams.organizationId)
+        return Restangular
+          .one('user',$stateParams.userId)
+          .one('organizations', $stateParams.organizationId)
           .one('projects').get()
       }
     }
@@ -58,7 +60,9 @@ angular.module('app.user.organization.projects', [
     },
     resolve: {
       project: function (Restangular, $stateParams, globalUtils) {
-        return Restangular.one('organizations', $stateParams.organizationId)
+        return Restangular
+          //.one('user', $stateParams.userId)
+          .one('organizations', $stateParams.organizationId)
           .one('projects', $stateParams.projectId).get().then(function (proj) {
             proj.environments = globalUtils.isJSON(proj.environment) ? JSON.parse(proj.environment) : [];
             proj.dbStacks = globalUtils.isJSON(proj.dbStack) ? JSON.parse(proj.dbStack) : [];

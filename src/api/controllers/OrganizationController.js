@@ -17,6 +17,7 @@ OrganizationController.findOne = (req, res) => {
   });
 };
 
+
 // Route: post /organizations
 OrganizationController.create = (req, res) => {
   UtilService.wrapCb(Organization.create(req.body), (err, organization) => {
@@ -26,6 +27,5 @@ OrganizationController.create = (req, res) => {
     }
 
     res.send(organization);
-  });
+});
 };
-

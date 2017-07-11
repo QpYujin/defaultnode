@@ -9,16 +9,50 @@ let MembershipService = module.exports = {};
 MembershipService.getUserOrgs = (user, cb) => {
   console.log('At membership get users',user);
 
-  OrganizationMembership.findAll({where: {userId: user.id}})
-    .then((orgs) => {
-    console.log('At organization membership',user);
-    let organizationIds = _.map(orgs, (org) => {
-      return org.toJSON().organizationId;
+  Organization.create
+  (
+    {
+      name:user.firstName,
+      description:user.lastName
+    }
+  )
+    .then((orgs) =>
+  {
+  console.log('Created ORGANIZATION successfully');
+  console.log('This is userId',user.id);
+  console.log('This is organizations ID',orgs.uuid);
+
+  OrganizationMembership.create
+  ({userId: user.id,
+      organizationId:orgs.uuid})
+    .then((orgs) =>
+  {
+    console.log('Created ORGANIZATION MEMEBER successfully');
+    console.log('This is orgs',orgs)
     })
 
-  cb(null, _.uniq(organizationIds));
-  }).catch((err) => {
+})
 
+
+  OrganizationMembership.findAll({where: {userId: user.id}})
+    .then((orgs) =>
+    {
+    console.log('At organization membership',user);
+    console.log('This is orgs',orgs);
+
+    let organizationIds = _.map(orgs, (org) => {
+      console.log('This is organization IDs',org);
+      return org.toJSON().organizationId;
+    })
+     cb(null, _.uniq(organizationIds));
+     console.log("This is organizationID null",organizationIds);
+     console.log("make post call for creating organization");
+
+
+}).catch((err) => {
     cb(err);
   });
+
+
 }
+

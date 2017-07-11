@@ -89,7 +89,7 @@ AuthController.callback = function(req, res, next) {
       return next(err);
     }
 
-    res.redirect('/user/'+req.user.id+'/'+'organizations/'+'cc7604f0-2aa0-11e7-b06f-d7863b545409');
+    //res.redirect('/user/'+req.user.id+'/'+'organizations/'+'cc7604f0-2aa0-11e7-b06f-d7863b545409m');
 
     // if (_(req.user).pick(['placeOfBirth', 'dateOfBirth', 'timeOfBirth']).pickBy().isEmpty()) {
     //   server.log.warn('User profile has not completed yet, redirecting to user profile');
@@ -107,8 +107,22 @@ AuthController.callback = function(req, res, next) {
     //   }
     // }
 
-    /*
-    MembershipService.getUserOrgs(req.user, (err, orgs) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   MembershipService.getUserOrgs(req.user, (err, orgs) => {
       if (err) {
         console.log(err);
         res.redirect('/login');
@@ -116,13 +130,18 @@ AuthController.callback = function(req, res, next) {
       }
       console.log(orgs);
       console.log('this is orgnisation',orgs)
+
       if (orgs.length)
       {
         console.log('this is org length function')
         res.redirect('/user/'+req.user.id+'/'+'organizations/'+orgs[0]);
 
       }
-    });*/
+    });
+
+
+
+
   };
 
   passport.authenticate(req.params.provider || 'local', {

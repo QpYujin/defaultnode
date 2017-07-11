@@ -16,7 +16,6 @@ module.exports = function(app) {
 
 
   app.get('/auth/:provider/callback', AuthController.callback);
-
   app.post('/auth/local', AuthController.callback);
   app.post('/api/auth/jwt', AuthController.jwtLogin);
   app.post('/api/register', AuthController.register);
@@ -37,9 +36,14 @@ module.exports = function(app) {
   apiRoutes.get('/organizations/:organizationId', OrganizationController.findOne);
   apiRoutes.post('/organizations', OrganizationController.create);
 
+
   // Projects
   apiRoutes.get('/organizations/:organizationId/projects/:projectId', ProjectController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId', ProjectController.update);
+
+  //created new route for projects
+  //apiRoutes.get('/user/:userId/organizations/:organizationId/projects', ProjectController.findAll);
+
   apiRoutes.get('/organizations/:organizationId/projects', ProjectController.findAll);
   apiRoutes.post('/organizations/:organizationId/projects', ProjectController.create);
 
