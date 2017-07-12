@@ -6,8 +6,31 @@
   bottom: 0;
   right: 0;
   // background: rgba(0,0,0,0.5);
-  background: #ccc;
+  background: #0b2b3c;
+
 }
+
+img1{
+  width: 20px;
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  margin: 4px
+}
+
+#brand {
+  width: 250px;
+  height: 59px;
+  margin: 0 auto 30px;
+  background-image: url('http://www.inboundnow.com/wp-content/uploads/2014/08/avatar1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#sign-in-text {
+  vertical-align: middle;
+  padding-top: 5px;
+}
+
 #login-form {
   max-width: 500px;
   padding: 20px;
@@ -23,6 +46,7 @@
 }
 #login-form h2 {
   margin-top: 0;
+  font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 #login-form .btn-social {
   width: 100%;
@@ -35,8 +59,13 @@
   text-align: center;
 }
 /*-------------------------*/
-#controller {
-  min-height: 100vh;
-  background: #eee;
-  padding-bottom: 40px;
+.container {
+  margin: 12% auto 0;
+}
+.container:before {
+  content: url('http://www.inboundnow.com/wp-content/uploads/2014/08/avatar1.png');
+  display: block;
+  margin: 0 auto;
+  height: 184px;
+  width: 173px;
 }

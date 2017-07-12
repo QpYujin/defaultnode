@@ -8,6 +8,7 @@ angular.module('app.user.organization', [
   function ($stateProvider, $locationProvider, $urlRouterProvider) {
     $stateProvider.state('user.organization', {
       url: '/organizations/:organizationId',
+      params : { organizationId : null },
       title: 'Organizations',
       views: {
         'user@user':{
@@ -19,7 +20,7 @@ angular.module('app.user.organization', [
               }
               return '';
             }
-            
+
 
             breadcrumbItems.items = [
               {
@@ -41,9 +42,9 @@ angular.module('app.user.organization', [
             $scope.$on('addBreadcrumbItem', function (event, item) {
               $scope.breadcrumbs.push(item);
             })
-              
 
-            
+
+
 
             $scope.getBreadcrumbs = function (parent) {
               if (parent) {

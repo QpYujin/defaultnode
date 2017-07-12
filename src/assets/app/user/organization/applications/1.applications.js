@@ -40,7 +40,8 @@ angular.module('app.user.organization.applications', [
   });
 
   $stateProvider.state('user.organization.applications.application', {
-    url: '/:applicationId',
+    url: '',
+    params : { applicationId : null },
     title: 'Application Name',
     abstract: true,
     views: {

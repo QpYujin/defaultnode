@@ -111,17 +111,6 @@ AuthController.callback = function(req, res, next) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
    MembershipService.getUserOrgs(req.user, (err, orgs) => {
       if (err) {
         console.log(err);
@@ -129,7 +118,7 @@ AuthController.callback = function(req, res, next) {
         return;
       }
       console.log(orgs);
-      console.log('this is orgnisation',orgs)
+      console.log('this is getuserOrgs function organization')
 
       if (orgs.length)
       {
@@ -138,9 +127,6 @@ AuthController.callback = function(req, res, next) {
 
       }
     });
-
-
-
 
   };
 

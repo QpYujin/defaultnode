@@ -6,11 +6,13 @@ angular.module('app.user', [
     $locationProvider.html5Mode(true);
 
     $stateProvider.state('user', {
-      url: '/user/:userId',
+      //url: '/user/:userId',
+      url: '/user/',
+      params : { userId : null },
       title: 'Home',
       // abstract: true,
       views: {
-        'main':{ 
+        'main':{
           templateUrl: 'app/user/user.tpl.jade',
           controller: function ($rootScope, $scope, $state, $location) {
             // $scope.$on('$stateChangeStart', function ($event, fromState, fromParams) {

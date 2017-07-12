@@ -7,25 +7,26 @@ html
     link(href='vendor/bootstrap-css-only/bootstrap.css', rel='stylesheet')
     link(href='vendor/font-awesome/css/font-awesome.css', rel='stylesheet')
     link(href='vendor/sweetalert/sweetalert.css', rel='stylesheet')
-    link(href='styles/login1.css', rel='stylesheet')
+    link(href='styles/login.css', rel='stylesheet')
+    
     link(href='vendor/css/admin.css', rel='stylesheet')
     script(src='https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit', async='', defer='')
   body
     #controller(ng-app='app')
       #login-page
+        #brand Deploybytes
         .overlay
         #login-form
           h2.text-center
             | Login or 
             a(href="/register") Sign up
-          br
           .row
-            //.col-md-6
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/facebook') Facebook
-            .col-md-6
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') Github
-            //.col-md-6
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/google') Google+
+            .col-md-12
+              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') 
+                img#img(src='')
+                span.sign-in-text Github
+          .divider-line
+              span Or
           form(name='loginForm', method='post', action='/auth/local')
             - if (errors.length)
               div.alert.alert-danger= errors
