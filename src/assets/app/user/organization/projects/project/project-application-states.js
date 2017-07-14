@@ -1,7 +1,9 @@
 angular.module('app.user.organization.projects.project.applications', [])
   .config(function ($stateProvider) {
     $stateProvider.state('user.organization.projects.project.applications.application', {
-      url: '/:applicationId',
+      //url: '/:applicationId',
+      url: '',
+      params : { applicationId : null },
       title: 'Application Name',
       abstract: true,
       views: {
@@ -12,7 +14,8 @@ angular.module('app.user.organization.projects.project.applications', [])
               { title: 'Organization',url: 'user.organization'},
               { title: 'Projects', url: 'user.organization.projects'},
               { title: project.name, url: 'user.organization.projects.project.applications'},
-              { title: application.name, url: 'user.organization.projects.project.applications.application.dashboard'}
+              { title: application.name,
+                url: 'user.organization.projects.project.applications.application.dashboard'}
             ];
 
             $scope.appGlobal = {};

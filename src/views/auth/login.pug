@@ -14,19 +14,20 @@ html
   body
     #controller(ng-app='app')
       #login-page
-        #brand Deploybytes
+        #brand
         .overlay
+        
         #login-form
-          h2.text-center
-            | Login or 
-            a(href="/register") Sign up
           .row
             .col-md-12
               a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') 
                 img#img(src='')
-                span.sign-in-text Github
-          .divider-line
-              span Or
+                span#sign-in-text Login with Github
+                hr.style1
+              h1.text-center
+                | Login or 
+                a(href="/register") Sign up
+                
           form(name='loginForm', method='post', action='/auth/local')
             - if (errors.length)
               div.alert.alert-danger= errors
@@ -45,6 +46,8 @@ html
                 button.btn.btn-lg.btn-success.btn-block(type='submit') Login
               .col-md-6
                 a.btn.btn-lg.btn-info.btn-block(onclick='forgotPassword()') Forgot password
+         
+
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='vendor/sweetalert/sweetalert.min.js')

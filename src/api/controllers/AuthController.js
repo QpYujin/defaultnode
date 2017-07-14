@@ -123,8 +123,13 @@ AuthController.callback = function(req, res, next) {
       if (orgs.length)
       {
         console.log('this is org length function')
+
         res.redirect('/user/'+req.user.id+'/'+'organizations/'+orgs[0]);
 
+
+
+
+        //res.redirect('/user/organizations/');
       }
     });
 

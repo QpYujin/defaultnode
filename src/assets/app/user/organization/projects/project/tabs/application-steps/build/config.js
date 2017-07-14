@@ -8,7 +8,6 @@ angular.module('app.user.organization.projects.project.applications')
   breadcrumbItems.items = items;
 
 
-
   $scope.build = {};
   $scope.releases = application.releases;
   $scope.currentSourceManagement = _.find($scope.global.repos, function (item) {

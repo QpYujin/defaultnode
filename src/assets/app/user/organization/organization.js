@@ -6,20 +6,33 @@ angular.module('app.user.organization', [
 
 .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
   function ($stateProvider, $locationProvider, $urlRouterProvider) {
-    $stateProvider.state('user.organization', {
+
+
+    $stateProvider.state('user.organization',
+      {
       url: '/organizations/:organizationId',
-      params : { organizationId : null },
+      //params : { organizationId : null },
       title: 'Organizations',
       views: {
         'user@user':{
           templateUrl: 'app/user/organization/organization.tpl.jade',
-          controller: function ($rootScope, $scope, $state, $location, currentOrganization, breadcrumbItems) {
-            var getStateTitle = function (title) {
-              if (title) {
-                return typeof title === 'function' ? title() : title;
-              }
-              return '';
-            }
+           controller: function ($rootScope, $scope, $state, $location, currentOrganization, breadcrumbItems)
+              {
+                  var getStateTitle = function (title) {
+                  if (title) {
+                      return typeof title === 'function' ? title() : title;
+                  }
+                  return '';
+
+                    /*
+                    breads['user.organization'] = [
+                      {text: userOrg.organization ? userOrg.organization.name : "No Organization", state: "user.organization"}
+                    ];
+                    $scope.organizationId = organizationId;*/
+
+               }
+
+
 
 
             breadcrumbItems.items = [
@@ -28,11 +41,13 @@ angular.module('app.user.organization', [
                 url: 'user.organization'
               }
             ]
+
             $scope.breadcrumbs = breadcrumbItems;
 
             $scope.$on('$stateChangeStart', function () {
               $rootScope.loading = true;
             })
+
             $scope.$on('$stateChangeSuccess', function () {
               $rootScope.loading = false;
               $scope.addOnButton = $state.current.addOnButton || {};
@@ -42,9 +57,6 @@ angular.module('app.user.organization', [
             $scope.$on('addBreadcrumbItem', function (event, item) {
               $scope.breadcrumbs.push(item);
             })
-
-
-
 
             $scope.getBreadcrumbs = function (parent) {
               if (parent) {
@@ -64,6 +76,7 @@ angular.module('app.user.organization', [
           }
         }
       },
+
       resolve: {
         currentOrganization: function (Restangular, $state, $stateParams) {
           return Restangular.one('organizations', String($stateParams.organizationId))
@@ -77,8 +90,18 @@ angular.module('app.user.organization', [
     })
   }])
 
+
+
+
+
+
+
+
+
   .service('breadcrumbItems', function () {
     return {
       items: []
     }
   })
+
+

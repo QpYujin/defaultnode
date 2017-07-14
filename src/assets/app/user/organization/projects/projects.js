@@ -64,7 +64,8 @@ angular.module('app.user.organization.projects', [
         return Restangular
           //.one('user', $stateParams.userId)
           .one('organizations', $stateParams.organizationId)
-          .one('projects', $stateParams.projectId).get().then(function (proj) {
+          .one('projects', $stateParams.projectId)
+          .get().then(function (proj) {
             proj.environments = globalUtils.isJSON(proj.environment) ? JSON.parse(proj.environment) : [];
             proj.dbStacks = globalUtils.isJSON(proj.dbStack) ? JSON.parse(proj.dbStack) : [];
             return proj;

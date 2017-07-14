@@ -3,18 +3,19 @@ angular.module('app.user', [
 ])
 .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
   function ($stateProvider, $locationProvider, $urlRouterProvider) {
-    $locationProvider.html5Mode(true);
 
+  $locationProvider.html5Mode(true);
     $stateProvider.state('user', {
-      //url: '/user/:userId',
-      url: '/user/',
-      params : { userId : null },
+      url: '/user/:userId',
+      //url: '/user/',
+      //params : { userId : null },
       title: 'Home',
-      // abstract: true,
+      abstract: true,
       views: {
         'main':{
           templateUrl: 'app/user/user.tpl.jade',
           controller: function ($rootScope, $scope, $state, $location) {
+
             // $scope.$on('$stateChangeStart', function ($event, fromState, fromParams) {
             //     $rootScope.loading = true;
             //     if (fromParams.projectId) {
