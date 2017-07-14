@@ -41,7 +41,8 @@ angular.module('app.user.organization.projects', [
   });
 
   $stateProvider.state('user.organization.projects.project', {
-    url: '/:projectId',
+    url: '',
+    params:{ projectId : null },    
     title: 'Project Name',
     abstract: true,
     addOnButton: {

@@ -10,7 +10,7 @@ var logger = require('fluent-logger');
 
 
 logger.configure('frontend', {
-    host:'a9fd09a27670f11e7ad4a0e80d0343f2-1535636578.us-east-1.elb.amazonaws.com',
+    host:'ac25381b868b011e798a60ec8ff6c4ad-2031531158.us-east-1.elb.amazonaws.com',
     port: 24224,
     timeout: 3.0,
     reconnectInterval: 600000 // 10 minutes

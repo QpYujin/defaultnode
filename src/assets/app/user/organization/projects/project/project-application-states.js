@@ -1,7 +1,8 @@
 angular.module('app.user.organization.projects.project.applications', [])
   .config(function ($stateProvider) {
     $stateProvider.state('user.organization.projects.project.applications.application', {
-      url: '/:applicationId',
+      url: '',
+      params:{applicationId:null},
       title: 'Application Name',
       abstract: true,
       views: {
