@@ -1,3 +1,5 @@
+//require("./angular-socket.js")
+
 var app = angular.module('app', [
   'ui.router',
   'app.user',
@@ -9,15 +11,39 @@ var app = angular.module('app', [
   'md.data.table',
   'ui.bootstrap',
   'restangular',
+  'socket.io',
 ])
 
 angular.module('app.services', []);
 angular.module('app.directives', ['app.services']);
+angular.module('socket.io', []);
+
+/*
+app.config(function ($socketProvider) {
+  console.log('at socket config')
+  $socketProvider.setConnectionUrl('http://192.168.99.100:');
+  console.log("/api");
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.controller('AppCtrl', function ($scope, $rootScope, StaticParams) {
   console.log('In Admin Controller');
   $rootScope.masonryOptions = StaticParams.masonryOptions;
 })
+
 app.config(function(RestangularProvider) {
   RestangularProvider.setBaseUrl('/api');
 })
@@ -66,14 +92,14 @@ app.config(function(RestangularProvider) {
       }
     })
   }
-  var regions = [ 
+  var regions = [
       {
         id: 'us-east-1',
         name: 'US East (N. Virginia)',
         children: [
           // {id: 'us-east-1b'},
-          {id: 'us-east-1c'}, 
-          // {id: 'us-east-1d'}, 
+          {id: 'us-east-1c'},
+          // {id: 'us-east-1d'},
           // {id: 'us-east-1e'}
         ]
       },
@@ -148,10 +174,10 @@ app.config(function(RestangularProvider) {
       label: {
         page: 'Page:',
         rowsPerPage: 'Per Page:',
-        of: '/' 
+        of: '/'
       }
     },
-    // configStatusIds: ['be-terminate', 'stop', 'runnning', 'started  ']; 
+    // configStatusIds: ['be-terminate', 'stop', 'runnning', 'started  '];
     configStatuses: [
       {
         id: 'terminate',
@@ -177,19 +203,19 @@ app.config(function(RestangularProvider) {
     configTypes: [
       {
         id: 1,
-        name: 'Type 1' 
+        name: 'Type 1'
       },
       {
         id: 2,
-        name: 'Type 2' 
+        name: 'Type 2'
       },
       {
         id: 3,
-        name: 'Type 3' 
+        name: 'Type 3'
       },
       {
         id: 4,
-        name: 'Type 4' 
+        name: 'Type 4'
       }
     ],
     regions: regions,
@@ -326,7 +352,7 @@ app.config(function(RestangularProvider) {
       //   name: 'Profile',
       //   field: 'profile'
       // }
-      
+
     ],
     projectParams: {
       stack: convertToObj(['node', 'meanstack', 'flask', 'other']),

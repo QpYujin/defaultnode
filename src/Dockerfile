@@ -9,6 +9,8 @@ MAINTAINER Neha Khairnar <neha@qpair.io>
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+#RUN pip install --upgrade --user awscli
+
 # Install app dependencies
 COPY package.json /usr/src/app/
 RUN npm install && npm install -g grunt-cli bower
@@ -17,6 +19,16 @@ RUN apt-get update && apt-get install vim -y
 # Bundle app source
 COPY . /usr/src/app
 RUN grunt build
+
+COPY id_rsa.pub /root/.ssh/id_rsa.pub
+
+RUN mv /usr/src/app/kops /usr/local/bin
+RUN mv /usr/src/app/kubectl /usr/local/bin
+RUN mv /usr/src/app/aws /usr/bin
+
+RUN chmod +x /usr/local/bin/kops
+RUN chmod +x /usr/local/bin/kubectl
+RUN chmod +x /usr/bin/aws
 
 EXPOSE 3000
 

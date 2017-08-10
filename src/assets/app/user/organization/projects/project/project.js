@@ -34,6 +34,7 @@ angular.module('app.user.organization.projects.project', [
     }
   });
 
+  
   $stateProvider.state('user.organization.projects.project.config', {
     url: '/config',
     title: 'Configuration',
@@ -45,6 +46,7 @@ angular.module('app.user.organization.projects.project', [
       }
     }
   });
+
 
   $stateProvider.state('user.organization.projects.project.config.new-repo', {
     url: '/new-repo',

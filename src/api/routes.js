@@ -36,6 +36,10 @@ module.exports = function(app) {
   apiRoutes.get('/organizations/:organizationId', OrganizationController.findOne);
   apiRoutes.post('/organizations', OrganizationController.create);
 
+  apiRoutes.post('/organizations/:organizationId/admin', OrganizationController.startcluster);
+  apiRoutes.post('/organizations/:organizationId/admin/destroy', OrganizationController.destroycluster);
+  apiRoutes.post('/organizations/:organizationId/admin/getconfig', OrganizationController.getconfig);
+  apiRoutes.post('/organizations/:organizationId/admin/getstatus', OrganizationController.getstatus);
 
   // Projects
   apiRoutes.get('/organizations/:organizationId/projects/:projectId', ProjectController.findOne);

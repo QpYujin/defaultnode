@@ -1,5 +1,9 @@
-angular.module('app.user.organization.projects.project.applications', [])
-  .config(function ($stateProvider) {
+angular.module('app.user.organization.projects.project.applications', ['app.user.organization.projects.project.applications.logs'])
+ /*.config(function ($socketProvider) {
+    $socketProvider.setConnectionUrl('http://localhost:8080/');
+  })*/
+   
+ .config(function ($stateProvider) {
     $stateProvider.state('user.organization.projects.project.applications.application', {
       //url: '/:applicationId',
       url: '',

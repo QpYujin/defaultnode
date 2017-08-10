@@ -9,23 +9,15 @@ module.exports = (function(sequelize) {
       },
       organizationId: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      projectId: {
+      access: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      secret: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      applicationId: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      servicename: {
-        type: Sequelize.STRING,
-        //allowNull: false,
-      },
-      serviceyaml:{
-        type: Sequelize.STRING,
-        //allowNull: false,
       }
     },
     {

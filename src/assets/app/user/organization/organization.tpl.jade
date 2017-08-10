@@ -8,21 +8,172 @@ div(layout, flex)
         | {{pageTitle}}
         span(flex)
         button.btn.btn-info(ng-if="addOnButton.title", ui-sref="{{addOnButton.url}}") {{addOnButton.title}}
+      //.content-wrapper.ng-scope.layout-column.flex(ui-view='organization1', flex='flex', layout='column', ng-class="{'no-padding': hideTitle}")
+          .panel-body.ng-scope
+      
+      //.content-wrapper.ng-scope.layout-column.flex(ui-view='organization2`', flex='flex', layout='column', ng-class="{'no-padding': hideTitle}")
+      //  .panel-body
+          h3.title-hero Separators
+          .example-box-wrapper
+            ul.list-group.list-group-separator.row.list-group-icons
+              li.col-md-2
+                a.list-group-item.active(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 Github
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.font-red.icon-bullhorn
+                  |                                 Docker
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.font-primary.icon-camera
+                  | AWS
+              li.col-md-2
+                a.list-group-item.active(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                Azure 
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 S3
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 Codecommit
       div.content-wrapper(ui-view="organization", flex, layout="column", ng-class="{'no-padding': hideTitle}")
-        //h1 Welcome to Deploybytes!
-        div.bt(ng-init="myVar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLuCfTIpDaXqrU5UKGICsq55vJKxssUFmHRCC4HnqoICrhWNgP'")
-          img(ng-src='{{myVar}}')
-          h1.contentm Hello There !
-          .content
-            | &nbsp &nbsp
-            | Welcome to Deploybytes!  &nbsp  &nbsp
-            .content__container
-              p.content__container__text
-              ul.content__container__list
-                li.content__container__list__item Build !
-                li.content__container__list__item Deploy !
-                li.content__container__list__item Test !
-                li.content__container__list__item  & you are done!
-            input.form-control(ng-model="", flex="150")
+        .panel
+          .panel-body
+            h2(style='color:#454545 !important') Welcome to Deploybytes!  
+            br
+            .example-box-wrapper
+              .row
+                .col-md-12
+                  .content-box
+                    .content-box-wrapper
+                        section
+                          article.articles
+                            article
+                             img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Qxhfjkxhy4drPf_oNtY793h_VmZKM_38x7d2dtp9Aoaqscij')
+                             h6   Lets Get started
+                             br
+                             | Thank you for choosing Deploybyte.We would like to help you thourgh out this process.Following steps makes your deployment easier.
+                             | Lets
+                             //span.bs-label.label-primary Get Started
+                             br
+                             
+                             span.ol
+                               span.li
+                                 span.important Create new project
+                                 |  You can navigate to existing projects if you already create one.
+                               br
+                               
+                               span.li
+                                 span.important Add Configuartion
+                                 |  Add configuration for project which will include github, docker and amazon services
+                               br
+                               
+                               span.li
+                                 span.important Create new application
+                                 |  Lets get start by creating application.Your application will be deployed as 'appname'
+                                 code.deploybytes.com
+                               br
+                               
+                               span.li
+                                 span.important Build 
+                                 |  Build section will build your application. select configurations and build.Push Image after successfull build. You can see status in History tab  
+                               br
+                               
+                               span.li
+                                 span.important Deploy
+                                 |  Select an image to deploy
+                               br
+                               
+                               span.li
+                                 span.important Test
+                                 |  Done!
+                               br                 
+                          article
 
-  deploying-app#deploying-app
+
+
+
+
+        //.panel-body
+          h3.title-hero Separators
+          .example-box-wrapper
+            ul.list-group.list-group-separator.row.list-group-icons
+              li.col-md-2
+                a.list-group-item.active(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 Github
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.font-red.icon-bullhorn
+                  |                                 Docker
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.font-primary.icon-camera
+                  | AWS
+              li.col-md-2
+                a.list-group-item.active(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                Azure
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 S3
+              li.col-md-2
+                a.list-group-item(href='#')
+                  i.glyph-icon.icon-dashboard
+                  |                                 Codecommit
+
+        .panel-body
+          .example-box-wrapper
+            .row
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-primary(ui-sref="user.organization.projects.new-project", title='Example tile shortcut')
+                  span.bs-badge.badge-absolute 5
+                  .tile-header
+                    | Add new project
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-folder
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-black(ui-sref="user.organization.projects", title='Example tile shortcut')
+                  span.bs-badge.badge-absolute 5
+                  .tile-header
+                    | Projects
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-folder-open
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-danger(ui-sref="user.organization.projects.project.applications.application.stage.deploy.deployments", title='Example tile shortcut')
+                  span.bs-badge.badge-absolute 1
+                  .tile-header
+                    | No of deployments
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-cog
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-info(href='#', title='Example tile shortcut')
+                  span.bs-badge.badge-absolute 2
+                  .tile-header
+                    | Documentation
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-file-text
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-warning(href='#', title='Example tile shortcut')
+                  .tile-header
+                    | Deploybot
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-typicons-user
+              //.col-md-6
+                .dashboard-box.bg-white.content-box
+                  .content-wrapper
+                    .header
+                      | Performance
+                      span July - December 2013
+                    .center-div.sparkline-bar-big-color
+                      canvas(width='90', height='90', style='display: inline-block; width: 90px; height: 90px; vertical-align: top;')
+                  .button-pane
+                    .size-md.float-left.heading                      
+
+                  
+

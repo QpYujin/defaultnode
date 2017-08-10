@@ -18,6 +18,6 @@ div.widget-container(masonry, options="$root.masonryOptions", ng-show="global.ap
             span {{application.zone}}
       .widget-footer(layout)
         .button-group(layout, flex)
-          button.btn.btn-success(flex, ui-sref="user.organization.projects.project.applications.application.build.config({applicationId: application.uuid})") Build
-          button.btn.btn-info(flex, ui-sref="user.organization.projects.project.applications.application.deploy.config({applicationId: application.uuid})") Deploy
+          button.btn.btn-success(flex, ui-sref="user.organization.projects.project.applications.application.build.config({applicationId: application.uuid})")
+          //button.btn.btn-info(flex, ui-sref="user.organization.projects.project.applications.application.deploy.config({applicationId: application.uuid})")
 h3(ng-hide="global.applications.length") There is no application

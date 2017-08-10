@@ -1,0 +1,20 @@
+form(layout="column")
+  label(layout="row")
+    span aws access key
+    input.form-control(ng-model="cluster.access", required)
+  label(layout="row")
+    span aws secret key
+    input.form-control(ng-model="cluster.secret", required)
+  .btn-group
+  br
+  div.text-right
+    button.btn.btn-success(ng-click="startcluster()") Start Cluster
+  br
+  div.text-right
+    button.btn.btn-success(ng-click="destroycluster()") Destroy Cluster
+  br
+  div.text-right
+    button.btn.btn-success(ng-click="getstatus()") Get status
+  br
+  div.text-right
+    button.btn.btn-success(ng-click="getconfig()") Get config

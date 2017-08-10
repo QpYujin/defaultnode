@@ -45,7 +45,7 @@
     filter: alpha(opacity: 70);
 }
 .tile-content-wrapper > .glyph-icon {
-    font-size: 35px;
+    font-size: 55px;
     line-height: 70px;
     position: absolute;
     top: 50%;
@@ -115,7 +115,7 @@ a.tile-box.btn:hover .tile-header .float-right {
     position: absolute;
     right: 10px;
     bottom: 6px;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 400;
 }
 .tile-box-shortcut .bs-badge {
@@ -126,7 +126,7 @@ a.tile-box.btn:hover .tile-header .float-right {
 }
 .tile-box-shortcut .tile-content-wrapper {
     padding: 0;
-    min-height: 80px;
+    min-height: 200px;
 }
 .tile-box-shortcut .tile-content-wrapper > .glyph-icon {
     position: absolute;

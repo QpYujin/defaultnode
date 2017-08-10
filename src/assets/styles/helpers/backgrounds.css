@@ -184,8 +184,9 @@
 .bg-gradient-6,
 .bg-gradient-7,
 .bg-gradient-8,
+.bg-gradient-10,
 .bg-gradient-9 {
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 .bg-gradient-1 {
@@ -222,3 +223,14 @@
     background: linear-gradient(154deg, #008fe2 0, #00b29c 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#008fe2', endColorstr='#00b29c', GradientType=1);
 }
+
+.bg-gradient-10 {
+    background-color:#1C2B36;
+}
+
+
+
+
+
+
+

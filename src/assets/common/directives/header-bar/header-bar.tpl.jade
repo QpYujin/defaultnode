@@ -1,11 +1,11 @@
-#page-header.bg-gradient-1
+#page-header.bg-gradient-10
   #mobile-navigation
     button#nav-toggle.collapsed(data-toggle='collapse', data-target='#page-sidebar')
       span
     a.logo-content-small(href='index.html', title='MonarchUI')
   #header-logo.logo-bg.text-center(style="padding-top: 0;")
     i.fa.fa-caret-down(ng-class="{active: $root.sidebarClosed}" ng-click="$root.sidebarClosed = !$root.sidebarClosed")
-    h1(ui-sref="user.organization.home") QPAIR
+    h1(style='color: white !important'  ui-sref="user.organization.home") Deploybytes
   #header-nav-left.pull-right
     .user-account-btn.dropdown
       a.user-profile.clearfix(href='#', title='My Account', data-toggle='dropdown')

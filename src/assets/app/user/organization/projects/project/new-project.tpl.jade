@@ -1,26 +1,153 @@
-form(layout="column")
-  label(layout="row")
-    span Name
-    input.form-control(ng-model="project.name", required)
-  label(layout="row")
-    span Description
-    textarea.form-control(ng-model="project.description")
-  //- hr
-  //- label(layout="row")
-  //-   span Stack
-  //-   md-input-container
-  //-     md-select(ng-model="project.stack")
-  //-       md-option(ng-repeat="item in projectStaticParams.stack", ng-value="item.value") {{item.name}}
-  //- label(layout="row")
-  //-   span Environment
-  //-   md-input-container
-  //-     md-select(ng-model="project.environment")
-  //-       md-option(ng-repeat="item in projectStaticParams.environment", ng-value="item.value") {{item.name}}
-  //- label(layout="row")
-  //-   span Database Stack
-  //-   md-input-container
-  //-     md-select(ng-model="project.dbStack")
-  //-       md-option(ng-repeat="item in projectStaticParams.dbStack", ng-value="item.value") {{item.name}}
-  br
-  div.text-right
-    button.btn.btn-success(ng-disabled="!project.name", ng-click="addNewProject()") Add new Project
+.panel.ng-scopei
+  .panel-body
+    h2(style='color:#454545 !important') Create new project  
+    br
+    .example-box-wrapper
+      .row
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    //img(src='')
+                    | Deploybytes serve project as a collection of applications which will be deployed using deploybytes.
+                    | To create new project you just need to add Name and description of project.
+                    // span.bs-label.label-primary Get Started
+                    br
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+               article.articles
+                 article
+                   .form-group
+                     label.col-sm-4.control-label Project Name
+                     .col-sm-8
+                       input.form-control(type='text', ng-model='project.name', id='', placeholder='Add project Name')
+                   br
+                   br
+                   .form-group
+                     label.col-sm-4.control-label Project Description
+                     .col-sm-8
+                       textarea.form-control.ng-valid.ng-dirty.ng-valid-parse.ng-touched.ng-not-empty(ng-model='project.description',placeholder='Add project description' ,aria-invalid='false', style='')
+                 
+
+          .text-center
+                        button.btn.btn-success(ng-disabled='!project.name', ng-click='addNewProject()', disabled='disabled') Add new Project
+
+
+        //.col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    // img(src='')
+                    // span.bs-label.label-primary Get Started
+                    br
+                    form.ng-scope.ng-dirty.ng-valid-parse.ng-valid-required.ng-pristine.layout-column.ng-invalid.ng-invalid-required(layout='column', style='')
+                      label.layout-row(layout='row')
+                        span Project Name
+                        input.form-control.ng-dirty.ng-valid-parse.ng-touched.ng-valid-required.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required(ng-model='project.name', required='required', aria-invalid='false', style='')
+                      label.layout-row(layout='row')
+                        span Project Description
+                        textarea.form-control.ng-valid.ng-dirty.ng-valid-parse.ng-touched.ng-pristine.ng-untouched.ng-empty(ng-model='project.description', aria-invalid='false', style='')
+                      br
+                      .text-center
+                        button.btn.btn-success(ng-disabled='!project.name', ng-click='addNewProject()', disabled='disabled') Add new Project
+
+.text-left
+  .row
+    .block
+      i.hovicon.effect-1.sub-a
+        b.i.glyph-icon.icon-dashboard(ui-sref="user.organization")
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Privious code 
+//.panel
+  .panel-body
+    h1.title-hero Add Project Details
+    form.ng-scope.layout-column.ng-dirty.ng-valid-parse.ng-valid.ng-valid-required(layout='column', style='')
+      label.layout-row(layout='row')
+        span Project Name
+        input.form-control.ng-dirty.ng-valid-parse.ng-touched.ng-not-empty.ng-valid.ng-valid-required(ng-model='project.name', required='required', aria-invalid='false', style='')
+      label.layout-row(layout='row')
+        span Project Description
+        textarea.form-control.ng-valid.ng-dirty.ng-valid-parse.ng-touched.ng-not-empty(ng-model='project.description', aria-invalid='false', style='')
+      br
+      .text-right
+        button.btn.btn-success(ng-disabled='!project.name', ng-click='addNewProject()') Add new Project
+        
+  //.container
+    .menu
+      input#menu.toggle(type='checkbox')
+      label.cloud.cloudTwo(for='menu')
+        span
+          i.fa.fa-file-text-o(aria-hidden='true')
+
+//.panel
+  .panel-body
+    h3.title-hero
+      | Add Project Configuration
+    .example-box-wrapper
+      #form-wizard-2
+        ul.list-group.list-group-separator.row.list-group-icons.list-group-centered
+          li.col-md-2
+            a.list-group-item(href='#custom-step-1', data-toggle='tab')
+              i.glyph-icon.tooltip-button.font-black.demo-icon.icon-github-alt
+              |                             Source Control Management
+          li.col-md-2
+            a.list-group-item(href='#custom-step-2', data-toggle='tab')
+              i.glyph-icon.tooltip-button.font-red.demo-icon.icon-cloud
+              |                             Cloud Provider
+          li.col-md-2
+            a.list-group-item(href='#custom-step-3', data-toggle='tab')
+              i.glyph-icon.demo-icon.tooltip-button.font-blue.icon-iconic-layers
+              |                             Image Repositories
+
+          li.col-md-2
+            a.list-group-item(href='#custom-step-4', data-toggle='tab')
+              i.glyph-icon.tooltip-button.demo-icon.icon-th-list
+              |                             Project Parameters
+
+//.tab-content
+  #custom-step-1.tab-pane
+    .content-box
+      h3.content-box-header.bg-default
+        | Source Control configuration
+      .content-box-wrapper
+        | There is no configuration for source control. Please add configuration.
+        button.btn.btn-success(buttons="managementButtons") Add Repo
+
+  #custom-step-2.tab-pane
+    .content-box
+      h3.content-box-header.bg-black
+        | Cloud Provider Configuration
+      .content-box-wrapper
+        | There is no configuration for Cloud Provider. Please add cloud provider configuration.
+  #custom-step-3.tab-pane
+    .content-box
+      h3.content-box-header.bg-green
+        | Image Repositories
+      .content-box-wrapper
+        | There is no configuration for Image repositories. Please add configuration. 
+  #custom-step-4.tab-pane
+    .content-box
+      h3.content-box-header.bg-blue
+        | Project Parameters
+      .content-box-wrapper
+        | There are no parameters set for project. Please add project parameters.
+
+
+br
+br
+.text-left
+  button.btn.btn-default(ui-sref="user.organization.projects.project.applications") Back
+
+style.
+  #steps-buttons {
+    display: none;
+  }
+
+

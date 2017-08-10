@@ -25,7 +25,13 @@ div(layout="column", flex).scrollable
             span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.zone}}
           td(md-cell, style="white-space: nowrap")
             span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.createdAt | date:'dd-M-yyyy'}}
-          td(md-cell)
-            a(ng-click="project(project)")
-              i.fa.fa-remove
-  md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")
+           
+            button.btn.btn-info(ui-sref="user.organization.projects.project.config({projectId: project.uuid})", ui-sref-active="hidden") 
+              i.glyph-icon.tooltip-button.font-white.demo-icon.icon-gear(title='', data-original-title='.icon-gear')
+              |  Add Configurations
+
+            button.btn.btn-info(ui-sref='user.organization', ui-sref-active='hidden')
+              i.glyph-icon.font-white.tooltip-button.demo-icon.icon-tachometer(title='', data-original-title='.icon-tachometer')
+              |  Dashboard
+
+            md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")

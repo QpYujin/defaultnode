@@ -5,6 +5,8 @@ services:
       file: common.yml
       service: app
     restart: always
+    ports:
+       - "3001:3000"
     depends_on:
       - redis
     #command: ["-wait", "tcp://redis:6379", "-timeout", "30s", "npm", "start" ]
@@ -32,8 +34,8 @@ services:
     image: influxdb
     restart: always
     ports:
-      - "8086:8086"
-      - "8083:8083"
+      - "8087:8086"
+      - "8084:8083"
     volumes:
       - "$HOME/data/influxdb:/var/lib/influxdb"
     environment:
@@ -44,7 +46,7 @@ services:
     image: grafana/grafana
     restart: always
     ports:
-      - "3000:3000"
+      - "3002:3000"
     volumes:
       - "$HOME/data/grafana:/var/lib/grafana"
     environment:
@@ -61,8 +63,8 @@ services:
     image: autodeploy/nginx
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - "81:80"
+      - "444:443"
     links:
       - web
       - grafana

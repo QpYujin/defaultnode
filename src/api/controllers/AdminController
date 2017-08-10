@@ -1,0 +1,9 @@
+let AdminController = module.exports = {};
+
+AdminController.startcluster = (req, res) => {
+  let params = req.body;
+  params.organizationId = req.params.organizationId;
+  console.log("server side start cluster admin controller");
+
+
+};

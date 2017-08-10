@@ -3,12 +3,14 @@ const glob = require('glob');
 const path = require('path');
 const nconf = require('nconf');
 
+
 let CONFIG_SCHEME = process.env.CONFIG_SCHEME || 'local';
 nconf.argv().env().file({file: 'config/env/.' + CONFIG_SCHEME + '.json'});
 nconf.defaults({
   PORT: 3000,
   NODE_ENV: 'development'
 });
+
 
 // Global variables
 global._ = require('lodash');
@@ -25,7 +27,6 @@ server.loadModules = function(pattern, setGlobal, opts) {
   let modules = glob.sync(pattern, opts || {});
 
   return _(modules).keyBy(_.partialRight(path.basename, '.js')).mapValues((f, key) => {
-
     let module = require(path.resolve(process.cwd(), f));
 
     if (setGlobal) {
@@ -50,15 +51,59 @@ server.startExpress = function() {
 
   // Morgan logger
   app.use(require('morgan')('tiny'));
-
   require('./api/routes')(app);
 
   // Last routes will be 404 page
   app.use(IndexController.notFound);
-
-  app.listen(nconf.get('PORT'));
+ // app.listen(nconf.get('PORT'));
   server.log.info('App listening on port', nconf.get('PORT'));
+
+
+  /*var http = require('http').Server(app);
+  var io = require('socket.io')(http);*/
+
+  var server1 = app.listen(nconf.get('PORT'));
+  var io = require('socket.io').listen(server1);
+
+  server1.listen(nconf.get('PORT'), function(){
+    console.log('http server listening at port',nconf.get('PORT'));
+  });
+
+
+ /*  http.listen(nconf.get('PORT'), function () {
+    'use strict';
+   })
+  io.emit('msg', msg);
+  var msg="This is from server in server.js";
+ */
+
+
+  io.sockets.on('connection',function (socket) {
+    var _socket = socket;
+    console.log('Someone connected');
+    console.log('Client Address ',socket.client.conn.remoteAddress);
+
+    socket.on('disconnect', function(){
+    console.log('user disconnected');
+    })
+
+    socket.on('echo', function (data) {
+      console.log('server.js: echo event at server')
+      _socket.emit('echo', data+10);
+    });
+
+    socket.on('echo-ack', function (data, callback) {
+      callback(data);
+    });
+
+    msg="This is from server in server.js";
+   _socket.emit('msg',msg);
+  });
+
 };
+
+
+
 
 const Server = module.exports = {};
 Server.init = function(cb) {
