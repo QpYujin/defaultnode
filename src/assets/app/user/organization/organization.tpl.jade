@@ -10,38 +10,49 @@ div(layout, flex)
         button.btn.btn-info(ng-if="addOnButton.title", ui-sref="{{addOnButton.url}}") {{addOnButton.title}}
       //.content-wrapper.ng-scope.layout-column.flex(ui-view='organization1', flex='flex', layout='column', ng-class="{'no-padding': hideTitle}")
           .panel-body.ng-scope
-      
-      //.content-wrapper.ng-scope.layout-column.flex(ui-view='organization2`', flex='flex', layout='column', ng-class="{'no-padding': hideTitle}")
-      //  .panel-body
-          h3.title-hero Separators
-          .example-box-wrapper
-            ul.list-group.list-group-separator.row.list-group-icons
-              li.col-md-2
-                a.list-group-item.active(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 Github
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.font-red.icon-bullhorn
-                  |                                 Docker
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.font-primary.icon-camera
-                  | AWS
-              li.col-md-2
-                a.list-group-item.active(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                Azure 
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 S3
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 Codecommit
+   
+     
       div.content-wrapper(ui-view="organization", flex, layout="column", ng-class="{'no-padding': hideTitle}")
-        .panel
+         .panel-body
+            .example-box-wrapper
+              .row
+                .col-md-2
+                  a.tile-box.tile-box-shortcut.btn-primary(ui-sref="user.organization.projects.new-project", title='Example tile shortcut')
+                    //span.bs-badge.badge-absolute 5
+                    .tile-header
+                      | Add new project
+                    .tile-content-wrapper
+                      i.glyph-icon.icon-folder
+                .col-md-2
+                  a.tile-box.tile-box-shortcut.btn-black(ui-sref="user.organization.projects", title='Example tile shortcut')
+                    span.bs-badge.badge-absolute 5
+                    .tile-header
+                      | Projects
+                    .tile-content-wrapper
+                      i.glyph-icon.icon-folder-open
+                .col-md-2
+                  a.tile-box.tile-box-shortcut.btn-danger(ui-sref="user.organization.projects.project.applications.application.stage.deploy.deployments", title='Example tile shortcut')
+                    span.bs-badge.badge-absolute 1
+                    .tile-header
+                      | No of deployments
+                    .tile-content-wrapper
+                      i.glyph-icon.icon-cog
+                .col-md-2
+                  a.tile-box.tile-box-shortcut.btn-info(href='#', title='Example tile shortcut')
+                    //span.bs-badge.badge-absolute 2
+                    .tile-header
+                      | Documentation
+                    .tile-content-wrapper
+                      i.glyph-icon.icon-file-text
+                .col-md-2
+                  a.tile-box.tile-box-shortcut.btn-warning(href='#', title='Example tile shortcut')
+                    .tile-header
+                      | Deploybot
+                    .tile-content-wrapper
+                      i.glyph-icon.icon-typicons-user
+
+
+         .panel
           .panel-body
             h2(style='color:#454545 !important') Welcome to Deploybytes!  
             br
@@ -98,82 +109,106 @@ div(layout, flex)
 
 
 
-        //.panel-body
-          h3.title-hero Separators
-          .example-box-wrapper
-            ul.list-group.list-group-separator.row.list-group-icons
-              li.col-md-2
-                a.list-group-item.active(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 Github
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.font-red.icon-bullhorn
-                  |                                 Docker
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.font-primary.icon-camera
-                  | AWS
-              li.col-md-2
-                a.list-group-item.active(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                Azure
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 S3
-              li.col-md-2
-                a.list-group-item(href='#')
-                  i.glyph-icon.icon-dashboard
-                  |                                 Codecommit
+            .panel.ng-scope
+              .panel-body
+                h3.title-hero Latest Updates
+                .example-box-wrapper
+                  ul.todo-box
+                    li.border-red
+                      //input#todo-1(type='checkbox', name='todo-1')
+                      md-table-container.scrollable.grids-table(layout, flex, ng-show="projects.length")
+                        table(md-table, flex)
+                          thead(md-head, md-order="query.order")
+                            tr(md-row)
+                              th(md-column) Project Name
+                              th(md-column) Stack
+                              th(md-column) Environment
+                              th(md-column) Status
+                              th(md-column) date
+                              th(md-column)
 
-        .panel-body
-          .example-box-wrapper
-            .row
-              .col-md-2
-                a.tile-box.tile-box-shortcut.btn-primary(ui-sref="user.organization.projects.new-project", title='Example tile shortcut')
-                  span.bs-badge.badge-absolute 5
-                  .tile-header
-                    | Add new project
-                  .tile-content-wrapper
-                    i.glyph-icon.icon-folder
-              .col-md-2
-                a.tile-box.tile-box-shortcut.btn-black(ui-sref="user.organization.projects", title='Example tile shortcut')
-                  span.bs-badge.badge-absolute 5
-                  .tile-header
-                    | Projects
-                  .tile-content-wrapper
-                    i.glyph-icon.icon-folder-open
-              .col-md-2
-                a.tile-box.tile-box-shortcut.btn-danger(ui-sref="user.organization.projects.project.applications.application.stage.deploy.deployments", title='Example tile shortcut')
-                  span.bs-badge.badge-absolute 1
-                  .tile-header
-                    | No of deployments
-                  .tile-content-wrapper
-                    i.glyph-icon.icon-cog
-              .col-md-2
-                a.tile-box.tile-box-shortcut.btn-info(href='#', title='Example tile shortcut')
-                  span.bs-badge.badge-absolute 2
-                  .tile-header
-                    | Documentation
-                  .tile-content-wrapper
-                    i.glyph-icon.icon-file-text
-              .col-md-2
-                a.tile-box.tile-box-shortcut.btn-warning(href='#', title='Example tile shortcut')
-                  .tile-header
-                    | Deploybot
-                  .tile-content-wrapper
-                    i.glyph-icon.icon-typicons-user
-              //.col-md-6
-                .dashboard-box.bg-white.content-box
-                  .content-wrapper
-                    .header
-                      | Performance
-                      span July - December 2013
-                    .center-div.sparkline-bar-big-color
-                      canvas(width='90', height='90', style='display: inline-block; width: 90px; height: 90px; vertical-align: top;')
-                  .button-pane
-                    .size-md.float-left.heading                      
-
-                  
-
+                          tbody(md-body)
+                            tr.tHi(md-row, ng-repeat="project in projects | orderBy: query.order")
+                              span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})")
+                              td(md-cell)
+                                span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.name}}
+                              td(md-cell)
+                                span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.stack}}
+                              td(md-cell)
+                                span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.environmentDisplay}}
+                              td(md-cell)
+                                span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.zone}}
+                              td(md-cell, style="white-space: nowrap")
+                                span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.createdAt | date:'dd-M-yyyy'}}
+                              td(md-cell)
+                     
+                      //label(for='todo-1') This is an example task that i need to finish
+                      //span.bs-label.bg-red(title='') Overdue
+                      //a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+                        //i.glyph-icon.icon-remove
+                      //a.btn.btn-xs.btn-success.float-right(href='#', title='')
+                        //i.glyph-icon.icon-check
+          
+//.panel
+  .panel-body
+    h3.title-hero
+      | Latest Updates
+      .example-box-wrapper
+        ul.todo-box
+          li.border-red
+            input#todo-1(type='checkbox', name='todo-1')
+              label(for='todo-1')         
+              n.bs-label.bg-red(title='') Overdue
+                   a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+                     i.glyph-icon.icon-remove
+                   a.btn.btn-xs.btn-success.float-right(href='#', title='')
+                     i.glyph-icon.icon-check
+        //li.border-orange
+          input#todo-2(type='checkbox', name='todo-2')
+          label(for='todo-2') Update server to a newer version
+          span.bs-label.bg-green(title='') 2 Weeks
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+        //li.border-blue
+          input#todo-3(type='checkbox', name='todo-3')
+          label(for='todo-3') Add more awesome template features
+          span.bs-label.bg-blue(title='') Tomorrow
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+        //li.border-purple
+          input#todo-4(type='checkbox', name='todo-4')
+          label(for='todo-4') Never forget to buy milk
+          span.bs-label.bg-black(title='') Today
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+        //li.border-azure
+          input#todo-5(type='checkbox', name='todo-5')
+          label(for='todo-5') Respond to all helpdesk questions
+          span.bs-label.bg-purple(title='')  Label 2
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+        //li.border-green
+          input#todo-6(type='checkbox', name='todo-6')
+          label(for='todo-6') Fix bugs for future releases
+          span.bs-label.bg-azure(title='')  Label 2
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+        //li.border-blue-alt
+          input#todo-7(type='checkbox', name='todo-7')
+          label(for='todo-7') Clean up the system directory
+          span.bs-label.bg-blue-alt(title='')  Label 2
+          a.btn.btn-xs.btn-danger.float-right(href='#', title='')
+            i.glyph-icon.icon-remove
+          a.btn.btn-xs.btn-success.float-right(href='#', title='')
+            i.glyph-icon.icon-check
+            

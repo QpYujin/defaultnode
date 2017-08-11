@@ -23,7 +23,7 @@
                     .example-box-wrapper
                       #form-wizard-2
                         ul.list-group.list-group-separator.row.list-group-icons.list-group-centered
-                          li(style='padding: 25px 25px;').col-md-2
+                          li.col-md-2
                             a.list-group-item(href='#custom-step-1', data-toggle='tab')
                               i.glyph-icon.tooltip-button.font-black.demo-icon.icon-github-alt
                               |                             Source Control
@@ -51,7 +51,8 @@
                                      article
                                        .example-box-wrapper
                                          content-box-header.bg-default
-                                         | Existing Source Control configuration :
+                                         //| Existing Source Control configuration :
+                                         //|
                                          //| There is no configuration for source control. Please add configuration.
                                          md-table-container.scrollable.grids-table(layout, flex, ng-show="global.repos.length")
                                            table(md-table, flex)
@@ -75,11 +76,13 @@
                                                  td(md-cell)
                                                    md-button.md-icon-button(ui-sref=".repo({repoId: repo.uuid})")
                                                      i.fa.fa-cog
-                                                   md-button.md-icon-button
-                                                     i.fa.fa-remove
-                                          button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Repo
+                                                   //md-button.md-icon-button
+                                                     //i.fa.fa-remove
+                                              br
+                                         button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
                                          strong(ng-show="!global.repos.length") There is no repository configured. Please add configuration 
-                                           button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Repo
+                                           br
+                                           button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add Configuration
 
 
                          #custom-step-2.tab-pane
@@ -110,10 +113,11 @@
                                                  td(md-cell)
                                                    md-button.md-icon-button(ui-sref=".cloud({cloudId: cloud.uuid})")
                                                      i.fa.fa-cog
-                                                   md-button.md-icon-button
-                                                     i.fa.fa-remove
+                                              br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
                                          strong(ng-show="!global.clouds.length") There is no cloud provider.Please add configuration
-                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-cloud", ui-sref-active="hidden") Add Config
+                                            br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-cloud", ui-sref-active="hidden") Add Configuration
 
 
                          #custom-step-3.tab-pane
@@ -125,7 +129,7 @@
                                      article
                                        .example-box-wrapper
                                          h3.content-box-header.bg-default
-                                         | Image Repositories
+                                         //| Image Repositories
                                          //| There is no configuration for Image repositories. Please add configuration.
                                          md-table-container.scrollable.grids-table(layout, flex, ng-show="global.images.length")
                                            table(md-table, flex)
@@ -149,11 +153,11 @@
                                                  td(md-cell)
                                                    md-button.md-icon-button(ui-sref=".image({imageId: image.uuid})")
                                                      i.fa.fa-cog
-                                                   md-button.md-icon-button
-                                                     i.fa.fa-remove
-                                         br
-                                         Strong(ng-show="!global.images.length") There is no image repository configured. Please add configuration .
-                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-image", ui-sref-active="hidden") Add config
+                                               br
+                                         button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
+                                         strong(ng-show="!global.images.length") There is no image repository configured. Please add configuration.
+                                            br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-image", ui-sref-active="hidden") Add configuration
 
 
                          #custom-step-4.tab-pane
@@ -165,7 +169,7 @@
                                      article
                                        .example-box-wrapper
                                          h3.content-box-header.bg-default
-                                         | Project Parameters
+                                         //| Project Parameters
                                          //| There are no parameters set for project. Please add project parameters.
                                          div(layout="column", style="padding: 15px;")
                                            label.form-group(layout="row", layout-align="start center")
@@ -178,13 +182,13 @@
                                              div(layout, layout-wrap, flex)
                                                md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
                                                //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
-                                               md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
+                                               //md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
                                            label(layout="row", layout-align="start start")
                                              span Select DB Stack
                                              div(layout, layout-wrap, flex)
                                                md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
                                                //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
-                                               md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+                                               //md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
 
 
 
