@@ -1,7 +1,8 @@
 angular.module('app.user.organization', [
   'app.user.organization.projects',
   'app.user.organization.applications',
-  'app.user.organization.builds'
+  'app.user.organization.builds',
+  'app.user.organization.admin'
 ])
 
 .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
@@ -89,12 +90,6 @@ angular.module('app.user.organization', [
       }
     })
   }])
-
-
-
-
-
-
 
 
 

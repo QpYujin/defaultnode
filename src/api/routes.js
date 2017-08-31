@@ -26,6 +26,9 @@ module.exports = function(app) {
   app.post('/api/reset-password/:token', TokenController.resetPassword);
 
   let apiRoutes = express.Router();
+
+
+
   apiRoutes.use(AuthController.ensureAuth);
 
 
@@ -35,6 +38,9 @@ module.exports = function(app) {
   // Organizations
   apiRoutes.get('/organizations/:organizationId', OrganizationController.findOne);
   apiRoutes.post('/organizations', OrganizationController.create);
+
+
+  apiRoutes.get('/organizations/:organizationId/admin', AdminController.create);
 
 
   // Projects
@@ -98,6 +104,11 @@ module.exports = function(app) {
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images', BuildImageController.findAll);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images/:buildImageId', BuildImageController.findOne);
+
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/build-images/logs', LogsController.getLogs);
+
+
+
 
 //  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.findAll);
  // apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.create);

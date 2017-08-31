@@ -50,12 +50,6 @@ BuildImageController.create = (req, res) => {
                   console.log('exec error: ' + error);
                   console.log('stdout: '+stdout);
                }
-
-
-
-
-
-
              var delayMillis = 6000; //1 second
              setTimeout(function () {
                if (shell.stdout === 'Successfully cloned') {

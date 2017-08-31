@@ -10,6 +10,7 @@ div(layout="column", flex).scrollable
           th(md-column) No of Apps
           th(md-column) Create At
           th(md-column)
+
       tbody(md-body)
         tr.tHi(md-row, ng-repeat="project in projects | orderBy: query.order")
           span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})")

@@ -7,9 +7,11 @@ services:
     restart: always
     depends_on:
       - redis
-    #command: ["-wait", "tcp://redis:6379", "-timeout", "30s", "npm", "start" ]
+    command: ["npm", "start" ]
     environment:
       - SERVICE_NAME=web
+    ports:
+      - "3001:3001"
 
   # cron:
   #   extends:
@@ -40,21 +42,21 @@ services:
       - SERVICE_NAME=influxdb
       - INFLUXDB_ADMIN_ENABLED=true
 
-  grafana:
-    image: grafana/grafana
-    restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - "$HOME/data/grafana:/var/lib/grafana"
-    environment:
-      - GF_SERVER_ROOT_URL=/grafana
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-      - GF_SECURITY_ADMIN_PASSWORD=adm@s3cr3t
-      - GF_DASHBOARDS_JSON_ENABLED=true
-      - SERVICE_NAME=grafana
-    links:
-      - influxdb
+  #grafana:
+   # image: grafana/grafana
+   # restart: always
+   # ports:
+   #   - "3002:3000"
+   # volumes:
+   #   - "$HOME/data/grafana:/var/lib/grafana"
+   # environment:
+   #   - GF_SERVER_ROOT_URL=/grafana
+   #   - GF_AUTH_ANONYMOUS_ENABLED=true
+   #   - GF_SECURITY_ADMIN_PASSWORD=adm@s3cr3t
+   #   - GF_DASHBOARDS_JSON_ENABLED=true
+   #   - SERVICE_NAME=grafana
+   # links:
+   #   - influxdb
 
   nginx:
     build: ./nginx
@@ -65,7 +67,7 @@ services:
       - "443:443"
     links:
       - web
-      - grafana
+    #  - grafana
       - consul
       - registrator
     environment:

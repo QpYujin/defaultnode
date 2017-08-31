@@ -1,6 +1,8 @@
 angular.module('app.user', [
   'app.user.organization'
 ])
+
+
 .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
   function ($stateProvider, $locationProvider, $urlRouterProvider) {
 

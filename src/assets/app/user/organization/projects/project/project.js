@@ -1,6 +1,7 @@
 angular.module('app.user.organization.projects.project', [
   'app.user.organization.projects.project.applications'
 ])
+
 .config(function ($stateProvider) {
   $stateProvider.state('user.organization.projects.project.applications', {
     url: '/applications',
@@ -17,6 +18,10 @@ angular.module('app.user.organization.projects.project', [
       }
     }
   });
+
+
+
+
 
   $stateProvider.state('user.organization.projects.project.applications.new-application', {
     url: '/new-application',
@@ -165,7 +170,7 @@ angular.module('app.user.organization.projects.project', [
 
 // Project configuration
 .controller('OrganizationProjectConfigCtrl', function ($rootScope, $scope, project, $state, StaticParams, projectService) {
-  
+
   $scope.codeManagements = [];
   $scope.global.addingNewRepo = false;
 
@@ -209,7 +214,7 @@ angular.module('app.user.organization.projects.project', [
   _.forEach($scope.dbStacks, function (item) {
     item.checked = $scope.global.project.dbStacks.indexOf(item.name) != -1
   })
-  
+
   $scope.updateProject = function () {
     var params = {}
     params.uuid = $scope.global.project.uuid;

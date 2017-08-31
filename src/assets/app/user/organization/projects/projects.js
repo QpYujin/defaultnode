@@ -93,6 +93,8 @@ angular.module('app.user.organization.projects', [
           .one('projects', $stateParams.projectId)
           .one('applications').get()
       }
+
+
     }
   });
 
@@ -113,6 +115,8 @@ angular.module('app.user.organization.projects', [
     $scope.projects = results.rows;
     _.forEach($scope.projects, function (pj) {
       pj.environmentDisplay = globalUtils.isJSON(pj.environment) ? JSON.parse(pj.environment).join(', ') : pj.environment;
+
+
     })
   })
   // $scope.projects = projects.rows;
@@ -124,5 +128,26 @@ angular.module('app.user.organization.projects', [
   //  var sColor = '#' + rgb.toString(16);
   //  return {backgroundColor: red};
   }
+
+
+
+  var getapps = function () {
+    Restangular.one('organizations', $stateParams.organizationId)
+      .one('projects', $stateParams.projectId)
+      .one('getapps')
+      .get()
+      .then(function (cluster) {
+        console.log("This is from the client side function for .get call");
+        console.log('successfully getting all deployments');
+      })
+
+  }
+  getapps();
+
+
+
+
+
+
 
 })

@@ -4,7 +4,7 @@
 var shell = require('shelljs');
 
 let ImageController = module.exports = {};
-var shell = require('shelljs');
+//var shell = require('shelljs');
 
 ImageController.findOne = (req, res) => {
   UtilService.wrapCb(Image.findById(req.params.imageId), (err, image) => {

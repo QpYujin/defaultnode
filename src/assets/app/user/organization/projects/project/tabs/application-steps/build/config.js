@@ -17,8 +17,12 @@ angular.module('app.user.organization.projects.project.applications')
   $scope.editing = false;
 
   var getGitHubRepo = function (owner) {
-    return Restangular.allUrl('get-repo', 'https://api.github.com/users/')
-      .one(owner).one('repos').get();
+    /*return Restangular.allUrl('get-repo', 'https://api.github.com/users/')
+      .one(owner).one('repos').get();*/
+    return Restangular.allUrl('get-repo', 'https://api.github.com/user/')
+      .one('repos')
+      .get();
+
   }
 
   var getGitHubBranch = function (owner, repo) {
