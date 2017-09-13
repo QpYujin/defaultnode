@@ -38,6 +38,9 @@ module.exports = function(app) {
   apiRoutes.post('/organizations/:organizationId/projects/:projectId', ProjectController.update);
   apiRoutes.get('/organizations/:organizationId/projects', ProjectController.findAll);
   apiRoutes.post('/organizations/:organizationId/projects', ProjectController.create);
+  apiRoutes.get('/organizations/:organizationId/projects/getapps', ProjectController.getapps);
+
+
 
   // Project ImageRepository
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/image-repos/:imageId', ImageRepositoryController.findOne);
@@ -88,6 +91,16 @@ module.exports = function(app) {
   //apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images', BuildImageController.create);
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images/:buildImageId', BuildImageController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/applications/:applicationId/:stage/build-images/:bunpm startildImageId', BuildImageController.update);
+
+
+
+  //newly added for kafka logs 
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/applications/:applicationId/logs',BuildImageController.getLogs);
+
+
+
+
+
 
 
   // Images Releases newly added without stage

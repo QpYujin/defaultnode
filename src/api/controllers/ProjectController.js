@@ -57,3 +57,26 @@ ProjectController.findAll = (req, res) => {
   })
 }
 
+
+
+ProjectController.getapps = (req, res) => {
+console.log('calculating no of apps');
+res.send(5);
+/*
+  UtilService.wrapCb(Application.findAndCountAll(
+req.params.projectId), (err, project) => {
+    if (err) {
+      server.log.error('Error getting project', err);
+      res.status(500).json(err);
+    }
+    res.send(project);
+
+  });*/
+
+}
+
+
+
+
+
+

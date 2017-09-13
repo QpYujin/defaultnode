@@ -5,8 +5,17 @@
 var sleep = require('sleep');
 var fs = require('fs');
 var shell = require('shelljs');
-
+var Kafka = require('no-kafka');
 var logger = require('fluent-logger');
+
+
+var Kafka = require('no-kafka');
+//var connString = ' kafka://192.168.1.237:2181, 192.168.1.237:2181 '
+//var producer = new Kafka.Producer({ connectionString: connString });
+
+var connString = ' kafka://a2297de55842511e782690e0b9849711-872475790.us-east-1.elb.amazonaws.com:9092, http://a2297de55842511e782690e0b9849711-872475790.us-east-1.elb.amazonaws.com:9092 '
+var producer = new Kafka.Producer({ connectionString: connString });
+
 
 
 logger.configure('frontend', {
@@ -55,7 +64,68 @@ BuildImageController.create = (req, res) => {
 
 
 
+BuildImageController.getLogs = (req, res) => {
+  let params = req.body;
+  params.organizationId = req.params.organizationId;
+  console.log(params);
+  console.log('server side logs controller get call for logs');
+  var consumer = new Kafka.SimpleConsumer({ connectionString: connString });
+
+  // data handler function can return a Promise 
+  var dataHandler = function (messageSet, topic, partition) {
+	var arr = [ ];
+	messageSet.forEach(function (m) {
+        console.log(topic, partition, m.message.value.toString('utf8'));
+		msg=m.message.value.toString('utf8');
+		arr.push(msg);
+    });
+	
+	console.log(arr);
+       //let msg=arr;
+       res.send(arr);
+
+  };
+ 
+        return consumer.init().then(function () {
+       // Subscribe partitons 0 and 1 in a topic: 
+       //return consumer.subscribe('test', dataHandler);
+	return consumer.subscribe('build', 0, {offset: 0, maxBytes: 1000}, dataHandler)
+     });
+
+};
+
+
+
+
+
+
+
+
+
+
 BuildImageController.create = (req, res) => {
+
+   console.log("Build image logs in build image controller");
+   
+    payloads = [
+       
+         {topic: 'build',partition: 0,message: {value: 'INFO : Intialising buiding process...'}}
+	  // {topic: 'build',partition: 0,message: {value: 'INFO : started build..'}},
+	  // {topic: 'build',partition: 0,message: {value: 'INFO : verifying dockers..'}},
+          // {topic: 'build',partition: 0,message: {value: '-----------------------------------------------------------'}}
+
+   ]
+ 
+  /*	return producer.init()
+	.then(function(){	 
+    	return producer.send(payloads);
+	}).then(function (result) {
+  	console.log('topic sent');
+        //add functionality here
+
+	});*/
+ 
+
   let params = req.body;
   params.organizationId = req.params.organizationId;
   params.projectId = req.params.projectId;
@@ -74,25 +144,23 @@ BuildImageController.create = (req, res) => {
     return SourceManagement.findById(buildImage.sourceControlId).then((repo)=>{
       c.repo=repo.toJSON();
       //console.log('This is value of :',c);
-      console.log('This is repository github link',repo.url);
+      console.log('This is repository github link',repo.url); 
       console.log('This is build image object--------------------------------');
       console.log('This is repository name',params.repoName);
       console.log('this is from branch',params.branchName);
       console.log('This is port',params.port);      
 
       var gitlink=repo.url+'/'+params.repoName+'.git';
-      console.log('complete github link ',gitlink);
-
-      
-
+      console.log('complete github link ',gitlink);    
+      //payloads.push({topic: 'build',partition: 0,message: {value: 'INFO : This is github repository link for clonnning : '+gitlink}} );
            //code for clonning image
            shell.exec('/usr/src/app/api/controllers/clone.sh'+' '+gitlink+' '+params.repoName+' ',
            function (error, stdout, stderr) {
            console.log('This is inside shell script function');
                if (error !== null) {
-               console.log(' success ! ');
-	      logger.emit('shell', {message: 'Successfully executed shell script'});
-              
+	       //payloads.push({topic: 'build',partition: 0,message: {value: 'INFO: executing shell script!'}} );
+               //payloads.push({topic: 'build',partition: 0,message: {value: '-----------------------------------------------------------'}} );
+
 		 }
 
 		//code for getting logs from shell
@@ -107,15 +175,17 @@ BuildImageController.create = (req, res) => {
 	
 			if(data.indexOf('Successfully cloned') >= 0){			
 				console.log('This is status after clonning:',data.toString());
-	                        buildImage.setDataValue('status', 'Success fully cloned');
+                                payloads.push({topic: 'status',partition: 0,message: {value: 'SUCCESS : successfully clonned '}} );
+	                        buildImage.setDataValue('build', 'Success fully cloned');
                 		return buildImage.save();				 
 
 			 }//end of clonned if
 
 			else if(data.indexOf('Image successfully build') >= 0){
                                         console.log('This is status:',data.toString());
+                                        payloads.push({topic: 'status',partition: 0,message: {value: 'SUCCESS : Successfully build '}} );
                                         buildImage.setDataValue('status', 'Successfully Build');
-                                        logger.emit('status', {message: 'Successfully Build'});
+                                        logger.emit('build', {message: 'Successfully Build'});
                                         return buildImage.save();
 
                                          }
@@ -124,8 +194,9 @@ BuildImageController.create = (req, res) => {
 
 			else if(data.indexOf('Image build failed') >= 0)
 				{	console.log('This is build status :failed');
+                                        payloads.push({topic: 'status',partition: 0,message: {value: 'ERROR : Failed to build '}} );
                                         buildImage.setDataValue('status', 'Failed to Build');
-                                        logger.emit('status', {message: 'Failed to Build'});
+                                        logger.emit('build', {message: 'Failed to Build'});
                                         return buildImage.save();
                                          }
 
@@ -133,8 +204,9 @@ BuildImageController.create = (req, res) => {
 
 			  else{
 				 console.log('failed');
+                                 payloads.push({topic: 'status',partition: 0,message: {value: 'ERROR : Failed to clonned '}} );
 				 buildImage.setDataValue('status', 'Failed to clonned');
-				 logger.emit('status', {message: 'Failed to clonned'});
+				 logger.emit('build', {message: 'Failed to clonned'});
                 		return buildImage.save();
 			  }
 		
@@ -146,7 +218,17 @@ BuildImageController.create = (req, res) => {
         });//end of source management
 
     }();//end of get repo
- });
+ });//util services
+
+        return producer.init()
+        .then(function(){
+        return producer.send(payloads);
+        }).then(function (result) {
+        console.log('topic sent');
+        //add functionality here
+        });
+
+
 };
 
 

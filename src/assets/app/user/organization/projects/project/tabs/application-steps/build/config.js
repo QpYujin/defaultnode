@@ -46,6 +46,19 @@ angular.module('app.user.organization.projects.project.applications')
       })
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   $scope.updateImage = function () {
     if ($scope.build.uuid) {
       $scope.global.deploymentStatus = 'Adding new image';
@@ -113,13 +126,22 @@ angular.module('app.user.organization.projects.project.applications')
           $scope.logs = '';
           $scope.build.uuid = newBuild.uuid;
 
-          // Will be removed
+           
+          getlogs();
+          
+          /*
           $timeout(function () {
-            $scope.logs += 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n';
-          }, 2000);
+           // $scope.logs += 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n';
+           getlogs();
+
+          }, 5000);
           $timeout(function () {
-            $scope.logs += 'Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s,\n';
-          }, 3000);
+           // $scope.logs += 'Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s,\n';
+           getlogs();
+
+          }, 5000);*/
+ 
+          /*
           $timeout(function () {
             $scope.logs += 'when an unknown printer took a galley of type and scrambled it to make a type specimen book.\n';
           }, 3500);
@@ -128,7 +150,7 @@ angular.module('app.user.organization.projects.project.applications')
           }, 5000);
           $timeout(function () {
             $scope.logs += ' It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages\n';
-          }, 7000);
+          }, 7000);*/
 
           $scope.global.deploymentStatus = 'Cloning code';
           $timeout(function () {
@@ -230,15 +252,32 @@ var doGetImage=function (buildId) {
   }
 
 
+//code for get logs 
+var getlogs = function () {
+      Restangular.one('organizations', $stateParams.organizationId)
+        .one('projects', $stateParams.projectId)
+        .one('applications', $stateParams.applicationId)
+        //.one('build-images')
+        .one('logs')
+        .get()
+        .then(function (msg) {
+          console.log("This is from the client side log function for .get call");
+          console.log('.then function get call');
+          console.log(msg);
+          //$scope.logs= msg;
+          //$scope.logs += msg[0]+'\n';
+          
+          for( i=0; i<msg.length; i++ )
+          {
 
+            // $scope.logs += 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n';
+            $scope.logs +=msg[i] +'\n';
+          }
 
+        })
 
-
-
-
-
-
-
+     }
+//getlogs();
 
 
 

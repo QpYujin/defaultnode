@@ -20,12 +20,19 @@ div(layout="column", flex).scrollable
           td(md-cell)
             span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.stack}}
           td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.environmentDisplay}}
+            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})")            
+              span(ng-repeat="value in project.environmentDisplay | commaBreak")
+                span(ng-class="{'bs-label label-primary': value==='development', 'bs-label label-yellow': value==='stage','bs-label label-warning': value==='performance','bs-label label-danger': value==='production','bs-label label-info': value==='qa','bs-label label-azure': value==='other' }"){{value}}
+               
+
+
           td(md-cell)
             span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.zone}}
           td(md-cell, style="white-space: nowrap")
             span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.createdAt | date:'dd-M-yyyy'}}
-          td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") 
+          td(md-cell) 
+            button.btn.btn-info(ui-sref="user.organization.projects.project.config({projectId: project.uuid})", ui-sref-active="hidden")   
+              |  Add Configuration
 
   md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")
+

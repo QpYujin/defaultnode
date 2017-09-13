@@ -89,7 +89,7 @@ angular.module('app.user.organization.projects', [
 
 })
 
-.controller('OrganizationProjectsCtrl', function ($scope, StaticParams, breadcrumbItems, projects, projectService, globalUtils) {
+.controller('OrganizationProjectsCtrl', function ($scope,Restangular,StaticParams,$stateParams,breadcrumbItems, projects, projectService, globalUtils) {
   breadcrumbItems.items = [
     {
       title: 'Organization',
@@ -104,9 +104,45 @@ angular.module('app.user.organization.projects', [
     $scope.projects = results.rows;
     _.forEach($scope.projects, function (pj) {
       pj.environmentDisplay = globalUtils.isJSON(pj.environment) ? JSON.parse(pj.environment).join(', ') : pj.environment;
+
+     // pj.environmentDisplay= pj.environment;// ? JSON.parse(pj.environment).split(', ') : pj.environment;
+      console.log(pj.environmentDisplay);
+
+
     })
   })
   // $scope.projects = projects.rows;
   $scope.options = StaticParams.tableOptions;
   $scope.query = StaticParams.tableQuery;
+
+  var getapps = function () {
+    Restangular.one('organizations', $stateParams.organizationId)
+      .one('projects')
+      .one('getapps')
+      .get()
+      .then(function (proj) {
+        console.log("This is from the client side function for .get call getting no of applications");
+        $scope.apps=proj;
+        console.log(proj);
+        
+      })
+
+  }
+  getapps();
+
+
+
+
+
+
 })
+
+
+.filter("commaBreak", 
+    function () {
+        return function ( value ) {
+            if( !value.length ) return;
+            return value.split(',');
+        }
+
+});

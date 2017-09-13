@@ -1,0 +1,48 @@
+{
+  "PORT": 3000,
+  "NODE_ENV": "production",
+  "baseUrl": "http://ec2-54-236-36-228.compute-1.amazonaws.com",
+  "redis": {
+    "host": "redis",
+    "port": 6379,
+    "db": 0
+  },
+  "mysql": {
+    "host": "qpairboto.cnryqwkkelel.us-east-1.rds.amazonaws.com",
+    "port": 3306,
+    "database": "QPAIRDEP",
+    "username": "root",
+    "password": "Qpair@2013"
+  },
+  "jwt": {
+    "issuer": "codedeploy",
+    "secret": "jwt_secret_key"
+  },
+  "google": {
+    "clientID": "329494996078-o8ndklskv02dmg4g05g8fhoo06kl5cd7.apps.googleusercontent.com",
+    "clientSecret": "-YTAvx-gPsRPCruLnXrZW-JS"
+  },
+  "facebook": {
+    "clientID": "facebook_client_id",
+    "clientSecret": "facebook_client_secret"
+  },
+
+  "mailer": {
+    "from": "Admin <admin@codedeploy.com>",
+    "transport": {
+      "service": "SES",
+      "auth": {
+        "user": "ses_auth_user",
+        "pass": "ses_sec_password"
+      }
+    }
+  },
+
+ "github":{
+    "clientID": "296f3c371801e0c3e87a",
+    "clientSecret": "2ad6586433034ebdab7c0df82f93e19f7cc90972"
+  }
+
+
+}
+

@@ -59,7 +59,9 @@
     "write-yaml":"1.0.0",
     "sleep":"5.1.1",
     "fluent-logger":"2.4.0",
-    "curl-cmd":"0.0.1"
+    "curl-cmd":"0.0.1",
+    "kafka-node":"2.2.0",
+    "no-kafka":"3.2.0"
   },
   "devDependencies": {
     "connect-livereload": "^0.6.0",

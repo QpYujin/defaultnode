@@ -13,21 +13,21 @@ angular.module('app.user', [
         'main':{ 
           templateUrl: 'app/user/user.tpl.jade',
           controller: function ($rootScope, $scope, $state, $location) {
-            // $scope.$on('$stateChangeStart', function ($event, fromState, fromParams) {
-            //     $rootScope.loading = true;
-            //     if (fromParams.projectId) {
-            //         $rootScope.sidebarClosed = true;
-            //     }
-            //     else {
-            //         $rootScope.sidebarClosed = false;
-            //     }
-            //     // $location.url($location.path());
-            // })
-            // $scope.$on('$stateChangeSuccess', function () {
-            //     $rootScope.loading = false;
-            //     $rootScope.hasSidebar = false;
-            //     $location.url('');
-            // });
+             $scope.$on('$stateChangeStart', function ($event, fromState, fromParams) {
+                 $rootScope.loading = true;
+                 if (fromParams.projectId) {
+                     $rootScope.sidebarClosed = true;
+                 }
+                 else {
+                     $rootScope.sidebarClosed = false;
+                 }
+                 // $location.url($location.path());
+             })
+             $scope.$on('$stateChangeSuccess', function () {
+                 $rootScope.loading = false;
+                 $rootScope.hasSidebar = false;
+                 $location.url('');
+             });
 
             // $scope.$on('closeSidebar', function () {
             //     $rootScope.sidebarClosed = true;

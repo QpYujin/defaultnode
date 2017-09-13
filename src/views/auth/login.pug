@@ -3,29 +3,31 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Auto deployment
+    title Deploybytes
     link(href='vendor/bootstrap-css-only/bootstrap.css', rel='stylesheet')
     link(href='vendor/font-awesome/css/font-awesome.css', rel='stylesheet')
     link(href='vendor/sweetalert/sweetalert.css', rel='stylesheet')
     link(href='styles/login.css', rel='stylesheet')
+    
     link(href='vendor/css/admin.css', rel='stylesheet')
     script(src='https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit', async='', defer='')
   body
     #controller(ng-app='app')
       #login-page
+        #brand
         .overlay
+        
         #login-form
-          h2.text-center
-            | Login or 
-            a(href="/register") Sign up
-          br
           .row
-            //.col-md-6
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/facebook') Facebook
             .col-md-12
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') Github
-            //.col-md-6
-              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/google') Google+
+              a.btn.btn-social.btn-lg.btn-default.btn-facebook(href='/auth/github') 
+                img#img(src='')
+                span#sign-in-text Login with Github
+                hr.style1
+              h1.text-center
+                | Login or 
+                a(href="/register") Sign up
+                
           form(name='loginForm', method='post', action='/auth/local')
             - if (errors.length)
               div.alert.alert-danger= errors
@@ -44,6 +46,8 @@ html
                 button.btn.btn-lg.btn-success.btn-block(type='submit') Login
               .col-md-6
                 a.btn.btn-lg.btn-info.btn-block(onclick='forgotPassword()') Forgot password
+         
+
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
     script(src='vendor/sweetalert/sweetalert.min.js')
