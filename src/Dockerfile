@@ -34,6 +34,7 @@ EXPOSE 3000
 
 #ENTRYPOINT ["dockerize"]
 
+#old dockerfile
 #CMD ["-wait", "tcp://mysql:3306", "-wait", "tcp://redis:6379", "npm", "start" ]
 
 CMD ["npm", "start" ]
