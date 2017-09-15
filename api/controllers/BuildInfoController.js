@@ -11,6 +11,8 @@ var branch = require('git-branch');
 var gittags = require('git-tags');
 
 BuildInfoController.getInfo = function(req, res) {
+	
+	
 
 	console.log('at build info controller')  
 	//------------------------------ for recent commits
@@ -19,12 +21,37 @@ BuildInfoController.getInfo = function(req, res) {
 	}).on('data', function(commit) {
   	console.log(commit);
   	console.log('\n------------------\n');
-	res.send(commit);
+	//res.send(commit);
 	}).on('error', function(err) {
   	throw err;
 	}).on('end', function() {
   	console.log("That's all, folks!");
 	});
+
+
+	var gitlog = require('gitlog')
+  	,options =
+   	 { repo:'/usr/src/app/.git'
+   	 , number: 1
+	, author: ''
+    	, fields:
+     	 [ 'hash'
+      	, 'abbrevHash'
+      	, 'subject'
+      	, 'authorName'
+      	, 'authorDateRel'
+     	 ]
+    	, execOptions:
+     	 {       }
+   	 }
+ 
+
+	gitlog(options, function(error, commits) {
+  	// Commits is an array of commits in the repo
+  	  console.log(commits);
+	  res.send(commits);
+	})
+
 
 	/*
 	branch(function(err, str) {
