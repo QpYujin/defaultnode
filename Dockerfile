@@ -56,6 +56,7 @@ RUN grunt build
 EXPOSE 3000
 
 #adding new comment
+#adding another commit for test
 #RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJ4TVH54NQOO3UZDQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
