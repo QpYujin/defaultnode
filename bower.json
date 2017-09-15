@@ -9,10 +9,14 @@
     "lodash": "^4.17.4",
     "angular-ui-router": "^0.4.2",
     "restangular": "^1.6.1",
-    "angular-material": "^1.1.3",
+    "angular-material": "^1.1.4",
     "font-awesome": "^4.7.0",
     "angular-material-data-table": "^0.10.10",
-    "bootstrap-css-only": "^3.3.7"
+    "bootstrap-css-only": "^3.3.7",
+    "sweetalert": "^1.1.3",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.18.1"
   },
   "exportsOverride": {
     "lodash": {
@@ -21,15 +25,6 @@
     "font-awesome": {
       "css": "css",
       "fonts": "fonts"
-    },
-    "angular-bootstrap": {
-      "js": "ui-bootstrap-tpls.js",
-      "css": "ui-bootstrap-csp.css"
-    },
-    "bootstrap": {
-      "less/mixins": "less/mixins/*.less",
-      "less": "less/*.less",
-      "js": "dist/js/bootstrap.js"
-    },
+    }
   }
 }
