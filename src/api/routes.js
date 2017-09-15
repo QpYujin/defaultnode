@@ -21,6 +21,9 @@ module.exports = function(app) {
   app.get('/api/confirm/:token', TokenController.verifyEmail);
   app.post('/api/forgot-password', TokenController.forgotPassword);
   app.post('/api/reset-password/:token', TokenController.resetPassword);
+  
+  //Newly added 
+  app.get('/api/buildInfo',BuildInfoController.getInfo);
 
   let apiRoutes = express.Router();
   apiRoutes.use(AuthController.ensureAuth);

@@ -37,6 +37,8 @@ RUN sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
 
 #RUN sudo docker-machine start default
 
+#RUN chmod +x /usr/src/app/.git
+
 # Create app directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -48,17 +50,24 @@ RUN apt-get update && apt-get install vim -y
 
 # Bundle app source
 COPY . /usr/src/app
+
 RUN grunt build
 
 EXPOSE 3000
 
+#adding new comment for file 1
+#adding new comment
+#adding another commit for test
 #RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJ4TVH54NQOO3UZDQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
+#RUN chmod +x /usr/src/app/.git
+
 
 RUN sudo mv /usr/src/app/.kube $HOME
 RUN chmod +x /usr/src/app/kubectl
 RUN sudo mv /usr/src/app/kubectl /usr/local/bin/
+RUN chmod +x /usr/src/app/api/controllers/myshell.sh
 RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh

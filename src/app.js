@@ -1,5 +1,6 @@
 /**
  * App startup
+ * addinded comments
  */
 
 const Server = require('./server');
