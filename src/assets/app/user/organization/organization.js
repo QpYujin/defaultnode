@@ -1,7 +1,7 @@
 angular.module('app.user.organization', [
   'app.user.organization.projects',
   'app.user.organization.applications',
-  //'app.user.organization.admin',
+  'app.user.organization.admin',
   'app.user.organization.builds'
 ])
 

@@ -1,6 +1,6 @@
 FROM node:boron
 MAINTAINER Neha Khairnar <neha@qpair.io>
- 
+
 # Install dockerize
 #ENV DOCKERIZE_VERSION v0.3.0
 #RUN curl -L https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz | tar zx -C /usr/bin
@@ -55,9 +55,6 @@ RUN grunt build
 
 EXPOSE 3000
 
-RUN chmod +x /usr/src/app/gitinfo.sh
-RUN /usr/src/app/gitinfo.sh
-
 #adding new comment for file 1
 #adding new comment
 #adding another commit for test
@@ -67,11 +64,10 @@ RUN /usr/src/app/gitinfo.sh
 #RUN chmod +x /usr/src/app/.git
 
 
-
 RUN sudo mv /usr/src/app/.kube $HOME
 RUN chmod +x /usr/src/app/kubectl
 RUN sudo mv /usr/src/app/kubectl /usr/local/bin/
-RUN chmod +x /usr/src/app/buildinfo.sh
+RUN chmod +x /usr/src/app/myshell.sh
 RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh

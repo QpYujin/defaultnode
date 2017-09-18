@@ -22,7 +22,7 @@ module.exports = function(app) {
   app.post('/api/forgot-password', TokenController.forgotPassword);
   app.post('/api/reset-password/:token', TokenController.resetPassword);
   
-  //Newly added 
+  //To get build info
   app.get('/api/buildInfo',BuildInfoController.getInfo);
 
   let apiRoutes = express.Router();
@@ -35,6 +35,13 @@ module.exports = function(app) {
   // Organizations
   apiRoutes.get('/organizations/:organizationId', OrganizationController.findOne);
   apiRoutes.post('/organizations', OrganizationController.create);
+
+  // Admin
+  apiRoutes.post('/organizations/:organizationId/admin/start', OrganizationController.startcluster);
+  apiRoutes.post('/organizations/:organizationId/admin/destroy', OrganizationController.destroycluster);
+  //apiRoutes.post('/organizations/:organizationId/admin/getconfig', OrganizationController.getconfig);
+  //apiRoutes.post('/organizations/:organizationId/admin/getstatus', OrganizationController.getstatus);
+
 
   // Projects
   apiRoutes.get('/organizations/:organizationId/projects/:projectId', ProjectController.findOne);

@@ -31,6 +31,7 @@ angular.module('app.user.organization.admin',[])
     Restangular
             .one('organizations', String($stateParams.organizationId))
             .one('admin')
+	    .one('start')
             .post('', $scope.cluster)
             .then(function () {
         swal('DONE', 'Cluster started', 'success');
