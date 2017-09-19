@@ -165,7 +165,7 @@ let params = req.body;
     	//endpoint: 'https://34.225.125.175',
     	//namespace: 'default',
     	binary: '/usr/local/bin/kubectl',
-   	 kubeconfig: '/usr/src/app/api/controllers/config.yaml',
+   	 kubeconfig: '/root/.kube/config.yaml',
     	version: '/api/v1',
     	/*auth: {
     	 	username: "admin",

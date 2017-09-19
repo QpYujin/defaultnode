@@ -55,13 +55,8 @@ RUN grunt build
 
 EXPOSE 3000
 
-RUN chmod +x /usr/src/app/gitinfo.sh
-RUN /usr/src/app/gitinfo.sh
-
-#adding new comment for file 1
-#adding new comment
-#adding another commit for test
-#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAJ4TVH54NQOO3UZDQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
+#create machine for another instance
+#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAISAG5IWEICSF4JYA --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
 #RUN chmod +x /usr/src/app/.git
@@ -70,12 +65,23 @@ RUN /usr/src/app/gitinfo.sh
 
 RUN sudo mv /usr/src/app/.kube $HOME
 RUN chmod +x /usr/src/app/kubectl
+
 RUN sudo mv /usr/src/app/kubectl /usr/local/bin/
+RUN mv /usr/src/app/kops /usr/local/bin
+RUN mv /usr/src/app/aws /usr/bin
+COPY id_rsa.pub /root/.ssh/id_rsa.pub
+
 RUN chmod +x /usr/src/app/buildinfo.sh
 RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh
 RUN chmod +x /usr/src/app/api/controllers/push.sh
+RUN chmod +x /usr/src/app/api/controllers/scripts/startcluster.sh
+RUN chmod +x /usr/src/app/api/controllers/scripts/destroycluster.sh
+RUN chmod +x /usr/local/bin/kubectl
+RUN chmod +x /usr/local/bin/kops
+RUN chmod +x /usr/bin/aws
+
 
 
 #ENTRYPOINT ["dockerize"]

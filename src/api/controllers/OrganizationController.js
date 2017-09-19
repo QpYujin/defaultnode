@@ -1,7 +1,7 @@
 /**
  * Create OrganizationController
  */
-
+var shell = require('shelljs');
 let OrganizationController = module.exports = {};
 
 // Route: get /organizations/:id
@@ -45,7 +45,7 @@ UtilService.wrapCb(Cluster.create(params), (err, cluster) => {
 console.log("at the server side constroller for start cluster");
 console.log("cluster access :",params.access);
 console.log("cluster secret :",params.secret);
-/*
+
 shell.exec('/usr/src/app/api/controllers/scripts/startcluster.sh'+' '+params.access+' '+params.secret,
 function (error, stdout, stderr) {
      console.log('This is inside shell script function');
@@ -54,7 +54,7 @@ function (error, stdout, stderr) {
               console.log('stdout: '+stdout);
                }
 
-           })*/
+           })
 };
 
 
@@ -75,7 +75,6 @@ console.log("at the server side constroller for destoy cluster");
 console.log("cluster access :",params.access);
 console.log("cluster secret :",params.secret);
 
-/*
 shell.exec('/usr/src/app/api/controllers/scripts/destroycluster.sh'+' '+params.access+' '+params.secret,
 function (error, stdout, stderr) {
      console.log('This is inside shell script function');
@@ -84,7 +83,7 @@ function (error, stdout, stderr) {
               console.log('stdout: '+stdout);
                }
 
-           })*/
+           })
 };
 
 
@@ -106,7 +105,6 @@ console.log("at the server side constroller for get status cluster");
 console.log("cluster access :",params.access);
 console.log("cluster secret :",params.secret);
 
-/*
 shell.exec('/usr/src/app/api/controllers/scripts/getstatus.sh'+' '+params.access+' '+params.secret,
 function (error, stdout, stderr) {
   console.log('This is inside shell script function');
@@ -114,6 +112,6 @@ function (error, stdout, stderr) {
              console.log('exec error: ' + error);
               console.log('stdout: '+stdout);
                            }
-                         })*/
+                         })
 };
 

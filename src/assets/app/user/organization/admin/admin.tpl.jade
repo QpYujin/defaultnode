@@ -1,20 +1,52 @@
-form(layout="column")
-  label(layout="row")
-    span aws access key
-    input.form-control(ng-model="cluster.access", required)
-  label(layout="row")
-    span aws secret key
-    input.form-control(ng-model="cluster.secret", required)
-  .btn-group
-  br
-  div.text-right
-    button.btn.btn-success(ng-click="startcluster()") Start Cluster
-  br
-  div.text-right
-    button.btn.btn-success(ng-click="destroycluster()") Destroy Cluster
-  br
-  div.text-right
-    button.btn.btn-success(ng-click="getstatus()") Get status
-  br
-  div.text-right
-    button.btn.btn-success(ng-click="getconfig()") Get config
+.example-box-wrapper
+  .content-box.remove-border.dashboard-buttons.clearfix
+    a.btn.vertical-button.remove-border.btn-success(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-tags
+      span.button-content Widgets
+    a.btn.vertical-button.remove-border.btn-warning(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-fire
+      span.button-content Tables
+    a.btn.vertical-button.remove-border.btn-purple(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-bar-chart-o
+      span.button-content Charts
+    a.btn.vertical-button.remove-border.btn-yellow(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-laptop
+      span.button-content Buttons
+    a.btn.vertical-button.remove-border.btn-azure(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-code
+      span.button-content Panels
+    a.btn.vertical-button.remove-border.btn-info(href='#', title='')
+      span.glyph-icon.icon-separator-vertical
+        i.glyph-icon.icon-picture-o
+      span.button-content Themes
+
+
+.panel
+  .panel-body
+    img(src='https://avatars1.githubusercontent.com/u/13629408?v=4&s=400', width='130', height='130')   
+    .col-md-12
+      .content-box
+        .content-box-wrapper
+          section
+            article.articles
+              article
+                form(layout="column")
+                  label(layout="row")
+                    span Aws Access key
+                  input.form-control(ng-model="cluster.access", required placeholder='Access key')
+                  label(layout="row")
+                    span Aws Secret key
+                  input.form-control(ng-model="cluster.secret", required placeholder='Access key')
+                .btn-group
+                 br
+                 div.text-left
+                   button.btn.btn-success(ng-click="startcluster()") Start Cluster
+                   button.btn.btn-success(ng-click="destroycluster()") Destroy Cluster
+                   button.btn.btn-success(ng-click="getstatus()") Get status
+
+
