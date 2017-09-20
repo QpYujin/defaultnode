@@ -1,25 +1,83 @@
-.new-repo-box(layout="column")
-  label(layout="row", layout-align="start center")
-    span Name
-    input.form-control(ng-model="newRepo.name")
-  label(layout="row", layout-align="start center")
-    span Provider
-    md-input-containter
-      md-select(ng-model="newRepo.provider")
-        md-option(ng-repeat="item in repoProviders", ng-value="item.value") {{item.name}}
-  label(layout="row", layout-align="start center")
-    span Url
-    input.form-control(ng-model="newRepo.url")
-  label(layout="row", layout-align="start center")
-    span Type
-    md-input-containter
-      md-select(ng-model="newRepo.type")
-        md-option(value="public") Public
-        md-option(value="private") Private
-  label(layout="row", layout-align="start center", ng-show="newRepo.type=='private'")
-    span SSH Key
-    input.form-control(ng-model="newRepo.sshKey")
-  .text-center
-    button.btn.btn-secondary(ui-sref="^") Cancel
-    &nbsp;&nbsp;&nbsp;
-    button.btn.btn-success(ng-disabled="!newRepo.name || !newRepo.url", ng-click="addNewRepo()") {{newRepo.uuid ? 'Update' : 'Add'}}
+.panel.ng-scopei.ng-scope
+  .panel-body
+    h2(style='color:#454545 !important')  Source Management Configuartion
+    br
+    .example-box-wrapper
+      .row
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    // img(src='')
+                    | Deploybytes support following github configuration.
+                    | Please choose any one service and add configuration .
+                    br
+
+
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    .example-box-wrapper
+                      #form-wizard-2
+                        ul.list-group.list-group-separator.row.list-group-icons.list-group-centered
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-1', data-toggle='tab')
+                              i.glyph-icon.font-black.tooltip-button.demo-icon.icon-github
+                              |                                 Github
+
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-2', data-toggle='tab')
+                              i.glyph-icon.font-blue.tooltip-button.demo-icon.icon-bitbucket
+                              |                                 Bitbucket
+
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-3', data-toggle='tab')
+                              i.glyph-icon.font-red.tooltip-button.demo-icon.icon-cubes
+                              |                              S3
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-4', data-toggle='tab')
+                              i.glyph-icon.font-yellow.tooltip-button.demo-icon.icon-puzzle-piece
+                              |                             Code commit
+
+
+
+                      #custom-step-1.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         content-box-header.bg-default
+                                         | strong Add Source Control configuration :
+                                         .new-repo-box(layout="column")
+                                             label(layout="row", layout-align="start center")
+                                               span Name
+                                               input.form-control(ng-model="newRepo.name")
+                                             label(layout="row", layout-align="start center")
+                                               span Provider
+                                               md-input-containter
+                                                 md-select(ng-model="newRepo.provider")
+                                                   md-option(ng-repeat="item in repoProviders", ng-value="item.value") {{item.name}}
+                                             label(layout="row", layout-align="start center")
+                                               span Url
+                                               input.form-control(ng-model="newRepo.url")
+                                             label(layout="row", layout-align="start center")
+                                               span Type
+                                               md-input-containter
+                                                 md-select(ng-model="newRepo.type")
+                                                   md-option(value="public") Public
+                                                   md-option(value="private") Private
+                                             label(layout="row", layout-align="start center", ng-show="newRepo.type=='private'")
+                                               span SSH Key
+                                               input.form-control(ng-model="newRepo.sshKey")
+                                             .text-center
+                                               button.btn.btn-secondary(ui-sref="^") Cancel
+                                               &nbsp;&nbsp;&nbsp;
+                                               button.btn.btn-success(ng-disabled="!newRepo.name || !newRepo.url", ng-click="addNewRepo()") {{newRepo.uuid ? 'Update' : 'Add'}}

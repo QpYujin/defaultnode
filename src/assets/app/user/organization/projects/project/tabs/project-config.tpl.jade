@@ -1,101 +1,196 @@
-collapse-box(title="Source code Management", buttons="managementButtons")
-  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.repos.length")
-    table(md-table, flex)
-      thead(md-head, md-order="query.order")
-        tr(md-row)
-          th(md-column) 
-            strong Name
-          th(md-column) 
-            strong Provider
-          th(md-column) 
-            strong Url
-          th(md-column) 
-            strong Type
-          th(md-column)
-      tbody(md-body)
-        tr(md-row, ng-repeat="repo in global.repos")
-          td(md-cell) {{repo.name}}
-          td(md-cell) {{repo.provider}}
-          td(md-cell) {{repo.url}}
-          td(md-cell) {{repo.type}}
-          td(md-cell)
-            md-button.md-icon-button(ui-sref=".repo({repoId: repo.uuid})")
-              i.fa.fa-cog
-            md-button.md-icon-button
-              i.fa.fa-remove
-  h3(ng-show="!global.repos.length") There is no repository
-br
-br
-collapse-box(title="Cloud Provider", buttons="cloudProviderButtons")
-  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.clouds.length")
-    table(md-table, flex)
-      thead(md-head, md-order="query.order")
-        tr(md-row)
-          th(md-column) 
-            strong Name
-          th(md-column) 
-            strong Provider
-          th(md-column)
-      tbody(md-body)
-        tr(md-row, ng-repeat="cloud in global.clouds")
-          td(md-cell) {{cloud.name}}
-          td(md-cell) {{cloud.provider}}
-          td(md-cell)
-            md-button.md-icon-button(ui-sref=".cloud({cloudId: cloud.uuid})")
-              i.fa.fa-cog
-            md-button.md-icon-button
-              i.fa.fa-remove
-  h3(ng-show="!global.clouds.length") There is no cloud provider
-br
-br
-collapse-box(title="Image Repository", buttons="imageButtons")
-  md-table-container.scrollable.grids-table(layout, flex, ng-show="global.images.length")
-    table(md-table, flex)
-      thead(md-head, md-order="query.order")
-        tr(md-row)
-          th(md-column) 
-            strong Name
-          th(md-column) 
-            strong Provider
-          th(md-column) 
-            strong Url
-          th(md-column) 
-            strong Type
-          th(md-column)
-      tbody(md-body)
-        tr(md-row, ng-repeat="image in global.images")
-          td(md-cell) {{image.name}}
-          td(md-cell) {{image.provider}}
-          td(md-cell) {{image.url}}
-          td(md-cell) {{image.type}}
-          td(md-cell)
-            md-button.md-icon-button(ui-sref=".image({imageId: image.uuid})")
-              i.fa.fa-cog
-            md-button.md-icon-button
-              i.fa.fa-remove
-  h3(ng-show="!global.images.length") There is no image repository
-br
-br
-collapse-box(title="Edit project params")
-  div(layout="column", style="padding: 15px;")
+.panel.ng-scopei.ng-scope
+  .panel-body
+    h2(style='color:#454545 !important')  Add Project Configuartion 
+    br
+    .example-box-wrapper
+      .row
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    // img(src='')
+                    | Deploybytes provide multiplatform deployment options.
+                    | Please add configurations for following services.
+                    br
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    .example-box-wrapper
+                      #form-wizard-2
+                        ul.list-group.list-group-separator.row.list-group-icons.list-group-centered
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-1', data-toggle='tab')
+                              i.glyph-icon.tooltip-button.font-black.demo-icon.icon-github-alt
+                              |                             Source Control
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-2', data-toggle='tab')
+                              i.glyph-icon.tooltip-button.font-red.demo-icon.icon-cloud
+                              |                             Cloud Provider
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-3', data-toggle='tab')
+                              i.glyph-icon.demo-icon.tooltip-button.font-blue.icon-iconic-layers
+                              |                             Image Repositories
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-4', data-toggle='tab')
+                              i.glyph-icon.tooltip-button.demo-icon.icon-th-list
+                              |                             Project Parameters
 
-    label.form-group(layout="row", layout-align="start center")
-      span Select Stack
-      md-input-container
-        md-select(ng-model="global.project.stack", ng-change="updateProject()")
-          md-option(ng-repeat="item in stacks", ng-value="item.value") {{item.name}}
-    label.form-group(layout="row", layout-align="start start")
-      span Select Environment
-      div(layout, layout-wrap, flex)
-        md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
-      //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
-        md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
-    label(layout="row", layout-align="start start")
-      span Select DB Stack
-      div(layout, layout-wrap, flex)
-        md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
-      //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
-        md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+
+
+                         #custom-step-1.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         content-box-header.bg-default
+                                         //| Existing Source Control configuration :
+                                         //|
+                                         //| There is no configuration for source control. Please add configuration.
+                                         md-table-container.scrollable.grids-table(layout, flex, ng-show="global.repos.length")
+                                           table(md-table, flex)
+                                             thead(md-head, md-order="query.order")
+                                               tr(md-row)
+                                                 th(md-column)
+                                                   strong Name
+                                                 th(md-column)
+                                                   strong Provider
+                                                 th(md-column)
+                                                   strong Url
+                                                 th(md-column)
+                                                   strong Type
+                                                   th(md-column)
+                                             tbody(md-body)
+                                               tr(md-row, ng-repeat="repo in global.repos")
+                                                 td(md-cell) {{repo.name}}
+                                                 td(md-cell) {{repo.provider}}
+                                                 td(md-cell) {{repo.url}}
+                                                 td(md-cell) {{repo.type}}
+                                                 td(md-cell)
+                                                   md-button.md-icon-button(ui-sref=".repo({repoId: repo.uuid})")
+                                                     i.fa.fa-cog
+                                                   //md-button.md-icon-button
+                                                     //i.fa.fa-remove
+                                              br
+                                         button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
+                                         strong(ng-show="!global.repos.length") There is no repository configured. Please add configuration 
+                                           br
+                                           button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add Configuration
+
+
+                         #custom-step-2.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         h3.content-box-header.bg-default
+                                         //collapse-box(title="Source code Management", buttons="managementButtons")
+                                         //| Existing Cloud Provider Configuration
+                                         //| There is no configuration for Cloud Provider. Please add cloud provider configuration.
+                                         md-table-container.scrollable.grids-table(layout, flex, ng-show="global.clouds.length")
+                                           table(md-table, flex)
+                                             thead(md-head, md-order="query.order")
+                                               tr(md-row)
+                                                 th(md-column)
+                                                   strong Name
+                                                 th(md-column)
+                                                   strong Provider
+                                                 th(md-column)
+                                             tbody(md-body)
+                                               tr(md-row, ng-repeat="cloud in global.clouds")
+                                                 td(md-cell) {{cloud.name}}
+                                                 td(md-cell) {{cloud.provider}}
+                                                 td(md-cell)
+                                                   md-button.md-icon-button(ui-sref=".cloud({cloudId: cloud.uuid})")
+                                                     i.fa.fa-cog
+                                              br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
+                                         strong(ng-show="!global.clouds.length") There is no cloud provider.Please add configuration
+                                            br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-cloud", ui-sref-active="hidden") Add Configuration
+
+
+                         #custom-step-3.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         h3.content-box-header.bg-default
+                                         //| Image Repositories
+                                         //| There is no configuration for Image repositories. Please add configuration.
+                                         md-table-container.scrollable.grids-table(layout, flex, ng-show="global.images.length")
+                                           table(md-table, flex)
+                                             thead(md-head, md-order="query.order")
+                                               tr(md-row)
+                                                 th(md-column)
+                                                   strong Name
+                                                 th(md-column)
+                                                   strong Provideri
+                                                 th(md-column)
+                                                   strong Url
+                                                 th(md-column)
+                                                   strong Type
+                                                 th(md-column)
+                                             tbody(md-body)
+                                               tr(md-row, ng-repeat="image in global.images")
+                                                 td(md-cell) {{image.name}}
+                                                 td(md-cell) {{image.provider}}
+                                                 td(md-cell) {{image.url}}
+                                                 td(md-cell) {{image.type}}
+                                                 td(md-cell)
+                                                   md-button.md-icon-button(ui-sref=".image({imageId: image.uuid})")
+                                                     i.fa.fa-cog
+                                               br
+                                         button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-repo", ui-sref-active="hidden") Add New Configuration
+                                         strong(ng-show="!global.images.length") There is no image repository configured. Please add configuration.
+                                            br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-image", ui-sref-active="hidden") Add configuration
+
+
+                         #custom-step-4.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         h3.content-box-header.bg-default
+                                         //| Project Parameters
+                                         //| There are no parameters set for project. Please add project parameters.
+                                         div(layout="column", style="padding: 15px;")
+                                           label.form-group(layout="row", layout-align="start center")
+                                             span Select Stack
+                                             md-input-container
+                                               md-select(ng-model="global.project.stack", ng-change="updateProject()")
+                                                 md-option(ng-repeat="item in stacks", ng-value="item.value") {{item.name}}
+                                           label.form-group(layout="row", layout-align="start start")
+                                             span Select Environment
+                                             div(layout, layout-wrap, flex)
+                                               md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+                                               //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
+                                               //md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
+                                           label(layout="row", layout-align="start start")
+                                             span Select DB Stack
+                                             div(layout, layout-wrap, flex)
+                                               md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+                                               //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
+                                               //md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+
+
 br
 br
 .text-left

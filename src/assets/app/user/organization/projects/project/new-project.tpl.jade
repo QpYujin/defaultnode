@@ -1,10 +1,55 @@
-form(layout="column")
-  label(layout="row")
-    span Name
-    input.form-control(ng-model="project.name", required)
-  label(layout="row")
-    span Description
-    textarea.form-control(ng-model="project.description")
+.panel
+  .panel-body
+    h2(style='color:#454545 !important') Create new project  
+    br
+    .example-box-wrapper
+      .row
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+                article.articles
+                  article
+                    //img(src='')
+                    | Deploybytes serve project as a collection of applications which will be deployed using deploybytes.
+                    | To create new project you just need to add Name and description of project.
+                    // span.bs-label.label-primary Get Started
+                    br
+        .col-md-12
+          .content-box
+            .content-box-wrapper
+              section
+               article.articles
+                 article
+                   .form-group
+                     label.col-sm-4.control-label Project Name
+                     .col-sm-8
+                       input.form-control(type='text', ng-model='project.name', id='', placeholder='Add project Name')
+                   br
+                   br
+                   .form-group
+                     label.col-sm-4.control-label Project Description
+                     .col-sm-8
+                       textarea.form-control.ng-valid.ng-dirty.ng-valid-parse.ng-touched.ng-not-empty(ng-model='project.description',placeholder='Add project description' ,aria-invalid='false', style='')
+                     .text-center
+                        button.btn.btn-success(ng-disabled='!project.name', ng-click='addNewProject()', disabled='disabled') Add new Project
+
+
+
+
+
+
+
+
+
+
+//form(layout="column")
+//  label(layout="row")
+//    span Name
+//    input.form-control(ng-model="project.name", required)
+//  label(layout="row")
+//    span Description
+//    textarea.form-control(ng-model="project.description")
   //- hr
   //- label(layout="row")
   //-   span Stack
@@ -21,6 +66,6 @@ form(layout="column")
   //-   md-input-container
   //-     md-select(ng-model="project.dbStack")
   //-       md-option(ng-repeat="item in projectStaticParams.dbStack", ng-value="item.value") {{item.name}}
-  br
-  div.text-right
-    button.btn.btn-success(ng-disabled="!project.name", ng-click="addNewProject()") Add new Project
+  //br
+  //div.text-right
+  //  button.btn.btn-success(ng-disabled="!project.name", ng-click="addNewProject()") Add new Project

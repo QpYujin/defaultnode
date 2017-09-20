@@ -1,7 +1,7 @@
 {
   "PORT": 3000,
   "NODE_ENV": "production",
-  "baseUrl": "http://ec2-34-201-3-200.compute-1.amazonaws.com",
+  "baseUrl": "http://deploybytesdev.deploybytes.com/login",
 
   "redis": {
     "host": "redis",

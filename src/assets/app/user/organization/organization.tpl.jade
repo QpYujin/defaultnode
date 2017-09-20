@@ -9,4 +9,99 @@ div(layout, flex)
         span(flex)
         button.btn.btn-info(ng-if="addOnButton.title", ui-sref="{{addOnButton.url}}") {{addOnButton.title}}
       div.content-wrapper(ui-view="organization", flex, layout="column", ng-class="{'no-padding': hideTitle}")
-  deploying-app#deploying-app
+        .panel-body
+          .example-box-wrapper
+            .row
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-primary(ui-sref="user.organization.projects.new-project", title='Example tile shortcut')
+                  //span.bs-badge.badge-absolute 5
+                  .tile-header
+                    | Add new project
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-folder
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-black(ui-sref="user.organization.projects", title='Example tile shortcut') 
+                  .tile-header
+                    | Projects
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-folder-open
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-danger(ui-sref="user.organization.projects.project.applications.application.stage.deploy.deployments", title='Example tile shortcut')
+                  //span.bs-badge.badge-absolute 1
+                  .tile-header
+                    | Deployments
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-cog
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-info(href='#', title='Example tile shortcut')
+                  //span.bs-badge.badge-absolute 2
+                  .tile-header
+                    | Documentation
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-file-text
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-warning(href='#', title='Example tile shortcut')
+                  .tile-header
+                    | Deploybot
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-typicons-user
+
+              .col-md-2
+                a.tile-box.tile-box-shortcut.btn-purple(href='#', title='Example tile shortcut')
+                  .tile-header
+                    | Admin
+                  .tile-content-wrapper
+                    i.glyph-icon.icon-typicons-user
+
+
+
+        .panel
+          .panel-body
+            h2(style='color:#454545 !important') Welcome to Deploybytes!  
+            br
+            .example-box-wrapper
+              .row
+                .col-md-12
+                  .content-box
+                    .content-box-wrapper
+                      section
+                        article.articles
+                          article
+                            img(src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Qxhfjkxhy4drPf_oNtY793h_VmZKM_38x7d2dtp9Aoaqscij')
+                            h6   Lets Get started
+                            br
+                            | Thank you for choosing Deploybyte.We would like to help you thourgh out this process.Following steps makes your deployment easier.
+                            | Lets Get Started
+                            br
+                            span.ol
+                              span.li
+                                span.important Create new project
+                                |  You can navigate to existing projects if you already create one.
+                              br
+                              
+                              span.li
+                                span.important Add Configuartion
+                                |  Add configuration for project which will include github, docker and amazon services
+                              br
+                               
+                              span.li
+                                span.important Create new application
+                                |  Lets get start by creating application.Your application will be deployed as 'appname'
+                                code.deploybytes.com
+                              br
+                              
+                              span.li
+                                span.important Build 
+                                |  Build section will build your application. select configurations and build.Push Image after successfull build. You can see status in History tab  
+                              br
+                              
+                              span.li
+                                span.important Deploy
+                                |  Select an image to deploy
+                              br
+                              
+                              span.li
+                                span.important Test
+                                |  Done!
+                              br                 
+                          article
