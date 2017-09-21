@@ -62,14 +62,14 @@ function (error, stdout, stderr) {
 OrganizationController.destroycluster = (req, res) => {
 let params = req.body;
 console.log('This is at the destroy cluster controller',params);
-/*
+
 UtilService.wrapCb(Cluster.create(params), (err, cluster) => {
     if (err) {
       server.log.error('Error create cluster', err);
       res.status(500).json(err);
     }
     res.send(cluster);
-});*/
+});
 
 console.log("at the server side constroller for destoy cluster");
 console.log("cluster access :",params.access);

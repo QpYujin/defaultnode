@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cp -rf  /home/ec2-user/Dev_Active/deploybytes/.git /home/ec2-user/Dev_Active/deploybytes/src/.git
+cp -rf ./.git /usr/src/app/.git
 
 echo "Done!"

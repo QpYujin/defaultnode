@@ -189,7 +189,7 @@
 }
 
 .bg-gradient-1 {
-    background: radial-gradient(circle at 8.75% 8.45%, #003973, transparent 100%),radial-gradient(circle at 94.06% 82.83%, #E5E5BE, transparent 100%),radial-gradient(circle at 50% 50%, #668cc2, #668cc2 100%);
+    background: radial-gradient(circle at 8.75% 8.45%, #e67e22, transparent 100%),radial-gradient(circle at 94.06% 82.83%, #d67520, transparent 100%),radial-gradient(circle at 50% 50%, #e67e22, #e67e22 100%);
 }
 .bg-gradient-2 {
     background: radial-gradient(circle at 1.98% 3.00%, #348F50, transparent 100%),radial-gradient(circle at 98.02% 98.00%, #56B4D3, transparent 100%),radial-gradient(circle at 50% 50%, #668cc2, #668cc2 100%);

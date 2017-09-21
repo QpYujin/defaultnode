@@ -1,7 +1,7 @@
 {
   "PORT": 3000,
   "NODE_ENV": "production",
-  "baseUrl": "http://deploybytesdev.deploybytes.com/login",
+  "baseUrl": "http://deploybytesdev.deploybytes.com",
 
   "redis": {
     "host": "redis",

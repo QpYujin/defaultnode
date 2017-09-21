@@ -6,10 +6,10 @@ angular.module('app.user.organization.projects', [
   $stateProvider.state('user.organization.projects', {
     url: '/projects',
     title: 'Projects',
-    addOnButton: {
+    /*addOnButton: {
       title: 'Add new Project',
       url: 'user.organization.projects.new-project'
-    },
+    },*/
     views: {
       'organization@user.organization': {
         templateUrl: 'app/user/organization/projects/projects.tpl.jade',

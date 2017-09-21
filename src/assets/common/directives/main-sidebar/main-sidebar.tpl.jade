@@ -3,10 +3,10 @@
     ul#sidebar-menu
       li.header
         span Services
-      //- li
-      //-   a(ui-sref="user.organization.home", title='Elements')
-      //-     i.glyph-icon.icon-home(title='.icon-home', style='color:DeepSkyBlue;')
-      //-     span Dashboard
+      li
+         a(ui-sref="user.organization", title='Elements')
+           i.glyph-icon.icon-home(title='.icon-home', style='color:DeepSkyBlue;')
+           span Dashboard
       li
         a(ui-sref="user.organization.projects", title='Elements')
           i.glyph-icon.icon-bars(title='.icon-bars', style='color:DeepSkyBlue;')
@@ -25,10 +25,7 @@
                       a(ui-sref="user.organization.projects.project.applications.application.stage.deploy.images", ui-sref-active="active") Deploy
                     li
                       a(ui-sref="user.organization.projects.project.applications.application.stage.test.config", ui-sref-active="active") Test
-      li
-        a(ui-sref="user.organization.projects", title='Elements')
-          i.glyph-icon.icon-cog(title='.icon-cog', style='color:green;')
-          span Settings
+      
       li
         a(ui-sref="user.organization.admin", title='Elements')
           i.glyph-icon.icon-user(title='.icon-user', style='color:red;')
@@ -39,7 +36,10 @@
           i.glyph-icon.icon-list-alt(title='.icon-list-alt', style='color:yellow;')
           span Reports
 
-
+      li
+        a(ui-sref="user.organization.projects", title='Elements')
+          i.glyph-icon.icon-cog(title='.icon-cog', style='color:green;')
+          span Settings
 
 
 

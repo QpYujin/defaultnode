@@ -1,0 +1,94 @@
+section {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  color: #696969;
+}
+
+section h5 {
+  margin: 0;
+  border-top: 0.01em solid #C0C0C0;
+  padding: 1em 0;
+  font-size: 2em;
+  color: #000000;
+}
+
+section .articles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+section .articles article {
+  width: 100%;
+  text-align: left;
+}
+
+section .articles article img{
+  display: inline-block;
+  height: 3em;
+  width: 3em;
+  vertical-align: middle;
+}
+
+section .articles article h6 {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  font-size: 1.5em;
+  line-height: 3em;  
+  color: #38393a
+}
+
+section .articles article ol {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style-position: outside;
+}
+
+section .articles article ol li {
+  margin: 0 0 1em 0;
+}
+
+section .articles article .important {
+  font-weight: 900;
+  font-size: 1.1em;
+}
+
+section .articles article p {
+  margin: 0 0 1em 0;
+}
+
+
+
+
+section .articles article .ol {
+  /* Name counter and set it to zero */
+  counter-reset: list;
+  list-style: none;
+}
+
+section .articles article .li {
+  /* Increment counter with every li */
+  counter-increment: list;
+  margin-bottom: 10px;
+}
+
+section .articles article .li::before {
+  /* Use ::before pseudoelement to show a custom counter with a leading zero */
+  content: counter(list, decimal-leading-zero);
+  background: #00bca4; 
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 20%;
+  width: 2.0em;
+  height: 2.0em;
+  line-height: 2.3em;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+
+
+

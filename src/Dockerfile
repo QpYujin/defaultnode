@@ -56,7 +56,7 @@ RUN grunt build
 EXPOSE 3000
 
 #create machine for another instance
-#RUN docker-machine create --driver amazonec2 --amazonec2-access-key AKIAISAG5IWEICSF4JYA --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
+RUN docker-machine create --driver amazonec2 --amazonec2-access-key  AKIAI4Y6AASGFMJV2NTQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
 #RUN chmod +x /usr/src/app/.git
@@ -82,8 +82,7 @@ RUN chmod +x /usr/local/bin/kubectl
 RUN chmod +x /usr/local/bin/kops
 RUN chmod +x /usr/bin/aws
 
-
-
+#COPY /home/ec2-user/Dev_Active/deploybytes/.git /usr/src/app/.git
 #ENTRYPOINT ["dockerize"]
 
 CMD ["npm", "start" ]
