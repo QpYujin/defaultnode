@@ -13,7 +13,7 @@ if [ $? -eq 0 ]; then
         cd $2
         #docker-machine create default
         #docker-machine start default
-        eval $(docker-machine env default --shell bash)
+        eval $(docker-machine env vm  --shell bash)
         docker-compose build
         
         if [ $? -eq 0 ]; then

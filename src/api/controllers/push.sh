@@ -2,7 +2,7 @@
 
 # First set up connection to a docker hub (NOTE: Currently just to docker hub, eventually branching out to other registry)
 
-eval $(docker-machine env default --shell bash)
+eval $(docker-machine env vm --shell bash)
 docker login --password Alpharius93 --username kokyj93 
 
 docker tag $1 kokyj93/$2

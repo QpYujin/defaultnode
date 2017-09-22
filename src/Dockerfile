@@ -50,13 +50,23 @@ RUN apt-get update && apt-get install vim -y
 
 # Bundle app source
 COPY . /usr/src/app
+COPY id_rsa /root/.ssh/id_rsa
+COPY id_rsa.pub /root/.ssh/id_rsa.pub
 
 RUN grunt build
 
 EXPOSE 3000
 
+RUN docker-machine create \
+   --driver generic \
+   --generic-ip-address=default.deploybytes.com \
+   --generic-ssh-key ~/.ssh/id_rsa \
+   --generic-ssh-user ubuntu \
+   vm
+
+
 #create machine for another instance
-RUN docker-machine create --driver amazonec2 --amazonec2-access-key  AKIAI4Y6AASGFMJV2NTQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
+#RUN docker-machine create --driver amazonec2 --amazonec2-access-key  AKIAI4Y6AASGFMJV2NTQ --amazonec2-instance-type t2.micro --amazonec2-secret-key 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 --amazonec2-region us-east-1 --amazonec2-ami=ami-2a0c313c default
 #RUN docker-machine start default
 #RUN eval $(docker-machine env default --shell bash)
 #RUN chmod +x /usr/src/app/.git
@@ -70,6 +80,11 @@ RUN sudo mv /usr/src/app/kubectl /usr/local/bin/
 RUN mv /usr/src/app/kops /usr/local/bin
 RUN mv /usr/src/app/aws /usr/bin
 COPY id_rsa.pub /root/.ssh/id_rsa.pub
+
+
+RUN apt-get install unzip -y
+
+RUN unzip /usr/src/app/.git.zip -d /usr/src/app/
 
 RUN chmod +x /usr/src/app/buildinfo.sh
 RUN chmod +x /usr/src/app/api/controllers/deploy.sh

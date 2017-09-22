@@ -85,7 +85,7 @@ angular.module('app.user.organization.projects.project.applications')
             swal('DONE', '', 'success');
             $scope.showLogs = false;
             return newBuild;
-          }, 10000)
+          }, 25000)
         }, function (result) {
           if (result.data.fields && result.data.fields.version) {
             swal('ERROR', 'Version is existed, please choose another one.', 'error');

@@ -64,7 +64,7 @@ typings/
 .git
 .vscode
 
-
+.git.zip
 
 src/assets/vendor
 .tmp
