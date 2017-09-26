@@ -32,6 +32,8 @@ RUN chmod +x /usr/bin/aws
 
 EXPOSE 3000
 
+EXPOSE 5001
+
 #ENTRYPOINT ["dockerize"]
 
 #old dockerfile

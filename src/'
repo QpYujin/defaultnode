@@ -59,20 +59,26 @@ server.startExpress = function() {
   server.log.info('App listening on port', nconf.get('PORT'));
 
 
-  var server1  = app.listen(nconf.get('PORT'))
-  var io      = require('socket.io').listen(server1);
+/*
+  var io = require('socket.io').listen(app.listen(nconf.get('PORT')));
 
-
-  /*
   io.listen(5001, function(){
-    console.log('http server listening at port same port');
+    console.log('socket Listening at port 5001');
   });*/
+
+
+  var io = require('socket.io').listen(app.listen(nconf.get('PORT'));;
+
+  io.listen(5001, function(){
+    console.log('http server listening at port 5001');
+  });
 
 
   io.sockets.on('connection',function (socket) {
     var _socket = socket;
     console.log('Someone connected');
     console.log('Client Address ',socket.client.conn.remoteAddress);
+
     socket.on('echo', function (data) {
         _socket.emit('echo', data);
     });

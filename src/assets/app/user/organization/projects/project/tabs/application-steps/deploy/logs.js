@@ -1,9 +1,6 @@
 angular.module('app.user.organization.projects.project.applications.logs',['socket.io'])
  .config(function ($socketProvider) {
-        
-    $socketProvider.setConnectionUrl('http://ec2-34-205-203-241.compute-1.amazonaws.com:3001/',{
-    path: 'user/72/organizations/6b1134f0-721c-11e7-a38e-913e98051e9a/projects/applications/stage-/deploy/logs'
-    })
+    $socketProvider.setConnectionUrl('http://ec2-34-229-202-25.compute-1.amazonaws.com:5001/')
 })
 
 //.controller('OrganizationProjectApplicationDeployLogsCtrl',['$scope','socketio',function($scope, Restangular, $timeout, $state, application, deployImages,socketio) {
@@ -19,7 +16,8 @@ angular.module('app.user.organization.projects.project.applications.logs',['sock
   });
 
   $socket.on('echo', function (data) {
-    $scope.serverResponse = data;
+     alert('value is socket.io'+data)
+     $scope.serverResponse = data;
     //$scope.con="this is message from consol";
   });
 
