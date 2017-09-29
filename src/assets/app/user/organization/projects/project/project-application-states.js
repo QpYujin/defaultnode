@@ -1,4 +1,4 @@
-angular.module('app.user.organization.projects.project.applications', [])
+angular.module('app.user.organization.projects.project.applications', ['app.user.organization.projects.project.applications.logs'])
   .config(function ($stateProvider) {
     $stateProvider.state('user.organization.projects.project.applications.application', {
       url: '',

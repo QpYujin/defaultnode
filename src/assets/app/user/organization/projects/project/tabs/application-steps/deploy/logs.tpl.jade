@@ -1,4 +1,22 @@
-.content-box
+input(ng-model='dataToSend')
+button(ng-click='emitBasic()') Send
+button(ng-click='emitACK()') Send (ACK)
+div Server Response: {{ serverResponse }}
+div Server Response (ACK): {{ serverResponseACK }}
+div Console log: {{con}}
+
+
+
+
+
+
+
+
+
+
+
+
+//.content-box
   h3 Deployment details
   .content(layout="column")
     label(layout="row")

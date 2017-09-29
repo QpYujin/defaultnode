@@ -62,9 +62,9 @@ let params = req.body;
                                  labels:
                                  { app: appname,
                                   role: "web",
-                                   dns: "route53"},
+                                   },
                                  annotations:
-                                 {domainName:fulldomain}
+                                 {external-dns.alpha.kubernetes.io/hostname: fulldomain}
                             },
                             spec:
                             {

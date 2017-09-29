@@ -56,8 +56,29 @@ server.startExpress = function() {
   // Last routes will be 404 page
   app.use(IndexController.notFound);
 
-  app.listen(nconf.get('PORT'));
+  //app.listen(nconf.get('PORT'));
   server.log.info('App listening on port', nconf.get('PORT'));
+
+  var server1  = app.listen(nconf.get('PORT'))
+  var io      = require('socket.io').listen(server1);
+
+    /*
+  io.listen(5001, function(){
+    console.log('http server listening at port same port');
+  });*/
+
+
+  io.sockets.on('connection',function (socket) {
+    var _socket = socket;
+    console.log('Someone connected');
+    console.log('Client Address ',socket.client.conn.remoteAddress);
+    socket.on('echo', function (data) {
+        _socket.emit('echo', data);
+    });
+
+  });
+
+
 };
 
 const Server = module.exports = {};
