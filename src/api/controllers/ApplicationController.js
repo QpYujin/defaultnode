@@ -41,6 +41,22 @@ ApplicationController.create = (req, res) => {
       res.status(500).json(err);
     }
     res.send(application);
+
+  //username password app na
+  var username="cloudoptim"
+  var password ="Qpair@2013"
+  var gitrepo= params.application.name;
+  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' ',+password+' ',+gitrepo+' ',
+    function (error, stdout, stderr) {
+      console.log('This is inside shell script function');
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        console.log('stdout: '+stdout);
+      }
+
+
+
+
   });
 };
 
