@@ -20,6 +20,9 @@ module.exports = (function(sequelize) {
     description: {
       type: Sequelize.STRING
     },
+    mydefaultvalue:{
+       type: Sequelize.INTEGER
+    },
     stack: {
       type: Sequelize.ENUM,
       values: ['node', 'meanstack', 'flask', 'other'],

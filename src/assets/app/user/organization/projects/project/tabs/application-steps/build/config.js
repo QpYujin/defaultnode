@@ -11,7 +11,8 @@ angular.module('app.user.organization.projects.project.applications')
   $scope.build = {};
   $scope.releases = application.releases;
   $scope.currentSourceManagement = _.find($scope.global.repos, function (item) {
-    return item.uuid = application.sourceManagementId;
+    //return item.uuid = application.sourceManagementId;
+    return item.uuid ="2f8d5620-6cbd-11e7-adab-432d6abaea89";
   });
 
   $scope.editing = false;
@@ -28,6 +29,13 @@ angular.module('app.user.organization.projects.project.applications')
   }
 
 
+  var getGitHubTag = function (owner, repo) {
+    return Restangular.allUrl('get-branch', 'https://api.github.com/')
+      .one('repos').one(owner)
+      .one(repo).one('tags').get();
+  }
+
+
 
   if ($scope.currentSourceManagement) {
     $scope.build.sourceControlId = $scope.currentSourceManagement.uuid;
@@ -36,14 +44,6 @@ angular.module('app.user.organization.projects.project.applications')
     getGitHubRepo($scope.sourceManagementOwner).then(function (repos) {
       $scope.repos = repos;
     })
-  }
-
-  $scope.changeRepo = function () {
-    getGitHubBranch($scope.sourceManagementOwner, $scope.build.repoName)
-      .then(function (branches) {
-        $scope.branches = branches;
-        
-      })
   }
 
   $scope.updateImage = function () {

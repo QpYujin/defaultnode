@@ -18,14 +18,50 @@ ProjectController.findOne = (req, res) => {
 // Route: post /organizations
 ProjectController.create = (req, res) => {
   let params = req.body;
+  let projectId=null;
+  let response=null;
+
+  console.log('This is default value',params.mydefaultvalue)
   params.organizationId = req.params.organizationId;
-  UtilService.wrapCb(Project.create(params), (err, project) => {
+  UtilService.wrapCb(Project.create(params), 
+  (err, project) => {
     if (err) {
       server.log.error('Error create project', err);
       res.status(500).json(err);
-    }
+    } 
+ 
+    projectId= project.uuid;
+    response=200;
+    console.log("This is project Id",project.uuid);
     res.send(project);
-  });
+   })
+
+    if (params.mydefaultvalue==1 && response==200)
+     {
+       
+       var name="Qpair"
+       var provider="Github"
+       var url = "https://github.com/cloudoptim"
+       var type = "public"
+
+     SourceManagement.create
+	({
+          organizationId:params.organizationId,
+          projectId: projectId,
+          name:"Qpair",
+          provider:"github",
+          url:"https://github.com/cloudoptim",
+          type:"public"}).then
+	  {
+        	console.log('This is another post from source')
+        	if (err) {
+           	server.log.error('Error create project', err);
+          	 res.status(500).json(err);
+               }
+            }
+   }
+ 
+
 };
 
 ProjectController.update = (req, res) => {
