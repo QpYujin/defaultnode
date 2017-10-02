@@ -91,6 +91,7 @@ RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh
 RUN chmod +x /usr/src/app/api/controllers/push.sh
+RUN chmod +x /usr/src/app/api/controllers/createRepo.sh
 RUN chmod +x /usr/src/app/api/controllers/scripts/startcluster.sh
 RUN chmod +x /usr/src/app/api/controllers/scripts/destroycluster.sh
 RUN chmod +x /usr/local/bin/kubectl

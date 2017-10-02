@@ -15,28 +15,25 @@ ProjectController.findOne = (req, res) => {
   });
 };
 
+
+
+
 // Route: post /organizations
 ProjectController.create = (req, res) => {
   let params = req.body;
-  let projectId=null;
-  let response=null;
 
   console.log('This is default value',params.mydefaultvalue)
   params.organizationId = req.params.organizationId;
-  UtilService.wrapCb(Project.create(params), 
+  
+ UtilService.wrapCb(Project.create(params), 
   (err, project) => {
     if (err) {
       server.log.error('Error create project', err);
       res.status(500).json(err);
-    } 
- 
-    projectId= project.uuid;
-    response=200;
-    console.log("This is project Id",project.uuid);
-    res.send(project);
-   })
-
-    if (params.mydefaultvalue==1 && response==200)
+    }
+    //res.send(project);
+    console.log("This is project object",project);
+    if (params.mydefaultvalue==1)
      {
        
        var name="Qpair"
@@ -47,19 +44,24 @@ ProjectController.create = (req, res) => {
      SourceManagement.create
 	({
           organizationId:params.organizationId,
-          projectId: projectId,
+          projectId: project.uuid,
           name:"Qpair",
           provider:"github",
           url:"https://github.com/cloudoptim",
           type:"public"}).then
 	  {
         	console.log('This is another post from source')
+                console.log('This is project uuid',project.uuid);
         	if (err) {
            	server.log.error('Error create project', err);
           	 res.status(500).json(err);
                }
             }
    }
+
+   res.send(project);
+
+})
  
 
 };

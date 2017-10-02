@@ -40,24 +40,26 @@ ApplicationController.create = (req, res) => {
       server.log.error('Error create application', err);
       res.status(500).json(err);
     }
-    res.send(application);
+  //  res.send(application);
 
-  //username password app na
-  var username="cloudoptim"
-  var password ="Qpair@2013"
-  var gitrepo= params.application.name;
-  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' ',+password+' ',+gitrepo+' ',
+  var username="QpYujin"
+  var password ="Alpharius93"
+  var gitrepo= application.name;
+  var gittag="dev_1.0.1";
+  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' ',+password+' ',+gitrepo+' ',+gittag+' ',
     function (error, stdout, stderr) {
       console.log('This is inside shell script function');
       if (error !== null) {
         console.log('exec error: ' + error);
         console.log('stdout: '+stdout);
       }
-
-
-
-
   });
+
+  res.send(application)
+  });
+
+
+
 };
 
 ApplicationController.update = (req, res) => {

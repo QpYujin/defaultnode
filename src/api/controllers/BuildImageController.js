@@ -51,10 +51,6 @@ BuildImageController.create = (req, res) => {
 };*/
 
 
-
-
-
-
 BuildImageController.create = (req, res) => {
   let params = req.body;
   params.organizationId = req.params.organizationId;
@@ -69,8 +65,27 @@ BuildImageController.create = (req, res) => {
       res.status(500).json(err);
     }
     res.send(buildImage);
+ 
+  var username="cloudoptim";
+  var password ="Qpair@2013";
+  var gitrepo= "test1";
+  var gittag ="1.1.1";
+
+  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' ',+password+' ',+gitrepo+' ',+gittag+' ',
+    function (error, stdout, stderr) {
+      console.log('This is inside shell script function');
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        console.log('stdout: '+stdout);
+      }
+  });
+
+
+   /*
+
     let c = buildImage.toJSON();
-    var getrepolink = function () {
+    var getrepolink = function ()
+   {
     return SourceManagement.findById(buildImage.sourceControlId).then((repo)=>{
       c.repo=repo.toJSON();
       //console.log('This is value of :',c);
@@ -83,9 +98,9 @@ BuildImageController.create = (req, res) => {
       var gitlink=repo.url+'/'+params.repoName+'.git';
       console.log('complete github link ',gitlink);
 
-      
+      */
 
-           //code for clonning image
+           /*code for clonning image
            shell.exec('/usr/src/app/api/controllers/clone.sh'+' '+gitlink+' '+params.repoName+' ',
            function (error, stdout, stderr) {
            console.log('This is inside shell script function');
@@ -140,12 +155,13 @@ BuildImageController.create = (req, res) => {
 		
           	 });
 
-		});
+		});*/
 
 
-        });//end of source management
+     //   });end of source management
 
-    }();//end of get repo
+   // }();end of get repo
+
  });
 };
 
