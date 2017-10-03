@@ -1,10 +1,14 @@
 div(layout="column", flex).scrollable
-  div(flex)    
-    //label(layout="row", layout-align="start center")
-    //  span Release
-    //  md-select(ng-disabled="!editing", ng-model="build.releaseId", placeholder="Select Release")
-    //    md-option(ng-repeat="release in Tags", ng-value="release.name") {{release.name}}
-    //  a(ui-sref="^.releases") Manage Releases
+  div(flex)  
+    label(layout="row")
+      span Version
+      input.form-control(ng-disabled="!editing", ng-model="build.version", flex="50")
+  
+    label(layout="row", layout-align="start center")
+      span Release
+      md-select(ng-disabled="!editing", ng-model="build.releaseId", placeholder="Select Release")
+        md-option(ng-repeat="release in Tags", ng-value="release.name") {{release.name}}
+      a(ui-sref="^.releases") Manage Releases
 
     label(layout="row")
       span Source Management
@@ -21,14 +25,11 @@ div(layout="column", flex).scrollable
       md-select(ng-disabled="!editing", ng-model="build.branchName")
         md-option(ng-repeat="branch in branches", ng-value="branch.name") {{branch.name}}
 
-
     label(layout="row",  layout-align="start center")
       span Select Tag
-      md-select(ng-disabled="!editing", ng-model="build.tag")
+      md-select(ng-disabled="!editing", ng-model="build.tagName")
         md-option(ng-repeat="tag in tags", ng-value="tag.name") {{tag.name}}
-        //md-option(ng-value="1.0") 1.0
-        //md-option(ng-value="1.1") 1.1
-        //md-option(ng-value="1.2") 1.2
+
 
     label(layout="row")
       span Docker-Image Name

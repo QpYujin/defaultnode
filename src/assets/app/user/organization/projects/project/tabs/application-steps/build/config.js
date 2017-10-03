@@ -12,7 +12,6 @@ angular.module('app.user.organization.projects.project.applications')
   $scope.releases = application.releases;
   $scope.currentSourceManagement = _.find($scope.global.repos, function (item) {
     return item.uuid = application.sourceManagementId;
-    //return item.uuid ="2f8d5620-6cbd-11e7-adab-432d6abaea89";
   });
 
   $scope.editing = false;
@@ -29,6 +28,7 @@ angular.module('app.user.organization.projects.project.applications')
   }
 
 
+
   var getGitHubTag = function (owner, repo) {
     return Restangular.allUrl('get-tag', 'https://api.github.com/')
       .one('repos').one(owner)
@@ -43,8 +43,37 @@ angular.module('app.user.organization.projects.project.applications')
     $scope.sourceManagementOwner = pathArray[pathArray.length-1];
     getGitHubRepo($scope.sourceManagementOwner).then(function (repos) {
       $scope.repos = repos;
+      console.log("This is inside repo function");
     })
   }
+
+
+   $scope.changeRepo = function () {
+    getGitHubBranch($scope.sourceManagementOwner, $scope.build.repoName)
+      .then(function (branches) {
+        $scope.branches = branches;
+        console.log('This is inside branch function');
+      })
+     getGitHubTag($scope.sourceManagementOwner, $scope.build.repoName)
+      .then(function (tags) {
+        $scope.tags = tags;
+       console.log('This is inside tag');
+      })
+  }
+
+
+/*
+ $scope.changeTag = function () {
+    getGitHubTag($scope.sourceManagementOwner, $scope.build.tagName)
+      .then(function (tags) {
+        $scope.tags = tags;
+       console.log('This is inside tag');
+      })
+  }
+*/
+
+
+
 
   $scope.updateImage = function () {
     if ($scope.build.uuid) {
