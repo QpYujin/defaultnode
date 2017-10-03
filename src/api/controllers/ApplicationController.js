@@ -45,8 +45,8 @@ ApplicationController.create = (req, res) => {
   var username="QpYujin"
   var password ="Alpharius93"
   var gitrepo= application.name;
-  var gittag="dev_1.0.1";
-  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' ',+password+' ',+gitrepo+' ',+gittag+' ',
+  var gittag="1.0.2";
+  shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+username+' '+password+' '+gitrepo+' '+gittag+' ',
     function (error, stdout, stderr) {
       console.log('This is inside shell script function');
       if (error !== null) {

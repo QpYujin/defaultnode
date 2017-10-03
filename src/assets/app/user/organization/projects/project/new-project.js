@@ -7,12 +7,6 @@ angular.module('app.user.organization.projects.new-project', [])
     dbStack: 'rds'
   };
 
-  $scope.check = function() {
-    console.log("This is inside checkbox function");
-    $scope.project.mydefaultvalue = 1;
-  }
-
-
   $scope.addNewProject = function () {
     // Restangular.one('organizations', $stateParams.organizationId)
     //   .post('projects', $scope.project)

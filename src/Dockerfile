@@ -7,7 +7,7 @@ MAINTAINER Neha Khairnar <neha@qpair.io>
 
 RUN apt-get update && apt-get install -y sudo
 
-RUN apt-get update && apt-get install -y python python-dev python-distribute python-pip sudo
+RUN apt-get update && apt-get install -y python python-dev python-distribute python-pip sudo git
 RUN sudo apt-get update
 RUN sudo apt-get install -y \
      apt-transport-https \

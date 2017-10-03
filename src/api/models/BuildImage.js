@@ -64,6 +64,12 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING(64),
       allowNull: false
     },
+
+    tagName: {
+      type: Sequelize.STRING(64),
+      allowNull: true
+    },
+
     imageRepoId:{
       type: Sequelize.STRING(64)
     },

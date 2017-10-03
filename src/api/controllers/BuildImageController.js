@@ -66,6 +66,7 @@ BuildImageController.create = (req, res) => {
     }
     res.send(buildImage);
  
+  /*
   var username="cloudoptim";
   var password ="Qpair@2013";
   var gitrepo= "test1";
@@ -78,11 +79,10 @@ BuildImageController.create = (req, res) => {
         console.log('exec error: ' + error);
         console.log('stdout: '+stdout);
       }
-  });
+  });*/
 
 
-   /*
-
+   
     let c = buildImage.toJSON();
     var getrepolink = function ()
    {
@@ -93,15 +93,14 @@ BuildImageController.create = (req, res) => {
       console.log('This is build image object--------------------------------');
       console.log('This is repository name',params.repoName);
       console.log('this is from branch',params.branchName);
+      console.log('This is tag',params.tagName);
       console.log('This is port',params.port);      
 
       var gitlink=repo.url+'/'+params.repoName+'.git';
-      console.log('complete github link ',gitlink);
+      console.log('complete github link ',gitlink);      
 
-      */
-
-           /*code for clonning image
-           shell.exec('/usr/src/app/api/controllers/clone.sh'+' '+gitlink+' '+params.repoName+' ',
+           //code for clonning image
+           shell.exec('/usr/src/app/api/controllers/clone.sh'+' '+gitlink+' '+params.repoName+' '+params.branchName+' '+params.tagName,
            function (error, stdout, stderr) {
            console.log('This is inside shell script function');
                if (error !== null) {
@@ -155,12 +154,12 @@ BuildImageController.create = (req, res) => {
 		
           	 });
 
-		});*/
+		});
 
 
-     //   });end of source management
+        });//end of source management
 
-   // }();end of get repo
+    }();//end of get repo
 
  });
 };
