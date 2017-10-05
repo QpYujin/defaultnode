@@ -1,7 +1,7 @@
 {
   "PORT": 3000,
   "NODE_ENV": "production",
-  "baseUrl": "http://deploybytesdev.deploybytes.com",
+  "baseUrl": "http://localhost",
 
   "redis": {
     "host": "redis",
@@ -27,7 +27,6 @@
     "clientID": "facebook_client_id",
     "clientSecret": "facebook_client_secret"
   },
-
   "mailer": {
     "from": "Admin <admin@codedeploy.com>",
     "transport": {
@@ -37,13 +36,10 @@
         "pass": "ses_sec_password"
       }
     }
-  },
-
+},
  "github":{
-    "clientID": "7166b05e232350ae8a54",
-    "clientSecret": "cc898f5a13f7bbd324c79e68fca7526ab9281772"
+    "clientID": "a99579235327c14a11aa",
+    "clientSecret": "2169aeae83e8161aa0d5d26b07a2439711d06ed9"
   }
-
-
 }
 

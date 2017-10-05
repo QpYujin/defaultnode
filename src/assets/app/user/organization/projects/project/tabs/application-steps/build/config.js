@@ -29,22 +29,51 @@ angular.module('app.user.organization.projects.project.applications')
 
 
 
+  var getGitHubTag = function (owner, repo) {
+    return Restangular.allUrl('get-tag', 'https://api.github.com/')
+      .one('repos').one(owner)
+      .one(repo).one('tags').get();
+  }
+
+
+
   if ($scope.currentSourceManagement) {
     $scope.build.sourceControlId = $scope.currentSourceManagement.uuid;
     var pathArray = $scope.currentSourceManagement.url.split('/');
     $scope.sourceManagementOwner = pathArray[pathArray.length-1];
     getGitHubRepo($scope.sourceManagementOwner).then(function (repos) {
       $scope.repos = repos;
+      console.log("This is inside repo function");
     })
   }
 
-  $scope.changeRepo = function () {
+
+   $scope.changeRepo = function () {
     getGitHubBranch($scope.sourceManagementOwner, $scope.build.repoName)
       .then(function (branches) {
         $scope.branches = branches;
-        
+        console.log('This is inside branch function');
+      })
+     getGitHubTag($scope.sourceManagementOwner, $scope.build.repoName)
+      .then(function (tags) {
+        $scope.tags = tags;
+       console.log('This is inside tag');
       })
   }
+
+
+/*
+ $scope.changeTag = function () {
+    getGitHubTag($scope.sourceManagementOwner, $scope.build.tagName)
+      .then(function (tags) {
+        $scope.tags = tags;
+       console.log('This is inside tag');
+      })
+  }
+*/
+
+
+
 
   $scope.updateImage = function () {
     if ($scope.build.uuid) {

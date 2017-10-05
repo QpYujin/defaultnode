@@ -39,6 +39,11 @@
                             a.list-group-item(href='#custom-step-4', data-toggle='tab')
                               i.glyph-icon.tooltip-button.demo-icon.icon-th-list
                               |                             Project Parameters
+                          li.col-md-2
+                            a.list-group-item(href='#custom-step-5', data-toggle='tab')
+                              i.glyph-icon.tooltip-button.demo-icon.icon-th-list
+                              |                             CI/CD Pipeline
+
 
 
 
@@ -171,6 +176,36 @@
                                          h3.content-box-header.bg-default
                                          //| Project Parameters
                                          //| There are no parameters set for project. Please add project parameters.
+                                         div(layout="column", style="padding: 15px;")
+                                           label.form-group(layout="row", layout-align="start center")
+                                             span Select Stack
+                                             md-input-container
+                                               md-select(ng-model="global.project.stack", ng-change="updateProject()")
+                                                 md-option(ng-repeat="item in stacks", ng-value="item.value") {{item.name}}
+                                           label.form-group(layout="row", layout-align="start start")
+                                             span Select Environment
+                                             div(layout, layout-wrap, flex)
+                                               md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+                                               //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
+                                               //md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
+                                           label(layout="row", layout-align="start start")
+                                             span Select DB Stack
+                                             div(layout, layout-wrap, flex)
+                                               md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
+                                               //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
+                                               //md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+
+                        #custom-step-5.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         h3.content-box-header.bg-default
+                                         //| Jenkins
+                                         //| Automating the CI/CD process is one step away! Please integrate your Jenkins with our DeployBytes.
                                          div(layout="column", style="padding: 15px;")
                                            label.form-group(layout="row", layout-align="start center")
                                              span Select Stack

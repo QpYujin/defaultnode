@@ -222,6 +222,11 @@ angular.module('app.user.organization.applications.application', [])
       .one(repo).one('branches').get();
   }
 
+ var getGitHubTag = function (owner, repo) {
+    return Restangular.allUrl('get-branch', 'https://api.github.com/')
+      .one('tags').one(owner)
+      .one(repo).one('tags').get();
+  }
 
 
   if ($scope.currentSourceManagement) {
@@ -240,6 +245,21 @@ angular.module('app.user.organization.applications.application', [])
         
       })
   }
+
+
+  $scope.changeTag = function () {
+    getGitHubTag($scope.sourceManagementOwner, $scope.build.sourceManagementRepo)
+      .then(function (tags) {
+        $scope.tags = tags;
+
+      })
+  }
+
+
+
+
+
+
 
   $scope.updateImage = function () {
     if ($scope.build.uuid) {

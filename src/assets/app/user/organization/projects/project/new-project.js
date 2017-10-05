@@ -6,6 +6,7 @@ angular.module('app.user.organization.projects.new-project', [])
     environment: 'development',
     dbStack: 'rds'
   };
+
   $scope.addNewProject = function () {
     // Restangular.one('organizations', $stateParams.organizationId)
     //   .post('projects', $scope.project)

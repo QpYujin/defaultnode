@@ -31,6 +31,11 @@
                      label.col-sm-4.control-label Project Description
                      .col-sm-8
                        textarea.form-control.ng-valid.ng-dirty.ng-valid-parse.ng-touched.ng-not-empty(ng-model='project.description',placeholder='Add project description' ,aria-invalid='false', style='')
+                       input(type='checkbox',ng-model="project.mydefaultvalue" ng-true-value=1 ng-false-value="")
+                       |  Use Default Configuration
+                       br
+
+
                      .text-center
                         button.btn.btn-success(ng-disabled='!project.name', ng-click='addNewProject()', disabled='disabled') Add new Project
 

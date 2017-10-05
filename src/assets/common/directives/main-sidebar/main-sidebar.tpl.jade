@@ -1,8 +1,11 @@
 #page-sidebar.bg-black.font-inverse(flex)
   .scroll-sidebar
     ul#sidebar-menu
+      #cog.cog-small
+      #cog-anti.cog-medium
       li.header
         span Services
+
       li
          a(ui-sref="user.organization", title='Elements')
            i.glyph-icon.icon-home(title='.icon-home', style='color:DeepSkyBlue;')
@@ -40,12 +43,6 @@
         a(ui-sref="user.organization.projects", title='Elements')
           i.glyph-icon.icon-cog(title='.icon-cog', style='color:green;')
           span Settings
-
-
-
-
-
-
 
       //- li
       //-   a(ui-sref="user.organization.applications", title='Elements')

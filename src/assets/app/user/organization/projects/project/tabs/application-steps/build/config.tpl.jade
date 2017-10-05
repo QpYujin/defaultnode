@@ -1,24 +1,35 @@
 div(layout="column", flex).scrollable
-  div(flex)
+  div(flex)  
     label(layout="row")
       span Version
       input.form-control(ng-disabled="!editing", ng-model="build.version", flex="50")
+  
     label(layout="row", layout-align="start center")
       span Release
       md-select(ng-disabled="!editing", ng-model="build.releaseId", placeholder="Select Release")
-        md-option(ng-repeat="release in releases", ng-value="release.uuid") {{release.name}}
+        md-option(ng-repeat="release in Tags", ng-value="release.name") {{release.name}}
       a(ui-sref="^.releases") Manage Releases
+
     label(layout="row")
       span Source Management
-      input.form-control(ng-disabled="!editing", ng-model="currentSourceManagement.url", disabled, flex="50")
+      input.form-control(ng-disabled="!editing", ng-model="currentSourceManagement.url", disabled, flex="50") 
+
     label(layout="row", layout-align="start center")
       span Select Repo
       md-select(ng-disabled="!editing", ng-model="build.repoName", ng-change="changeRepo()")
         md-option(ng-repeat="repo in repos", ng-value="repo.name") {{repo.name}}
+    
+   
     label(layout="row",  layout-align="start center")
       span Select Branch
       md-select(ng-disabled="!editing", ng-model="build.branchName")
         md-option(ng-repeat="branch in branches", ng-value="branch.name") {{branch.name}}
+
+    label(layout="row",  layout-align="start center")
+      span Select Tag
+      md-select(ng-disabled="!editing", ng-model="build.tagName")
+        md-option(ng-repeat="tag in tags", ng-value="tag.name") {{tag.name}}
+
 
     label(layout="row")
       span Docker-Image Name

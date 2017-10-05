@@ -16,6 +16,16 @@ div(layout="column", flex).scrollable
     label(layout="row")
       span Description
       textarea.form-control(ng-model="application.description")
+
+    label(layout="row", layout-align="start center")
+      span Type of App
+      md-input-container(flex)
+        md-select(placeholder="Select Type of Service" ng-model="servicetype")
+          md-option(ng-value="Flask") Flask
+          md-option(ng-value="Node") Node
+          md-option(ng-value="Mean Stack") MeanStack
+          md-option(ng-value="Other") Other
+
     hr
     label(layout="row", layout-align="start center")
       span Source Control
