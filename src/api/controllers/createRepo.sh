@@ -19,7 +19,7 @@ git clone --bare https://github.com/cloudoptim/flasktemplate.git
 cd flasktemplate.git
 
 # Pushed clone repo to users repo
-git push --mirror https://$1@github.com/owner/$2.git
+git push --mirror https://$1@github.com/$4/$2.git
 cd ..
 # Delete the bare repo
 rm -rf flasktemplate.git
@@ -31,7 +31,7 @@ else
 fi
 
 # Cloned the USER'S flask repo into local
-git clone -b dev_1.0.1 https://$1@github.com/owner/$2.git
+git clone -b dev_1.0.1 https://$1@github.com/$4/$2.git
 cd $2
 if [ $? -eq 0 ]; then
     echo "Successfully entered folder"
