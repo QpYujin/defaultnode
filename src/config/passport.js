@@ -47,7 +47,7 @@ module.exports = {
     name: 'Github',
     protocol: 'oauth2',
     strategy : require('passport-github').Strategy,
-    scope: ['profile', 'email'],
+    scope: ['profile', 'email','repo','user','gist','delete_repo','read:org','write:org'],
     options: _.defaults(nconf.get('github'), {
       callbackURL: nconf.get('baseUrl') + '/auth/github/callback'
     })

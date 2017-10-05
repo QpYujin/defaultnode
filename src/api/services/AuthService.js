@@ -55,8 +55,8 @@ AuthService.registerUser = function(params) {
 
 
 AuthService.socialOauth = (type, provider, token, profile) => {
-  console.log('Providers in auth service social uth',provider);
-  console.log('Providers in auth service social profile',profile);
+  //console.log('Providers in auth service social uth',provider);
+  //console.log('Providers in auth service social profile',profile);
 
   // Require either type is oauth or oauth2
   if (type !== 'oauth' && type !== 'oauth2') {
@@ -64,8 +64,8 @@ AuthService.socialOauth = (type, provider, token, profile) => {
   }
   // Create the user OAuth profile
     let email = profile.login;
-   console.log('this is email',profile.profileUrl);
-   console.log('This is profile name',profile.username);
+   //console.log('this is email',profile.profileUrl);
+   //console.log('This is profile name',profile.username);
 
 
   return Credential.findOne({where: {type: type, provider: provider, identifier: profile.id}}).then(credential => {

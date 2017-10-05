@@ -61,6 +61,13 @@ module.exports = function(app) {
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/source-managements', SourceManagementController.findAll);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/source-managements', SourceManagementController.create);
 
+
+  // Project CICD
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/Continuous-Integration/:integrationId', ContinuousIntegrationController.findOne);
+  apiRoutes.post('/organizations/:organizationId/projects/:projectId/Continuous-Integration/:integrationId', ContinuousIntegrationController.update);
+  apiRoutes.get('/organizations/:organizationId/projects/:projectId/Continuous-Integration', ContinuousIntegrationController.findAll);
+  apiRoutes.post('/organizations/:organizationId/projects/:projectId/Continuous-Integration', ContinuousIntegrationController.create);
+
   // Project CloudProvider
   apiRoutes.get('/organizations/:organizationId/projects/:projectId/cloud-providers/:cloudId', CloudProviderController.findOne);
   apiRoutes.post('/organizations/:organizationId/projects/:projectId/cloud-providers/:cloudId', CloudProviderController.update);
