@@ -17,6 +17,11 @@ module.exports = (function(sequelize) {
     projectId: {
       type: Sequelize.STRING
     },
+
+    name: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     ci:
       {
         type: Sequelize.ENUM,

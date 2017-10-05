@@ -1,0 +1,23 @@
+.new-repo-box(layout="column")
+  label(layout="row", layout-align="start center")
+    span Name
+    input.form-control(ng-model="newCicd.name")
+  label(layout="row", layout-align="start center")
+    span Continuous Integration
+    md-input-containter
+      md-select(ng-model="newCICD.ciprovider")
+        md-option(ng-repeat="item in ciprovider", ng-value="item.value") {{item.name}}
+
+  label(layout="row", layout-align="start center")
+    span APIKey
+    input.form-control(ng-model="newCicd.apikey")
+
+  label(layout="row", layout-align="start  center")
+    span Url
+    input.form-control(ng-model="newCicd.url")
+
+
+  .text-center
+    button.btn.btn-secondary(ui-sref="^") Cancel
+  &nbsp;&nbsp;&nbsp;
+  button.btn.btn-success(ng-disabled="!newCicd.name || !newCicd.url", ng-click="addNewRepo()") {{newCicd.uuid ? 'Update' : 'Add'}}

@@ -82,6 +82,53 @@ angular.module('app.user.organization.projects.project', [
     }
   });
 
+
+  //newly added
+  $stateProvider.state('user.organization.projects.project.config.new-cicd', {
+    url: '/new-cicd',
+    title: 'Add new Repository',
+    hideTitle: true,
+    views: {
+      'project-content@user.organization.projects.project': {
+        templateUrl: 'app/user/organization/projects/project/tabs/project-config-new-cicd.tpl.jade',
+        controller: 'OrganizationProjectConfigNewCicdCtrl'
+      }
+    },
+    resolve: {
+      currentCicd: function () {
+        return null;
+      }
+    }
+  });
+  $stateProvider.state('user.organization.projects.project.config.cicd', {
+    url: '/cicd/:cicdId',
+    title: 'Edit Repository',
+    hideTitle: true,
+    views: {
+      'project-content@user.organization.projects.project': {
+        templateUrl: 'app/user/organization/projects/project/tabs/project-config-new-cicd.tpl.jade',
+        controller: 'OrganizationProjectConfigNewCicdCtrl'
+      }
+    },
+    resolve: {
+      currentCicd: function (Restangular, $stateParams) {
+        return Restangular.one('organizations', $stateParams.organizationId)
+          .one('projects', $stateParams.projectId)
+          .one('continuous-integrations', $stateParams.cicdId)
+          .get();
+      }
+    }
+  });
+
+
+
+
+
+
+
+
+
+
   $stateProvider.state('user.organization.projects.project.config.new-cloud', {
     url: '/new-cloud',
     title: 'Add new Cloud Provider',
@@ -180,6 +227,17 @@ angular.module('app.user.organization.projects.project', [
       }
     }
   ];
+ 
+   $scope.CicdButtons = [
+    {
+      title: "Add Integration",
+      onClickFn: function () {
+        $state.go('.new-cicd');
+      }
+    }
+  ];
+
+
   $scope.cloudProviderButtons = [
     {
       title: "Add Cloud Provider",
@@ -227,13 +285,14 @@ angular.module('app.user.organization.projects.project', [
 })
 
 // Project global controller
-.controller('OrganizationProjectCtrl', function ($rootScope, $scope, breadcrumbItems, project, $state, repositories, clouds, images, applications) {
+.controller('OrganizationProjectCtrl', function ($rootScope, $scope, breadcrumbItems, project, $state, repositories, clouds, images, applications,cicds) {
 
   $scope.global = {
     project: project,
     repos: repositories.rows,
     clouds: clouds.rows,
     images: images.rows,
+    cicds:cicds.rows,
     applications: applications.rows
   };
   if (project.name) {
@@ -257,6 +316,28 @@ angular.module('app.user.organization.projects.project', [
     })
   }
 })
+
+
+.controller('OrganizationProjectConfigNewCicdCtrl', function ($scope, $stateParams, $state, project, StaticParams, projectService, currentCicd) {
+  $scope.cicdProviders = StaticParams.projectParams.cicdProvider;
+  var newCicd = {
+    provider: 'Jenkins'
+  }
+  $scope.newCicd = currentCicd ? angular.copy(currentCicd) : angular.copy(newCicd);
+  $scope.addNewCicd = function () {
+    projectService.updateCicd($scope.newCicd, function () {
+      $scope.newCicd = angular.copy(newCicd);
+      $state.go('^', {}, {reload: true});
+    })
+  }
+})
+
+
+
+
+
+
+
 
 .controller('OrganizationProjectConfigSingleCloudProviderCtrl', function ($scope, $stateParams, $state, project, StaticParams, projectService, currentCloud) {
   $scope.providers = StaticParams.projectParams.cloudProvider;

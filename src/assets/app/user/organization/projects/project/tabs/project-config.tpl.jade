@@ -160,6 +160,68 @@
                                             button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-image", ui-sref-active="hidden") Add configuration
 
 
+
+
+                         #custom-step-4.tab-pane
+                           .col-md-12
+                             .content-box
+                               .content-box-wrapper
+                                 section
+                                   article.articles
+                                     article
+                                       .example-box-wrapper
+                                         h3.content-box-header.bg-default
+                                         //| Image Repositories
+                                         //| There is no configuration for Image repositories. Please add configuration.
+                                         md-table-container.scrollable.grids-table(layout, flex, ng-show="global.cicd.length")
+                                           table(md-table, flex)
+                                             thead(md-head, md-order="query.order")
+                                               tr(md-row)
+                                                 th(md-column)
+                                                   strong Name
+                                                 th(md-column)
+                                                   strong Provider
+                                                 th(md-column)
+                                                   strong Url
+                                                 th(md-column)
+                                                   strong API key
+                                                 th(md-column)
+                                             tbody(md-body)
+                                               tr(md-row, ng-repeat="image in global.images")
+                                                 td(md-cell) {{.name}}
+                                                 td(md-cell) {{.provider}}
+                                                 td(md-cell) {{.url}}
+                                                 td(md-cell) {{.type}}
+                                                 td(md-cell)
+                                                   md-button.md-icon-button(ui-sref=".image({imageId: image.uuid})")
+                                                     i.fa.fa-cog
+                                               br
+                                         button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-cicd", ui-sref-active="hidden") Add New Configuration
+                                         strong(ng-show="!global.images.length") There is no image repository configured. Please add configuration.
+                                            br
+                                            button.btn.btn-sm.btn-primary(ui-sref="user.organization.projects.project.config.new-cicd", ui-sref-active="hidden") Add configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                          #custom-step-4.tab-pane
                            .col-md-12
                              .content-box
