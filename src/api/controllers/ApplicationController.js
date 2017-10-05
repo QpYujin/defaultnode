@@ -64,15 +64,17 @@ OrganizationMembership.findOne(
       console.log("this is membership",membership);
       console.log("=================================",membership.userId);
       
-     var myuserid=membership.userId
+     var myuserid=membership.userId;
       Credential.findOne(
       {where:{
         userId:myuserid,
       }}).then((user) => {
-      //console.log("this is user credential",user);
-      console.log("this is user credential token",user.token); 
-      console.log("This is username",user.json._raw);
-     
+      console.log("this is user credential token-------------",user.token); 
+      var getuserid =user.userId;
+      User.findOne({where:{userId:getuserid }}).then((myuser)=>{
+      console.log("this is user name-------------",myuser.firstName);
+      });
+
       var token=user.token;
       var gitrepo= application.name;
       var gittag="1.0.2";
@@ -83,12 +85,10 @@ OrganizationMembership.findOne(
         console.log('exec error: ' + error);
         console.log('stdout: '+stdout);
       }
-     });
 
-
-
-
-    })//user
+     });//shell
+     
+    })//userId from credential
 
    }) //membership
 
