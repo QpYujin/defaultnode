@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6,
     background: rgba(255, 255, 255, 0.05);
 }
 #page-sidebar.font-inverse #sidebar-menu li a {
-    color: rgba(255, 255, 255, 0.62);
+    color: white;
 }
 #page-sidebar.font-inverse #sidebar-menu li a:hover {
     color: rgba(255, 255, 255, 0.96);

@@ -1,33 +1,28 @@
-div(layout="column", flex).scrollable
-  h3(ng-show="!projects.length") There is no project
-  md-table-container.scrollable.grids-table(layout, flex, ng-show="projects.length")
-    table(md-table, flex)
-      thead(md-head, md-order="query.order")
-        tr(md-row)
-          th(md-column)
-          th(md-column) Project Name
-          th(md-column) Stack
-          th(md-column) Environment
-          th(md-column) No of Apps
-          th(md-column) Create At
-          th(md-column)
-      tbody(md-body)
-        tr.tHi(md-row, ng-repeat="project in projects | orderBy: query.order")
-          td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") 
-          td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.name}}
-          td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.stack}}
-          td(md-cell)
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.environmentDisplay}}
-          //td(md-cell)
-            //span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.zone}}
-          td(md-cell, style="white-space: nowrap")
-            span(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.createdAt | date:'dd-M-yyyy'}}
-          td(md-cell)
-            span(ui-sref="(user.organization.projects.project.config({projectId: project.uuid})") 
-              button.btn.btn-info(ui-sref="user.organization.projects.project.config({projectId: project.uuid})", ui-sref-active="hidden") 
-                //i.glyph-icon.tooltip-button.font-white.demo-icon.icon-gear(title='', data-original-title='.icon-gear')
-                |  Add Config
-  md-table-pagination(md-label="{{options.label}}" md-limit="query.limit" md-limit-options="limitOptions" md-page="query.page" md-total="{{testResults.length}}" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="options.changePage()", ng-show="testResults.length && !isLoadingTestResults")
+div.widget-container(masonry, options="$root.masonryOptions", ng-show="projects.length")
+  .item.widget(masonry-tile, ng-repeat="project in projects track by $index", style="width: calc(33.33% - 10px);")
+    div.project
+      .widget-header.bg-primary(layout, layout-align="start center")
+        h4 
+          strong(ui-sref="user.organization.projects.project.applications({projectId: project.uuid})") {{project.name}}
+      .widget-body
+        div.app-description {{project.description || 'project Description'}}
+        div.app-details(layout="column")
+          label
+            span.label-title Created at:
+            span {{project.createdAt | date:'dd-M-yyyy'}}
+          label
+            span.label-title No of Apps:
+            span {{project.region}}
+         
+      .widget-footer(layout)
+        .button-group(layout, flex)
+          button.btn.btn-success(flex) {{project.stack}}
+        button.btn.btn-info(flex, ui-sref="user.organization.projects.project.config({projectId: project.uuid})") config
+
+
+
+
+
+
+  
+         
