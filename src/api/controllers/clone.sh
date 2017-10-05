@@ -11,6 +11,14 @@ git clone $1
 if [ $? -eq 0 ]; then
         echo "Successfully cloned">/usr/src/app/api/controllers/clonelog.txt
         cd $2
+        
+        if [ ! -z $4 ]; then
+          git checkout $3
+        else
+          git checkout tags/$4
+        fi
+
+	git fetch
         #docker-machine create default
         #docker-machine start default
         eval $(docker-machine env vm  --shell bash)

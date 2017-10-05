@@ -7,7 +7,7 @@ MAINTAINER Neha Khairnar <neha@qpair.io>
 
 RUN apt-get update && apt-get install -y sudo
 
-RUN apt-get update && apt-get install -y python python-dev python-distribute python-pip sudo
+RUN apt-get update && apt-get install -y python python-dev python-distribute python-pip sudo git
 RUN sudo apt-get update
 RUN sudo apt-get install -y \
      apt-transport-https \
@@ -91,6 +91,7 @@ RUN chmod +x /usr/src/app/api/controllers/deploy.sh
 RUN chmod +x /usr/src/app/api/controllers/config.yaml
 RUN chmod +x /usr/src/app/api/controllers/clone.sh
 RUN chmod +x /usr/src/app/api/controllers/push.sh
+RUN chmod +x /usr/src/app/api/controllers/createRepo.sh
 RUN chmod +x /usr/src/app/api/controllers/scripts/startcluster.sh
 RUN chmod +x /usr/src/app/api/controllers/scripts/destroycluster.sh
 RUN chmod +x /usr/local/bin/kubectl
