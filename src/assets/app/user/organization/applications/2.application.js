@@ -23,6 +23,11 @@ angular.module('app.user.organization.applications')
 
   $scope.fields = StaticParams.applicationFields;
 
+  var createGitHubRepo = function (owner) {
+    return Restangular.allUrl('create-repo', 'https://api.github.com/user/')
+      .customPOST("repos", {access_token: '6b8a2caf51e81e891d3c85bfe7d8c88b2213a973'},{name: "test" })
+  }
+
 
   $scope.updateApplication = function () {
     if ($scope.application.uuid) {
@@ -31,14 +36,27 @@ angular.module('app.user.organization.applications')
         .one('applications', $scope.application.uuid)
         .post('', $scope.application)
         .then(function () {
+
+        /*createGitHubRepo($scope.sourceManagementOwner).then(
+        function () {
+            swal('DONE','repository is created','Success')
+         })*/
+
           swal('DONE','','success');
         });
     }
+
     else {
       Restangular.one('organizations', String($stateParams.organizationId))
         .one('projects', $stateParams.projectId)
         .post('applications', $scope.application)
         .then(function () {
+         
+         /* createGitHubRepo($scope.sourceManagementOwner).then(
+         function () {
+            swal('DONE','repository is created','Success')
+         })*/
+
           swal('DONE', '', 'success');
           $state.go('^', {}, {reload: true});
         })

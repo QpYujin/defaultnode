@@ -74,7 +74,7 @@ MembershipService.getUserOrgs = (user, cb) => {
 
 
 MembershipService.getUserOrgs = (user, cb) => {
-  console.log('At membership get users',user);
+  //console.log('At membership get users',user);
 
   Organization.create
   (
@@ -85,30 +85,30 @@ MembershipService.getUserOrgs = (user, cb) => {
   )
     .then((orgs) =>
   {
-  console.log('Created ORGANIZATION successfully');
-  console.log('This is userId',user.id);
-  console.log('This is organizations ID',orgs.uuid);
+  //console.log('Created ORGANIZATION successfully');
+  //console.log('This is userId',user.id);
+  //console.log('This is organizations ID',orgs.uuid);
 
   OrganizationMembership.create
   ({userId: user.id,
       organizationId:orgs.uuid})
     .then((orgs) =>
   {
-    console.log('Created ORGANIZATION MEMEBER successfully');
-    console.log('This is orgs',orgs)
+    //console.log('Created ORGANIZATION MEMEBER successfully');
+    //console.log('This is orgs',orgs)
 
       OrganizationMembership.findAll({where: {userId: user.id}})
         .then((orgs) =>
         {
-          console.log('At organization membership find all ',user);
-          console.log('This is orgs',orgs);
+          //console.log('At organization membership find all ',user);
+          //console.log('This is orgs',orgs);
 
         let organizationIds = _.map(orgs, (org) => {
-            console.log('This is organization IDs',org);
+            //console.log('This is organization IDs',org);
             return org.toJSON().organizationId;
         })
         cb(null, _.uniq(organizationIds));
-        console.log("This is organizationID null",organizationIds);
+        //console.log("This is organizationID",organizationIds);
 
       }).catch((err) => {
           cb(err);
