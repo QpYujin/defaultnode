@@ -10,9 +10,10 @@ angular.module('app.user.organization.projects.project.applications')
   
   $scope.build = {};
   $scope.releases = application.releases;
-  $scope.currentSourceManagement = _.find($scope.global.repos, function (item) {
+  $scope.currentSourceManagement = _.find($scope.global.repos, function (item) {   
     return item.uuid = application.sourceManagementId;
   });
+
 
   $scope.editing = false;
   
@@ -40,11 +41,13 @@ angular.module('app.user.organization.projects.project.applications')
   if ($scope.currentSourceManagement) {
     $scope.build.sourceControlId = $scope.currentSourceManagement.uuid;
     var pathArray = $scope.currentSourceManagement.url.split('/');
+
     $scope.sourceManagementOwner = pathArray[pathArray.length-1];
     getGitHubRepo($scope.sourceManagementOwner).then(function (repos) {
       $scope.repos = repos;
       console.log("This is inside repo function");
     })
+
   }
 
 
@@ -60,19 +63,6 @@ angular.module('app.user.organization.projects.project.applications')
        console.log('This is inside tag');
       })
   }
-
-
-/*
- $scope.changeTag = function () {
-    getGitHubTag($scope.sourceManagementOwner, $scope.build.tagName)
-      .then(function (tags) {
-        $scope.tags = tags;
-       console.log('This is inside tag');
-      })
-  }
-*/
-
-
 
 
   $scope.updateImage = function () {

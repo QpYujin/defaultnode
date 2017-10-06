@@ -155,16 +155,59 @@ angular.module('app.user.organization.projects.project', [
   });
 
 })
-.controller('OrganizationProjectAppplicationsCtrl', function ($rootScope, $scope, project, breadcrumbItems, $state) {
+
+
+
+
+.controller('OrganizationProjectAppplicationsCtrl', function ($rootScope, Restangular,StaticParams,$scope,$stateParams, project, breadcrumbItems, $state) {
   breadcrumbItems.items = [
     { title: 'Organization',url: 'user.organization'},
     { title: 'Projects', url: 'user.organization.projects'},
     { title: project ? project.name : 'New Project', url: 'user.organization.projects.project.applications'}
   ];
+
+
+
+
+ $scope.getStatus = function () {
+  console.log('At cicd function');
+
+  Restangular.oneUrl('status','http://a1438862aaaa711e7adce0e9083bf8cc-1005993571.us-east-1.elb.amazonaws.com:8500/v1/health/service/nodejs_backend?dc=dc1&token=')
+  .get()
+  .then(function (sample) {
+                $scope.sample = sample;
+                console.log($scope.sample);
+                console.log(JSON.stringify($scope.sample));
+                $scope.deployappstatus= JSON.stringify($scope.sample);
+                swal('Temple is created.');
+                });
+
+  /*
+  Restangular
+            .one('http://a1438862aaaa711e7adce0e9083bf8cc-1005993571.us-east-1.elb.amazonaws.com:8500/v1/health/service/nodejs_backend?dc=dc1&token=')
+            .get()
+            .then(function (sample) {
+                $scope.sample = sample;
+                console.log($scope.sample);
+		swal('DONE', 'Created config successfully', 'success');
+		});*/
+		
+  //swal('DONE', 'This is get status', 'success');
+ 
+ }//getstatus
+
+
+$scope.getEndpoint = function () {
+  console.log('At cicd function');
+  swal('DONE', 'This is end point', 'success');
+
+ }//getendpoint
+
+
 })
 
 // Project configuration
-.controller('OrganizationProjectConfigCtrl', function ($rootScope, $scope, project, $state, StaticParams, projectService) {
+.controller('OrganizationProjectConfigCtrl', function ($rootScope, $scope, project, $state, StaticParams,$stateParams,projectService,Restangular) {
   
   $scope.codeManagements = [];
   $scope.global.addingNewRepo = false;
@@ -224,7 +267,30 @@ angular.module('app.user.organization.projects.project', [
     $scope.global.project.dbStacks = params.dbStack;
     return projectService.updateProject(params);
   }
+
+
+  $scope.addCICD = function () {
+  console.log('At cicd function');
+  console.log('This is object cicd', $scope.newCicd);
+  Restangular
+            .one('organizations', String($stateParams.organizationId))
+            .one('projects', $stateParams.projectId)
+            .one('continuous-integration')
+            .post('', $scope.newCicd)
+            .then(function () {
+        swal('DONE', 'Configuration created suceessfully', 'success');
+    })
+  
+ }//addCICD
+
+
+
 })
+
+
+
+
+
 
 // Project global controller
 .controller('OrganizationProjectCtrl', function ($rootScope, $scope, breadcrumbItems, project, $state, repositories, clouds, images, applications) {

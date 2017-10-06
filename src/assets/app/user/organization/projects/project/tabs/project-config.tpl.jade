@@ -208,25 +208,25 @@
                                          //| Automating the CI/CD process is one step away! Please integrate your Jenkins with our DeployBytes.
                                          div(layout="column", style="padding: 15px;")
                                            label.form-group(layout="row", layout-align="start center")
-                                             span Select Stack
-                                             md-input-container
-                                               md-select(ng-model="global.project.stack", ng-change="updateProject()")
-                                                 md-option(ng-repeat="item in stacks", ng-value="item.value") {{item.name}}
-                                           label.form-group(layout="row", layout-align="start start")
-                                             span Select Environment
-                                             div(layout, layout-wrap, flex)
-                                               md-checkbox(ng-repeat="item in environments", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
-                                               //- md-radio-group(ng-model="global.project.environment", ng-change="updateProject({environment: global.project.environment})", layout="row", flex, layout-wrap)
-                                               //md-radio-button(ng-repeat="item in environments", ng-value="item.value", flex="50") {{item.name}}
-                                           label(layout="row", layout-align="start start")
-                                             span Select DB Stack
-                                             div(layout, layout-wrap, flex)
-                                               md-checkbox(ng-repeat="item in dbStacks", ng-model="item.checked", ng-change="updateProject()") {{item.name}}
-                                               //- md-radio-group(ng-model="global.project.dbStack",  ng-change="updateProject({dbStack: global.project.dbStack})")
-                                               //md-radio-button(ng-repeat="item in dbStacks", ng-value="item.value") {{item.name}}
+                                              span Name
+                                              input.form-control(ng-model="newCicd.name")
+                                           label(layout="row", layout-align="start center")
+                                              span Continuous Integration
+                                              md-input-containter
+                                                md-select(ng-model="newCicd.ci")
+                                                  md-option(value="Jenkins") Jenkins
+                                                  md-option(value="Codeship") Codeship
+                                                  md-option(value="Codeship") GoCD
 
+                                           label(layout="row", layout-align="start center")
+                                             span APIKey
+                                             input.form-control(ng-model="newCicd.apikeys")
 
-br
+                                           label(layout="row", layout-align="start  center")
+                                             span Url
+                                             input.form-control(ng-model="newCicd.url")
+                                           button.btn.btn-success(ng-click="addCICD()") Add Integration
+
 br
 .text-left
   button.btn.btn-default(ui-sref="user.organization.projects.project.applications") Back

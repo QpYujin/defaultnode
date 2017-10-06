@@ -17,20 +17,23 @@ module.exports = (function(sequelize) {
     projectId: {
       type: Sequelize.STRING
     },
+    name: {
+      type: Sequelize.STRING
+    },
     ci:
       {
         type: Sequelize.ENUM,
-        values: ['CICD'],
-        defaultValue: 'CICD'
+        values: ['Jenkins'],
+        defaultValue: 'Jenkins',
       },
     url:
       {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-    Apikeys:{
+    apikeys:{
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
   },
 
   }, {

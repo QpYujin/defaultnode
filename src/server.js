@@ -43,6 +43,13 @@ server.startExpress = function() {
   // Bootstraping express server
   const app = server.app = express();
 
+  var bodyParser = require('body-parser');
+  var cors = require('cors');
+
+  app.use(cors());	//enable express to use CORS. You may want to disable/restrict in production
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json());
+
   require('./api/bootstrap')(app);
 
   // Serve static files
