@@ -3,6 +3,7 @@
  */
 var shell = require('shelljs');
 var K8s = require('k8s');
+var yaml = require('write-yaml');
 const http = require('http');
 const fs = require('fs');
 var Slack = require('slack-node');
@@ -39,8 +40,66 @@ ApplicationController.create = (req, res) => {
       server.log.error('Error create application', err);
       res.status(500).json(err);
     }
-    res.send(application);
+  
+  console.log("at server side app controller");
+  console.log("This is organization id",req.params.organizationId);
+
+  /*
+  OrganizationMembership.findAndCountAll({where: {organizationId: req.params.organizationId,}}), 
+   (err, organizationmembership) => {
+    if (err) {
+      server.log.error('Error getting organization', err);
+      console.log("at error");
+      return res.status(500).json(err);
+    }
+   console.log('this is organization membership at application controller',organizationmembership);
+   console.log('this is user id',organizationmembership.userId);
+ }*/
+
+var myid=req.params.organizationId;
+OrganizationMembership.findOne(
+   { where: {
+    organizationId: myid,
+   }}).then(membership => {
+      //console.log("this is membership",membership);
+      console.log("=================================",membership.userId);
+      
+     var myuserid=membership.userId;
+      Credential.findOne(
+      {where:{
+        userId:myuserid,
+      }}).then((user) => {
+      console.log("this is user credential token-------------",user.token);
+      console.log("this is user  value printed",user); 
+      var getuserid = user.userId;
+      User.findOne({where:{id:getuserid }}).then((myuser)=>{
+      console.log("this is user name-------------",myuser.firstName);
+
+      var token=user.token;
+      var gitrepo= application.name;
+      var gittag="1.0.2";
+      var username=myuser.firstName;
+      shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+token+' '+gitrepo+' '+gittag+' '+username+' ',
+      function (error, stdout, stderr) {
+      console.log('This is inside shell script function');
+      if (error !== null) {
+        console.log('exec error: ' + error);
+        console.log('stdout: '+stdout);
+      }
+
+     });//username
+
+     });//shell
+     
+    })//userId from credential
+
+   }) //membership
+
+  res.send(application)
   });
+
+
+
 };
 
 ApplicationController.update = (req, res) => {
@@ -85,68 +144,129 @@ ApplicationController.newservice = (req, res) => {
   let params = req.body;
   var file = 'service.json'
   var dummyjson = require('dummy-json');
-  var value1= params.port;
-  var value2= params.domain;
+  var port= params.port;
+  var domain= params.domain;
+  var appname=params.appname;
+  var namespace=params.namespace;
+  var dockerimage=params.dockerimage;
   var decservice = params.appname;
+  var fulldomain=domain +'.deploybytes.com';
 
   console.log('Parameters :',params);
   console.log('Appname :',params.appname);
+  console.log('Port',params.port);
   console.log("At the server side service function");
-  console.log('Creating file from editor');
 
-  var obj = {
-	       "apiVersion":"v1",
-           "kind":"Service",
-		  
-   		   "metadata": {
-               "name": params.appname,
-               "namespace": params.namespace,
-                  "labels": {
-                           "app": params.appname,
-                          "role": "web",
-                           "dns": "route53"
-                            },
-		          "annotations": {
-                    "domainName": params.domain +".deploybytes.com"
-                    }
-				 },
-		    
-			"spec": {
-			"type": "LoadBalancer",
-			"ports": [
-				{
-					"name": "web",
-					"port": params.port,
-					"targetPort": "web",
-					"protocol": "TCP"
+/*  UtilService.wrapCb(Service.create(params), (err, application) => {
+    if (err) {
+      server.log.error('Error create service', err);
+      res.status(500).json(err);
+    }
+    res.send(service);
+  });*/
+
+
+  
+var data = {
+		apiVersion: 'v1',
+		kind:"List",
+		items:
+		[
+	    	{apiVersion: "v1",
+			 kind: 'Namespace',
+			 metadata:
+			 {name: namespace},
+			},
+			
+		    {
+			  apiVersion: 'v1',
+			   kind: 'Service',
+			   metadata:
+			   {name: appname,
+				namespace: namespace,
+				labels:
+				{ app: appname,
+				 role: "web",
+				  dns: "route53"},
+				annotations:
+				{domainName:fulldomain}          		   
+			   },
+			   spec:
+			   {
+				type: 'LoadBalancer',
+				ports:
+				[ 
+				 {name: 'web',
+				  port: parseInt(port),
+				  targetPort: 'web',
+				  protocol: 'TCP'}
+				 ],
+				selector:
+				{app: appname,
+				role: "web"} 			 
+			   }
+			   },
+			   
+			   {
+			apiVersion: 'extensions/v1beta1',
+			kind: 'Deployment',
+			metadata:
+			   {name: appname,
+			   namespace: namespace},
+			spec:
+			   {replicas: 3,
+			strategy: 
+			   {type: "RollingUpdate"},
+			revisionHistoryLimit: 10,
+			selector:
+			   {   matchLabels:
+			   {app: appname,
+				role: "web"}
 				},
-				{
-				"name": "web-ssl",
-				"port": "443",
-				"protocol": "TCP",
-				"targetPort": "web-ssl"
+			template:
+			{
+			 metadata:{
+			 labels:{
+			  app: appname,
+			  role: "web"
+			  }
+			},
+			 spec:
+			 {
+			 containers:
+			 [
+			{name: appname,
+			 image: dockerimage,
+			 resources:
+			{  limits:{
+			 cpu: "100m",
+			  memory: "250Mi"
+				},
+			 requests:{
+			  cpu: "10m",
+			  memory: "125Mi"
+				 }
+			 },
+			 ports:[
+				{name: "web",
+				containerPort: 5000}
+				   ]
+				
+				}]
+					 }
+					}
 				}
-					],
-					
-			"selector": {
-				"app": params.appname,
-				"role": "web"
-				}
-			}
-  } 
- 
-  console.log(obj);  
-  jsonfile.writeFile('/usr/src/app/api/controllers/service.json', obj, {spaces: 2}, function(err) {
-           console.error(err)
-   })
+			   }	
+			]
+			};
+
+		
+yaml('/usr/src/app/api/controllers/deployment.yaml',data, function(err) {
+  // do stuff with err
+});
 
 
 
-  var writeStream = fs.createWriteStream("/usr/src/app/api/controllers/service.yaml");
-  console.log('Writing to file from editor');
-  fs.writeFile("/usr/src/app/api/controllers/service.yaml", params.serviceyaml, 'utf8', function (err) {
-    if (err) return console.log(err);
-  });
 
  console.log('Service name -',decservice);
  
@@ -182,37 +302,22 @@ ApplicationController.newservice = (req, res) => {
      }*/
   })
 
-
-  console.log('before deployment.yml file');
-  kubectl.deployment.create(('/usr/src/app/api/controllers/deployment.yaml'), function(err, data){
-    console.log(err)
-    console.log(data)
  
-    slack.webhook({
-    channel: "#opsbot",
-    username: "Deploybyte", //neha main user
-    text: err
-        }, function(err, response) {
-              console.log(response);
-  });
 
-
-
- })
 
   console.log('before service.yml file');
-  
-  kubectl.service.create(('/usr/src/app/api/controllers/service.yaml'), function(err, data){
-         console.log(err)
+       var delayMillis = 4000;
+ 
+       kubectl.command('create -f /usr/src/app/api/controllers/deployment.yaml', function(err, data){
          console.log(data)
-         var delayMillis = 1000;
+         console.log(err)
+        })
 
          setTimeout(function() {
-        //code to be executed after 1 second
+        //code to be executed after 4 second
 
-
-         //kubectl.command('describe services my-app', function(err, data){
-         kubectl.command('describe services '+decservice, function(err, data){
+         //kubectl.command('describe services'+decservice, function(err, data){
+         kubectl.command('--namespace='+namespace+' describe services '+appname, function(err, data){
 
                  console.log(data)
                  console.log(err)
@@ -229,7 +334,7 @@ ApplicationController.newservice = (req, res) => {
                 slack.webhook({
                  channel: "#opsbot",
                  username: "Deploybyte", //neha main user
-                 text: 'Please wait for a while to see your application... Keep refreshing above link to see your app in browser!'
+                 text: 'Please wait for a while to see your application... Keep refreshing domain link to see your app in browser!'
                  }, function(err, response) {
                        console.log(response);
                  });//slackwebhook
@@ -239,19 +344,10 @@ ApplicationController.newservice = (req, res) => {
          
         },delayMillis);//settimeout function
 
-
- })//kubectl service
-
-
-
 //------------------------------------------------------------------------------------------------------------------------------
 
-
-
-  res.end('ending server response');
+res.end('ending server response');
 };
-
-
 
 
 ApplicationController.findAll = (req, res) => {

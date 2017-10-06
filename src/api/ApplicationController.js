@@ -61,34 +61,37 @@ OrganizationMembership.findOne(
    { where: {
     organizationId: myid,
    }}).then(membership => {
-      console.log("this is membership",membership);
+      //console.log("this is membership",membership);
       console.log("=================================",membership.userId);
       
-     var myuserid=membership.userId
+     var myuserid=membership.userId;
       Credential.findOne(
       {where:{
         userId:myuserid,
       }}).then((user) => {
-      //console.log("this is user credential",user);
-      console.log("this is user credential token",user.token); 
-      console.log("This is username",user.json._raw);
-     
+      console.log("this is user credential token-------------",user.token);
+      console.log("this is user  value printed",user); 
+      var getuserid = user.userId;
+      User.findOne({where:{id:getuserid }}).then((myuser)=>{
+      console.log("this is user name-------------",myuser.firstName);
+
       var token=user.token;
       var gitrepo= application.name;
       var gittag="1.0.2";
-      shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+token+' '+gitrepo+' '+gittag+' ',
+      var username=myuser.firstName;
+      shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+token+' '+gitrepo+' '+gittag+' '+username+' ',
       function (error, stdout, stderr) {
       console.log('This is inside shell script function');
       if (error !== null) {
         console.log('exec error: ' + error);
         console.log('stdout: '+stdout);
       }
-     });
 
+     });//username
 
-
-
-    })//user
+     });//shell
+     
+    })//userId from credential
 
    }) //membership
 
