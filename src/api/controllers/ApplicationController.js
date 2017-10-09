@@ -30,6 +30,8 @@ ApplicationController.findOne = (req, res) => {
   });
 };
 
+
+
 // Route: post /organizations
 ApplicationController.create = (req, res) => {
   let params = req.body;
@@ -40,65 +42,75 @@ ApplicationController.create = (req, res) => {
       server.log.error('Error create application', err);
       res.status(500).json(err);
     }
-  
-  console.log("at server side app controller");
-  console.log("This is organization id",req.params.organizationId);
+   const applicationTemplate = application.template;
+   const applicationName = application.name;
+   console.log("After application get project id", application.projectId);
+   Project.findOne({where:{uuid:application.projectId}}).then(project => {
+   console.log("After findById project",project);
+   if(project.mydefaultvalue==1)
+   {
+        console.log("This is default value 1"); 
+        var myid= project.organizationId;
+        console.log("After project get organization my id",myid);
+        OrganizationMembership.findOne({ where: {organizationId: myid,}}).then(membership => {
+           //console.log("this is membership",membership);
+            console.log("=================================",membership.userId);
+            var myuserid=membership.userId;
+            Credential.findOne({where:{userId:myuserid,}}).then((user) => {
+            console.log("this is user credential token-------------",user.token);
+            var getuserid = user.userId;
+            User.findOne({where:{id:getuserid }}).then((myuser)=>{
+            console.log("this is user name-------------",myuser.firstName);
+            var token=user.token;
+            var gitrepo= applicationName;
+            var gittag="1.0.2";
+            var username=myuser.firstName;
 
-  /*
-  OrganizationMembership.findAndCountAll({where: {organizationId: req.params.organizationId,}}), 
-   (err, organizationmembership) => {
-    if (err) {
-      server.log.error('Error getting organization', err);
-      console.log("at error");
-      return res.status(500).json(err);
-    }
-   console.log('this is organization membership at application controller',organizationmembership);
-   console.log('this is user id',organizationmembership.userId);
- }*/
+           switch(applicationTemplate) {
+           case "Flask":
+                       console.log("This is flask template--------------------");
+                       //for flask template
+                       shell.exec('/usr/src/app/api/controllers/templates/flask.sh'+' '+token+' '+gitrepo+' '+gittag+' '+username+' ',
+                       function (error, stdout, stderr) {
+                       console.log('This is inside shell script flask function');
+                       if (error !== null) {
+                             console.log('exec error: ' + error);
+                             console.log('stdout: '+stdout);
+                        }
+                       });//shell for flask
+                       break;
 
-var myid=req.params.organizationId;
-OrganizationMembership.findOne(
-   { where: {
-    organizationId: myid,
-   }}).then(membership => {
-      //console.log("this is membership",membership);
-      console.log("=================================",membership.userId);
-      
-     var myuserid=membership.userId;
-      Credential.findOne(
-      {where:{
-        userId:myuserid,
-      }}).then((user) => {
-      console.log("this is user credential token-------------",user.token);
-      console.log("this is user  value printed",user); 
-      var getuserid = user.userId;
-      User.findOne({where:{id:getuserid }}).then((myuser)=>{
-      console.log("this is user name-------------",myuser.firstName);
+           case "Node":
+                      console.log("This is Node template------------------------");
+                      //for Node template
+                      shell.exec('/usr/src/app/api/controllers/templates/nodejs.sh'+' '+token+' '+gitrepo+' '+gittag+' '+username+' ',
+                      function (error, stdout, stderr) {
+                      console.log('This is inside shell script nodejs function');
+                       if (error !== null) {
+                             console.log('exec error: ' + error);
+                             console.log('stdout: '+stdout);
+                        }
+                      });//shell for flask
+                      break;
 
-      var token=user.token;
-      var gitrepo= application.name;
-      var gittag="1.0.2";
-      var username=myuser.firstName;
-      shell.exec('/usr/src/app/api/controllers/createRepo.sh'+' '+token+' '+gitrepo+' '+gittag+' '+username+' ',
-      function (error, stdout, stderr) {
-      console.log('This is inside shell script function');
-      if (error !== null) {
-        console.log('exec error: ' + error);
-        console.log('stdout: '+stdout);
-      }
+           case "Mean Stack":
+                      console.log("This is Meanstack template------------------------");
+                      break;
 
-     });//username
-
-     });//shell
-     
-    })//userId from credential
-
-   }) //membership
-
-  res.send(application)
-  });
-
-
+           case "Other":
+                      console.log("This is Meanstack template------------------------");
+                      break;
+                   }
+           });//username
+        })//userId from credential
+      }) //membership
+     }//if end default
+      else{
+            console.log("This is not default configuration");
+          }//else end of default configuration
+   });//project details
+   res.send(application);
+  });//application
 
 };
 

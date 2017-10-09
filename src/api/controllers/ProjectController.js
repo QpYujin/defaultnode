@@ -21,49 +21,48 @@ ProjectController.findOne = (req, res) => {
 // Route: post /organizations
 ProjectController.create = (req, res) => {
   let params = req.body;
-
-  console.log('This is default value',params.mydefaultvalue)
   params.organizationId = req.params.organizationId;
-  
  UtilService.wrapCb(Project.create(params), 
   (err, project) => {
     if (err) {
       server.log.error('Error create project', err);
       res.status(500).json(err);
     }
-    //res.send(project);
-    console.log("This is project object",project);
-    if (params.mydefaultvalue==1)
-     {
-       
-       var name="Qpair"
-       var provider="Github"
-       var url = "https://github.com/cloudoptim"
-       var type = "public"
 
-     SourceManagement.create
-	({
-          organizationId:params.organizationId,
-          projectId: project.uuid,
-          name:"Qpair",
-          provider:"github",
-          url:"https://github.com/cloudoptim",
-          type:"public"}).then
-	  {
-        	console.log('This is another post from source')
-                console.log('This is project uuid',project.uuid);
-        	if (err) {
-           	server.log.error('Error create project', err);
-          	 res.status(500).json(err);
-               }
-            }
-   }
+    //console.log("This is project object",project);
+    var myid=req.params.organizationId;
+    OrganizationMembership.findOne({where:{organizationId: myid,}}).then(membership => {
+    //console.log("this is membership",membership);
+    console.log("=================================",membership.userId);      
+    var myuserid=membership.userId;
+    Credential.findOne({where:{userId:myuserid,}}).then((user) => { 
+        var getuserid = user.userId;
+	User.findOne({where:{id:getuserid }}).then((myuser)=>{
+	console.log("this is user github link-------------",myuser.email);
+		SourceManagement.create
+		({
+		  organizationId:params.organizationId,
+		  projectId: project.uuid,
+		  name:myuser.firstName,
+		  provider:"github",
+		  url: myuser.email,
+		  type:"public"})
+		 .then
+		{
+                console.log('This is another post for user source control');
+			if (err) {
+			server.log.error('Error create project', err);
+			res.status(500).json(err);
+			}
+		}
 
+		});//username
+
+		});//credential
+     
+    })//membership
    res.send(project);
-
 })
- 
-
 };
 
 ProjectController.update = (req, res) => {
