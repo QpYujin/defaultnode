@@ -29,6 +29,12 @@ angular.module('app.user.organization.applications')
   }
 
 
+
+  $scope.templates=['Flask','Node','Mean Stack','Other'];
+
+
+
+
   $scope.updateApplication = function () {
     if ($scope.application.uuid) {
       Restangular.one('organizations', String($stateParams.organizationId))
@@ -56,6 +62,7 @@ angular.module('app.user.organization.applications')
          function () {
             swal('DONE','repository is created','Success')
          })*/
+
 
           swal('DONE', '', 'success');
           $state.go('^', {}, {reload: true});

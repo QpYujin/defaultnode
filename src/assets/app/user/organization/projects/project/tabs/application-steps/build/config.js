@@ -155,10 +155,10 @@ angular.module('app.user.organization.projects.project.applications')
             //swal('DONE','This is message', 'success');
             
 	    doGetImage(newBuild.uuid);
-
             $scope.showLogs = false;
             return newBuild;
-          }, 20000)
+
+          }, 50000)
         }, function (result) {
           if (result.data.fields && result.data.fields.version) {
             swal('ERROR', 'Version is existed, please choose another one.', 'error');
@@ -228,6 +228,8 @@ var doGetImage=function (buildId) {
 
         console.log('this is after get call for status',$scope.buildimage);
         console.log($scope.buildimage.status);
+        
+        swal('DONE',$scope.buildimage.status, 'success');
 
         if($scope.buildimage.status.toString()=="Failed to clonned"){
           console.log('this is unsuccessful clonned message')
@@ -239,12 +241,12 @@ var doGetImage=function (buildId) {
           swal('Error', $scope.buildimage.status +' Try again!','error');
         }
 
-
-        if ($scope.buildimage.status =="Successfully Build"){
-         console.log('This is Error');
+        if ($scope.buildimage.status =="Image successfully pushed"){
+          console.log('This is Error');
           swal('Done', $scope.buildimage.status +' Image is ready to deploy!','success');
         }
 
+   
       })
   }
 

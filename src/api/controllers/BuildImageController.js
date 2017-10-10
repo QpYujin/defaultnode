@@ -64,14 +64,14 @@ BuildImageController.create = (req, res) => {
       server.log.error('Error create buildImage', err);
       res.status(500).json(err);
     }
-    res.send(buildImage);
-   
+    res.send(buildImage);  
     Image.create
 	({
           organizationId:params.organizationId,
           projectId: params.projectId,
           applicationId:params.applicationId,
-          buildImageId:buildImage.uuid
+          buildImageId:buildImage.uuid,
+          Status:'Pending',
           }).then
 	  {
         	console.log('saving into image table');
@@ -81,10 +81,6 @@ BuildImageController.create = (req, res) => {
                }
             }
   
-
-
-
-
     let c = buildImage.toJSON();
     var getrepolink = function ()
    {
@@ -107,20 +103,26 @@ BuildImageController.create = (req, res) => {
            console.log('This is inside shell script function');
                if (error !== null) {
                console.log(' success ! ');
-	      logger.emit('shell', {message: 'Successfully executed shell script'});
-              
+	          logger.emit('shell', {message: 'Successfully executed shell script'});
 		 }
+
+               
 
 		//code for getting logs from shell
                sleep.sleep(15);
 		fs.readFile('/usr/src/app/api/controllers/clonelog.txt', 'utf8', function (err,data) {
+			
+
 			if (err) {
 				return console.log(err);
 			}
 			
-			console.log(data);
-			logger.emit('read', {message: 'Successfully reading clone logs'});
-	
+	          	console.log("This is data from file",data);
+                        buildImage.setDataValue('status',data);
+                        return buildImage.save();
+
+			//logger.emit('read', {message: 'Successfully reading clone logs'});
+                        /*
 			if(data.indexOf('Successfully cloned') >= 0){			
 				console.log('This is status after clonning:',data.toString());
 	                        buildImage.setDataValue('status', 'Success fully cloned');
@@ -152,25 +154,16 @@ BuildImageController.create = (req, res) => {
 				 buildImage.setDataValue('status', 'Failed to clonned');
 				 logger.emit('status', {message: 'Failed to clonned'});
                 		return buildImage.save();
-			  }
+			  }*/
+                            
 		
           	 });
 
 		});
 
-
-                       
-
-
-
-
-
-
-
         });//end of source management
 
     }();//end of get repo
-
  });
 };
 

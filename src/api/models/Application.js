@@ -23,9 +23,16 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING,
       allowNull: false,
     },
+
     description: {
       type: Sequelize.TEXT,
     },
+    
+    template: {
+      type: Sequelize.ENUM,
+      values: ['Flask', 'Node', 'Mean Stack', 'Other'],
+    },
+
     versionId: {
       type: Sequelize.STRING(128)
     },

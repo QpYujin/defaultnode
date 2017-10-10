@@ -41,9 +41,9 @@ div(layout="column", flex).scrollable
 
     hr
     div(layout="row", layout-align="start center", ng-hide="editing")
-      button.btn.btn-primary(ng-disabled="global.deploymentStatus", ng-click="updateImage()") Git Clone
+      button.btn.btn-primary(ng-disabled="global.deploymentStatus", ng-click="updateImage()") Build
       span &nbsp;
-      button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="pushImage()") Push Image
+      //button.btn.btn-success(ng-disabled="global.deploymentStatus", ng-click="pushImage()") Push Image
       span(flex)
       button.btn.btn-info(ng-disabled="global.deploymentStatus", ng-click="editing = true") Edit
 

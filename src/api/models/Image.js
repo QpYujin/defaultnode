@@ -32,9 +32,9 @@ module.exports = (function(sequelize) {
       type: Sequelize.STRING(128),
       allowNull: false
     },
-    status: {
+    Status: {
       type: Sequelize.STRING(128),
-      allowNull: false
+      allowNull: true
     },
 
     /*stage: {

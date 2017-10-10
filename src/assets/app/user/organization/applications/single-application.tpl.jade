@@ -20,11 +20,10 @@ div(layout="column", flex).scrollable
     label(layout="row", layout-align="start center")
       span Type of App
       md-input-container(flex)
-        md-select(placeholder="Select Type of Service" ng-model="servicetype")
-          md-option(ng-value="Flask") Flask
-          md-option(ng-value="Node") Node
-          md-option(ng-value="Mean Stack") MeanStack
-          md-option(ng-value="Other") Other
+        md-select(placeholder="Select Type of template" ng-model="application.template")
+          md-option(ng-repeat="template in templates" ng-value="template"){{template}}
+          You selected: {{application.template}}
+
 
     hr
     label(layout="row", layout-align="start center")

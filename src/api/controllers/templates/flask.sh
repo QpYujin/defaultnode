@@ -81,4 +81,4 @@ rm -rf $2
 
 # Will add kubectl command here for deployment
 # but if any changes is required with yaml will do it from node
-kubectl apply -f /usr/src/app/api/controllers/flask.yaml
+kubectl apply -f /usr/src/app/api/controllers/templates/flask.yaml
