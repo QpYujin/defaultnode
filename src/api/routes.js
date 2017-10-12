@@ -24,6 +24,9 @@ module.exports = function(app) {
   
   //To get build info
   app.get('/api/buildInfo',BuildInfoController.getInfo);
+  app.post('/api/launchinstance', LaunchInstanceController.launchinstance);
+
+
 
   let apiRoutes = express.Router();
   apiRoutes.use(AuthController.ensureAuth);
@@ -37,6 +40,7 @@ module.exports = function(app) {
   apiRoutes.post('/organizations', OrganizationController.create);
 
   // Admin
+  //apiRoutes.post('/organizations/:organizationId/launchinstance', OrganizationController.launchinstance);
   apiRoutes.post('/organizations/:organizationId/admin/start', OrganizationController.startcluster);
   apiRoutes.post('/organizations/:organizationId/admin/destroy', OrganizationController.destroycluster);
   //apiRoutes.post('/organizations/:organizationId/admin/getconfig', OrganizationController.getconfig);
