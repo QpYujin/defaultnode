@@ -31,6 +31,30 @@ OrganizationController.create = (req, res) => {
 
 
 
+
+// Route: post /organizations/admin
+OrganizationController.launchinstance = (req, res) => {
+let params = req.body;
+console.log('This is at the launch instances');
+UtilService.wrapCb(Instance.create(params), (err, instance) => {
+    if (err) {
+      server.log.error('Error create cluster', err);
+      res.status(500).json(err);
+    }
+    res.send(instance);
+});
+console.log("at the server side constroller for start no of instances");
+};
+
+
+
+
+
+
+
+
+
+
 // Route: post /organizations/admin
 OrganizationController.startcluster = (req, res) => {
 let params = req.body;
